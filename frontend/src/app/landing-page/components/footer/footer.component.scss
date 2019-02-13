@@ -1,0 +1,89 @@
+@import "./../../../shared/styles/abstracts/variables";
+@import "./../../../shared/styles/abstracts/mixins";
+
+.footer {
+  background-color: $color-grey-dark-3;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2rem;
+  padding: 6rem 6rem;
+  font-size: $font-size;
+
+  @include respond(tab-pot) {
+    grid-template-columns: minmax(0,1fr);
+    text-align: center;
+  }
+
+
+  &__navigation {
+    grid-column: 1 / 2;
+
+    @include respond(tab-pot) {
+      grid-row: 1/2;
+    }
+  }
+
+  &__list {
+    list-style: none;
+  }
+
+  &__item {
+    display: inline-block;
+
+    &:not(:last-child) {
+      margin-right: 1.5rem;
+
+    }
+  }
+
+  &__link {
+    &:link,
+    &:visited {
+      padding: 0.5rem;
+      color: $color-grey-light-1;
+      background-color: $color-grey-dark-3;
+      text-decoration: none;
+      text-transform: uppercase;
+      display: inline-block;
+      transition: all 0.2s;
+    }
+
+    &:hover,
+    &:active {
+      color: $color-primary;
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.9);
+      transform: rotate(5deg) scale(1.1);
+    }
+  }
+
+  &__copyright {
+    grid-column: 2 / 3;
+    color: $color-grey-light-1;
+
+    @include respond(tab-pot) {
+      grid-row: 2/3;
+      grid-column: 1/2;
+    }
+  }
+}
+
+
+.line {
+  display: none;
+
+  @include respond(tab-pot) {
+    margin: 3rem auto 2rem auto; 
+    display: block;
+    height: 1px;
+    border:none;
+    height:1px;
+
+    width: 60%;
+    background-image: radial-gradient(circle, $color-white, transparent);
+  }
+
+  @include respond(mobile-l) {
+    width: 90%;
+  }
+}

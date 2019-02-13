@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+@import "app/shared/styles/abstracts/variables";
+@import "app/shared/styles/abstracts/mixins";
+
+@import "app/shared/styles/base/base";
+@import "app/shared/styles/base/typography";
+@import "app/shared/styles/base/animations";
+
+@import "app/shared/styles/components/button";
+@import "app/shared/styles/components/form";

@@ -1,0 +1,17 @@
+<div class="footer">
+  <div class="footer__navigation">
+    <ul class="footer__list">
+      <li class="footer__item" *ngFor="let link of links">
+        <a href="{{ link.path }}" class="footer__link">{{ link.text }}</a>
+      </li>
+    </ul>
+    <div>
+      <span class="line"></span>
+    </div>
+  </div>
+
+  <p class="footer__copyright">
+    Built by
+    <a href="#" class="footer__link">Reuel D'silva</a> and <a href="#" class="footer__link">Chinmay Khanolkar</a> as a part of a mini project for <a href="#" class="footer__link">Internet Programming</a>.<br>Copyright &copy; by Chinamy Khanolkar & Reuel D'silva.
+  </p>
+</div>

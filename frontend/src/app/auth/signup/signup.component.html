@@ -1,0 +1,24 @@
+<div class="container">
+  <app-nav class="nav"></app-nav>
+
+  <div class="signup">
+
+    <div class="signup__heading heading__secondary">Create an Account for {{ selectedForm }}</div>
+
+    <div class="signup__wrapper">
+      <div class="signup__selection" (click)="onClick($event)">
+        <a class="signup__selection--item signup__employee heading__tertiary" [ngClass]="{selected: selectedForm === 'employee'}">Employee</a>
+        <span class="line"></span>
+        <a class="signup__selection--item signup__company heading__tertiary" [ngClass]="{selected: selectedForm === 'company'}">Company</a>
+      </div>
+
+      <div class="signup__form">
+        <app-employee-signup *ngIf="selectedForm === 'employee'"></app-employee-signup>
+        <app-company-signup *ngIf="selectedForm === 'company'"></app-company-signup>
+      </div>
+
+    </div>
+  
+  </div>
+
+</div>

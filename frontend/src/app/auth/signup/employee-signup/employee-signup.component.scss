@@ -1,0 +1,70 @@
+@import "./../../../shared/styles/abstracts/variables";
+@import "./../../../shared/styles/abstracts/mixins";
+
+
+.content {
+  padding: 3rem 5rem;
+}
+
+.form {
+
+
+  &__group--flex {
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  &__image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    clip-path: circle(46% at 50% 50%);
+
+    &--placeholder {
+      width: 15rem;
+      height: 15rem;
+      background-color: $color-white;
+      clip-path: circle(46% at 50% 50%);
+
+    }
+
+    &-wrapper {
+      position: relative;
+    }
+    
+    &-border {
+      // margin: 0 auto;
+      width: 15rem;
+      height: 15rem;
+      background-color: $color-grey-light-2;
+      clip-path: circle(50% at 50% 50%);
+    }
+
+    &-picker {
+      color: $color-grey-dark;
+      font-size: $font-size*2;
+      position: absolute;
+      top: 10.5rem;
+      left: 12.3rem;
+
+      &--hidden {
+        visibility: hidden;
+      }
+    }
+  }
+
+  &__invalid--img-msg {
+    text-align: center;
+  }
+}
+
+.signup__link {
+  margin: 0 5%;
+  line-height: 2rem;
+}
+
+.spinner {
+  display: inline-block;
+  margin-left: .5rem;
+}

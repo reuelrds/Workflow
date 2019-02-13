@@ -1,0 +1,56 @@
+// @import "./../abstracts/variables.scss";
+
+*,
+*::after,
+*::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+
+html {
+    font-size: 62.5%;    //1 rem = 10px; 10px/16px=62.5%
+    
+    @include respond('big-desktop') {
+        font-size: 75%;    //1 rem = 12px; 12px/16px=75%
+    }
+    
+    @include respond('tab-land') {
+        font-size: 56.25%;    //1 rem = 9px; 9px/16px=56.25%
+    }
+    
+    @include respond('tab-pot') {
+        font-size: 50%;    //1 rem = 8px; 8px/16px=50%
+    }
+    
+    
+    @include respond('phone') {
+        font-size: 43.75%;    //1 rem = 7px; 7px/16px=43.75%
+    }
+    @include respond('phone-m') {
+        font-size: 31.25%;    //1 rem = 5px; 5px/16px=31.25%
+    }
+}
+
+body {
+    box-sizing: border-box;
+}
+
+::selection {
+    background-color: $color-primary-3;
+    color: $color-white;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+.container {
+    display: grid;
+    grid-template-columns: [full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
+
+    @include respond(phone){
+        grid-template-columns: [full-start] minmax(2rem,1fr) [center-start]repeat(8, [col-start] minmax(min-content, 7rem) [col-end]) [center-end] minmax(2rem, 1fr) [full-end];
+    }
+}

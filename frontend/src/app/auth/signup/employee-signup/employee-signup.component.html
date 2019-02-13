@@ -1,0 +1,105 @@
+<div class="content">
+  <form class="form" [formGroup]="employeeSignup" (submit)="onSubmit()">
+
+    <div class="form__group">
+      <div class="form__group--flex">
+        <div class="form__image-wrapper">
+          <div class="form__image-border">
+            <img [src]="imagePreview" class="form__image" *ngIf="imagePreview !== '' && imagePreview !== null && employeeSignup.controls.image?.valid">
+            <div class="form__image--placeholder"></div>
+
+          </div>
+          <div class="form__image-picker">
+            <i class="icofont-camera" (click)="filePicker.click()"></i>
+            <input type="file" #filePicker (change)="onImagePicked($event)" class="form__image-picker--hidden">
+          </div>
+        </div>
+      </div>
+      <div class="form__invalid form__invalid--img-msg">
+        <div *ngIf="employeeSignup.controls.image.errors?.invalidFile">Invalid Image Type</div>
+        <div *ngIf="employeeSignup.controls.image.errors?.largeFileSize">File Size is Too Large</div>
+      </div>
+    </div>
+
+    <div class="form__group">
+
+      <input type="text" formControlName="firstName" class="form__input" placeholder="First Name">
+      <label class="form__label">First Name</label>
+      <app-form-underline [invalidUnderline]="employeeSignup.controls.firstName.invalid && employeeSignup.controls.firstName.touched"></app-form-underline>
+      <div class="form__invalid" *ngIf="employeeSignup.controls.firstName.touched">
+        <div *ngIf="employeeSignup.controls.firstName.invalid">First name is Required</div>
+      </div>
+
+    </div>
+
+    <div class="form__group">
+
+      <input type="text" formControlName="lastName" class="form__input" placeholder="Last Name">
+      <label class="form__label">Last Name</label>
+      <app-form-underline [invalidUnderline]="employeeSignup.controls.lastName.invalid && employeeSignup.controls.lastName.touched"></app-form-underline>
+      <div class="form__invalid" *ngIf="employeeSignup.controls.lastName.touched">
+        <div *ngIf="employeeSignup.controls.lastName.invalid">Last name is Required</div>
+      </div>
+
+    </div>
+
+    <div class="form__group">
+
+      <input type="text" formControlName="email" class="form__input" placeholder="Email">
+      <label class="form__label">Email</label>
+      <app-form-underline [invalidUnderline]="employeeSignup.controls.email.invalid && employeeSignup.controls.email.touched"></app-form-underline>
+      <div class="form__invalid" *ngIf="employeeSignup.controls.email.touched">
+        <div *ngIf="employeeSignup.controls.email.errors?.required">Email is Required</div>
+        <div *ngIf="employeeSignup.controls.email.errors?.invalidEmail">Invalid Email Address</div>
+      </div>
+
+    </div>
+
+    <div class="passwords" formGroupName="passwords">
+      <div class="form__group">
+
+        <input type="password" formControlName="password" class="form__input" placeholder="Password">
+        <label class="form__label">Password</label>
+        <app-form-underline [invalidUnderline]="passwd.controls.password.invalid && passwd.controls.password.touched"></app-form-underline>
+        <div class="form__invalid" *ngIf="passwd.controls.password.touched">
+          <div *ngIf="passwd.controls.password.errors?.required">Password is Required</div>
+          <div *ngIf="passwd.controls.password.errors?.pattern">The Password Should be atleast 6 characters</div>
+
+        </div>
+      </div>
+
+      <div class="form__group">
+
+        <input type="password" formControlName="confirmPassword" class="form__input" placeholder="Confirm Password">
+        <label class="form__label">Confirm Password</label>
+        <app-form-underline [invalidUnderline]="passwd.controls.confirmPassword.invalid && passwd.controls.confirmPassword.touched"></app-form-underline>
+        <div class="form__invalid" *ngIf="passwd.controls.confirmPassword.touched">
+          <div *ngIf="passwd.controls.confirmPassword.errors?.required">Password is Required</div>
+          <div *ngIf="passwd.controls.confirmPassword.errors?.PasswordMatch">The Passwords do not match</div>
+          <div *ngIf="passwd.controls.confirmPassword.errors?.pattern">The Password Should be atleast 6 characters</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form__group">
+
+      <input type="text" formControlName="token" class="form__input" placeholder="Company Token">
+      <label class="form__label">Token</label>
+      <app-form-underline [invalidUnderline]="employeeSignup.controls.token.invalid && employeeSignup.controls.token.touched"></app-form-underline>
+      <div class="form__invalid" *ngIf="employeeSignup.controls.token.touched">
+        <div *ngIf="employeeSignup.controls.token.invalid">Token is Required</div>
+      </div>
+
+    </div>
+
+    <button class="btn signup__link" *ngIf="!isLoading">
+      Signup
+    </button>
+    <button class="btn signup__link" type="submit" *ngIf="isLoading" [@fadeInOut]>
+      Signing Up...
+      <mat-spinner diameter="20" strokeWidth="2" class="spinner" strokeColor="#fff"></mat-spinner>
+    </button>
+
+  </form>
+</div>

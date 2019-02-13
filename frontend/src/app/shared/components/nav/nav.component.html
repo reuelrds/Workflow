@@ -1,0 +1,32 @@
+<div class="navigation__toggle">
+  <input type="checkbox" id="navi-toggle" class="navigation__toggle--checkbox" (click)="toggleMenu()" [checked]="toggleState">
+  <label for="navi-toggle" class="navigation__toggle--label">
+    <span class="navigation__toggle--icon" [ngClass]="{'navigation__toggle--icon-black': !isHomePage}">&nbsp;</span>
+  </label>
+</div>
+
+
+<div class="navigation" [@slideInOut]="menuState">
+
+  <div class="navigation__wrapper">
+
+    <ul class="navigation__list" (click)="toggleMenu()" *ngFor="let item of menuItems['links']">
+      <li class="navigation__list--item">
+        <a href="{{ item.path }}" class="navigation__list--link">{{ item.name }}</a>
+      </li>
+    </ul>
+
+
+    <div class="action-buttons" *ngFor="let button of menuItems['buttons']">
+
+      <a routerLink="{{ button.path }}"  class="btn action-buttons__link" [ngClass]="{'login-btn__link': isHomePage&& button.name!=='Signup', 'signup-btn__link': isHomePage && button.name==='Signup', 'action-buttons__link--add-border': !isHomePage}">
+        <svg class="action-buttons__svg" *ngIf="isHomePage">
+          <rect class="action-buttons__rect"></rect>
+        </svg>
+        {{ button.name }}
+      </a>
+
+    </div>
+    
+  </div>
+</div>

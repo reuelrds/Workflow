@@ -1,0 +1,12 @@
+<div class="dialog-container">
+  <h1 mat-dialogue-title class="dialog-container__title">Error Occured</h1>
+  <div>
+    <p class="mat-body-1 dialog-container__title-sub"> {{ data.message }}</p>
+    <p class="mat-body-1 dialog-container__title-sub" *ngIf="!data.message"> {{ message }}</p>
+  </div>
+  
+  <div mat-dialog-actions>
+    <button mat-dialog-close mat-stroked-button color="warn"> Okay </button>
+  </div>
+
+</div>  

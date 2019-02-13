@@ -1,0 +1,36 @@
+<div class="loader" [ngClass]="{fade: isLoaded}">
+  <div class="anim">
+
+    <div class="spinner" [ngClass]="{fade: isLoaded}">
+      <div class="rect{{ i }}" *ngFor="let i of 8|times"></div>
+    </div>
+    
+  </div>
+</div>
+
+
+<div class="container" (window:load)="onLoad()" [ngClass]="{onLoaded: isLoaded}">
+  <nav>
+    <app-nav [style.background-color]="transparent"></app-nav>
+  </nav>
+
+  <header class="header">
+    <app-hero></app-hero>
+  </header>
+
+  <section class="section-about">
+    <app-about></app-about>
+  </section>
+
+  <section class="section-pricing">
+    <app-pricing></app-pricing>
+  </section>
+
+  <section class="section-newsletter">
+    <app-newsletter></app-newsletter>
+  </section>
+
+  <footer class="footer">
+    <app-footer></app-footer>
+  </footer>
+</div>

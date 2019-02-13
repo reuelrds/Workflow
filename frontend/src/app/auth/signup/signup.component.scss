@@ -1,0 +1,75 @@
+@import "../../shared/styles/abstracts/variables";
+@import "../../shared/styles/abstracts/mixins";
+
+.container {
+  grid-row-gap: 10rem;
+}
+
+.nav{
+  grid-column: full-start / full-end;
+}
+
+.signup {
+  grid-column: center-start / center-end;
+
+  display: grid;
+  grid-template-columns: minmax(mincontent, 1fr);
+  grid-row-gap: 6rem;
+
+  margin-bottom: 6rem;
+
+  &__heading {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    justify-self: center;
+  }
+
+  &__wrapper {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    border-radius: 2px;
+    box-shadow: 5px 5px 2rem rgba($color-black, .3);
+
+  }
+  
+  &__selection {
+    position: relative;
+    
+    &--item {
+      padding: 1.5rem 3rem;
+      cursor: pointer;
+      font-weight: 400;
+      display: inline-block;
+      width: 49.5%;
+      text-align: center;
+      text-transform: none;
+      
+    }
+  }
+  
+  &__form {
+    border-radius: 2px;
+    box-shadow: 5px 5px 2rem rgba($color-black, .3);
+
+  }
+}
+
+.selected {
+  background: linear-gradient(to bottom right, $color-primary-2, $color-primary-4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.line {
+  display: inline-block;
+  
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  
+  width: 1px;
+  height: 80%;
+  
+  border:none;
+  background-image: radial-gradient(circle, $color-black, transparent);
+}

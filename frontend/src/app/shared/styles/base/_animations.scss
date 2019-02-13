@@ -1,0 +1,46 @@
+@keyframes anim {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes stretch {
+  0%, 40%, 100% { 
+    transform: scaleY(0.4);
+  }  20% { 
+    transform: scaleY(1.0);
+  }
+}
+
+@keyframes hideout {
+  100% {
+    width: 0;
+    height: 0;
+    display: none;
+    z-index: 0;
+  }
+}
+
+@keyframes fadeout{
+  0% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 0;
+    display: initial;
+    z-index: initial;
+    width: initial;
+    height: initial;
+  }
+  100% {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+}

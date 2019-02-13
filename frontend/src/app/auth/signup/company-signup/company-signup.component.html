@@ -1,0 +1,61 @@
+<div class="content">
+  <form class="form" [formGroup]="companySignup" (submit)="onSubmit()">
+
+    <div class="form__group">
+
+      <input type="text" formControlName="name" class="form__input" placeholder="Company Name">
+      <label class="form__label">Company Name</label>
+      <app-form-underline [invalidUnderline]="companySignup.controls.name.invalid && companySignup.get('name')?.touched"></app-form-underline>
+      <div class="form__invalid" *ngIf="companySignup.get('name').touched">
+        <div *ngIf="companySignup.get('name').invalid">Company name is Required</div>
+      </div>
+    </div>
+
+
+    <div class="form__group">
+
+      <input type="text" formControlName="email" class="form__input" placeholder="Email">
+      <label class="form__label">Email</label>
+      <app-form-underline [invalidUnderline]="companySignup.controls.email.invalid && companySignup.get('email')?.touched"></app-form-underline>
+      <div class="form__invalid" *ngIf="companySignup.get('email').touched">
+        <div *ngIf="companySignup.get('email').errors?.required">Email is Required</div>
+        <div *ngIf="companySignup.get('email').errors?.invalidEmail">Invalid Email Address</div>
+      </div>
+    </div>
+
+    <div formGroupName="passwords">
+      <div class="form__group">
+
+        <input type="password" formControlName="password" class="form__input" placeholder="Password">
+        <label class="form__label">Password</label>
+        <app-form-underline [invalidUnderline]="passwd.controls.password.invalid && passwd.get('password')?.touched"></app-form-underline>
+        <div class="form__invalid" *ngIf="passwd.get('password')?.touched">
+          <div *ngIf="passwd.get('password').errors?.required">Password is Required</div>
+          <div *ngIf="passwd.get('password').errors?.pattern">The Password Should be atleast 6 characters</div>
+        </div>
+
+      </div>
+
+      <div class="form__group">
+
+        <input type="password" formControlName="confirmPassword" class="form__input" placeholder="Confirm Password">
+        <label class="form__label">Confirm Password</label>
+        <app-form-underline [invalidUnderline]="passwd.controls.confirmPassword.invalid && passwd.get('confirmPassword')?.touched"></app-form-underline>
+        <div class="form__invalid" *ngIf="passwd.get('confirmPassword')?.touched">
+          <div *ngIf="passwd.get('confirmPassword').errors?.required">Password is Required</div>
+          <div *ngIf="passwd.controls.confirmPassword.errors?.PasswordMatch">The Passwords do not match</div>
+          <div *ngIf="passwd.get('confirmPassword').errors?.pattern">The Password Should be atleast 6 characters</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn signup__link" type="submit" *ngIf="!isLoading" >
+      Signup
+    </button>
+    <button class="btn signup__link" type="submit" *ngIf="isLoading" [@fadeInOut]>
+      Signing Up...
+      <mat-spinner diameter="20" strokeWidth="2" class="spinner" strokeColor="#fff"></mat-spinner>
+    </button>
+
+  </form>
+</div>

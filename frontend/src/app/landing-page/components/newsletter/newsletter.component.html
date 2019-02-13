@@ -1,0 +1,43 @@
+<div class="newsletter" id="subscribe">
+  <div class="newsletter__block">
+    <div class="newsletter__back-img">
+      <div class="newsletter__content">
+
+        <div class="newsletter__heading heading__secondary">
+          Sign Up for The NewsLetter!
+        </div>
+
+        <form class="form" (submit)="onSubmit(newsletterForm)" #newsletterForm="ngForm">
+
+          <div class="form__group">
+
+            <input type="text" class="form__input" placeholder="First Name">
+            <label class="form__label">First Name</label>
+            <app-form-underline></app-form-underline>
+
+          </div>
+
+          <div class="form__group">
+            <input type="text" class="form__input" placeholder="Last Name">
+            <label class="form__label">Last Name</label>
+            <app-form-underline></app-form-underline>
+
+          </div>
+
+          <div class="form__group">
+            <input type="text" class="form__input" placeholder="Email">
+            <label class="form__label">Email</label>
+            <app-form-underline></app-form-underline>
+
+          </div>
+
+          <button class="btn signup__link">
+            Subscribe
+          </button>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

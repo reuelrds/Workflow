@@ -1,0 +1,87 @@
+@import "./../../shared/styles/abstracts/variables";
+@import "./../../shared/styles/abstracts/mixins";
+
+.container {
+  grid-row-gap: 10rem;
+}
+
+.nav{
+  grid-column: full-start / full-end;
+  background-color: transparent;
+}
+
+.login {
+  grid-column: col-start 2 / col-end 7;
+  background-color: white;
+  
+  @include respond(phone) {
+    
+    grid-column: center-start / center-end;
+  }
+  
+  &__heading {
+    padding: 1rem 0;
+    text-align: center; 
+    width: 100%;
+  }
+
+  &__wrapper {
+    border-radius: 2px;
+    box-shadow: 5px 5px 2rem rgba($color-black, .3);
+
+  }
+  
+  &__selection {
+    position: relative;
+    
+    &--item {
+      padding: 1.5rem 3rem;
+      cursor: pointer;
+      font-weight: 400;
+      display: inline-block;
+      width: 49.5%;
+      text-align: center;
+      
+    }
+  }
+  
+  &__form {
+    border-radius: 2px;
+    box-shadow: 5px 5px 2rem rgba($color-black, .3);
+
+  }
+}
+
+.selected {
+  background: linear-gradient(to bottom right, $color-primary-2, $color-primary-4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.line {
+  display: inline-block;
+  
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  
+  width: 1px;
+  height: 80%;
+  
+  border:none;
+  background-image: radial-gradient(circle, $color-black, transparent);
+}
+
+.content {
+  padding: 3rem 5rem;
+}
+
+.login__link {
+  margin: 0 5%;
+  line-height: 2rem;
+}
+
+.spinner {
+  display: inline-block;
+  margin-left: .5rem;
+}

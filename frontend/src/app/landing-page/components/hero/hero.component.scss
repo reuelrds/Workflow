@@ -1,0 +1,95 @@
+@import '../../../shared/styles/abstracts/variables';
+@import '../../../shared/styles/abstracts/mixins';
+
+.hero {
+  
+  position: relative;
+  height: 100vh;
+
+  &__titlebox {    
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate( -20%, -50%);
+  }
+
+  
+  &__next-indiactor {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+
+    @include respond(mobile-l) {
+      display: none;
+    }
+
+    &--element {
+      position: relative;
+      transform: rotate(45deg);
+      animation-delay: -.4s;
+      
+      &,
+      &::before,
+      &::after {
+        width: 2rem;
+        height: 2rem;
+        display: inline-block;
+        border-bottom: .1rem solid $color-white;
+        border-right: .1rem solid $color-white;
+        animation: anim 3s infinite;
+      }
+      
+      &::before,
+      &::after{
+        content: "";
+        position: absolute;
+        
+      }
+
+      &::before {
+          top: -1rem;
+          left: -1rem;
+      }
+      
+      &::after {
+          top: 1rem;
+          left: 1rem;
+          animation-delay: .4s;
+      }
+    }
+  }
+  
+  &__link {
+    transition-delay: -2.0s;
+    font-size: $font-size*1.1;
+    background-color: transparent;
+    padding: 1.5rem 5rem;
+    font-weight: 300;
+    position: relative;
+  }
+
+  &__svg,
+  &__rect {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  &__rect {
+    fill: transparent;
+    stroke: $color-primary-0;
+    stroke-width: .5rem;
+
+    stroke-dasharray: 50 210;
+    stroke-dashoffset: 25;
+    transition: 2s;
+  }
+  
+  &__link:hover &__svg &__rect {
+    stroke:$color-secondary-1-4;
+    stroke-dasharray: 520;
+    stroke-dashoffset: 0;
+  }
+}

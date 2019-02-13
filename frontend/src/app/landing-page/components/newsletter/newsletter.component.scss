@@ -1,0 +1,79 @@
+@import "./../../../shared/styles/abstracts/variables";
+@import "./../../../shared/styles/abstracts/mixins";
+
+.newsletter {
+  padding: 15rem 0;
+  background: linear-gradient(
+    to bottom right,
+    $color-primary-2 0%,
+    $color-primary-0 45%,
+    $color-secondary-2-0 75%,
+    $color-secondary-2-4 95%
+  );
+
+  @include respond(phone) {
+    padding: 10rem 0;
+  }
+  @include respond(mobile-l) {
+    padding: 6rem 0;
+  }
+
+  &__block {
+    margin: 0 auto;
+    max-width: 70vw;
+
+    @include respond(tab-pot) {
+      max-width: 80vw;
+    }
+    @include respond(phone) {
+      max-width: 90vw;
+    }
+  }
+
+  &__back-img {
+    background-image: linear-gradient(
+        105deg,
+        rgba($color-white, 1) 0%,
+        rgba($color-white, 1) 50%,
+        transparent 50%
+      ),
+      url("../../../../assets/images/unsplash-newsletter.jpg");
+    background-size: cover;
+    box-shadow: 1rem 1rem 2rem rgba($color-black, 1);
+
+    @include respond(tab-land) {
+      background-image: linear-gradient(
+          to right,
+          rgba($color-white, 0.9) 0%,
+          rgba($color-white, 0.9) 100%
+        ),
+        url("../../../../assets/images/unsplash-newsletter.jpg");
+      background-size: cover;
+    }
+  }
+
+  &__content {
+    width: 50%;
+    padding: 6rem;
+    text-align: center;
+
+
+    @include respond(tab-land) {
+      width: 100%;
+    }
+  }
+}
+
+.signup {
+  &__link {
+    color: $color-white;
+    transition-delay: -2s;
+    background-color: $color-primary-0;
+    transition: 1s;
+  }
+
+  &__link:hover {
+    color: #fff;
+    background-color: $color-primary-4;
+  }
+}

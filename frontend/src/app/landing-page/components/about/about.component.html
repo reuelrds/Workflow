@@ -1,0 +1,19 @@
+<div class="about" id="about-sec">
+  <h2 class="heading__secondary about__heading">Spend less time on guesswork. And do more great work.</h2>
+  <div class="about__text">
+
+    <div class="about__text--box" *ngFor="let text of content['aboutText']">
+      <i class="icofont-{{ text.iconClass }} about__text--icon"></i>
+      <h3 class="heading__tertiary about__text--heading">{{ text.title }}</h3>
+      <p class="about__text--content">
+        {{ text.content }}
+      </p>
+    </div>
+  </div>
+
+  <div class="about__images composition">
+    <img src="../../../../assets/images/{{ image.imgPath }}" alt="Photo {{ i+1 }}" class="composition__photo composition__photo--p{{ i+1 }}"
+      *ngFor="let image of content['aboutComposition']; index as i">
+  </div>
+
+</div>
