@@ -1,0 +1,73 @@
+<div class="appSettingsTab">
+  <mat-card class="card card-1">
+    <mat-card-header>
+      <mat-card-title class="card__title card-1__title">Apps</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="card__body card-1__body">
+
+      <div class="drawer">
+
+        <div class="drawer__nav">
+          <ng-container *ngFor="let category of categories; last as isLast">      
+            <div matRipple class="drawer__nav--items" *ngIf="category != [(selectedCategory)]; else selected" (click)="onClick($event)">
+              {{ category }}
+            </div>
+            <ng-template #selected>
+
+              <div matRipple class="drawer__nav--items selected" (click)="onClick($event)">
+                {{ category }}
+              </div>
+            </ng-template>
+            
+            
+            <mat-divider inset="true" *ngIf="!isLast"></mat-divider>
+          </ng-container>
+        </div>
+
+        <span class="line">&nbsp;</span>
+
+        <div class="drawer__content">
+            <ng-container *ngFor="let content of contents">
+              <div class="drawer__content-item" *ngIf="content.category == selectedCategory || selectedCategory=='All'">
+                <!-- {{ content.data }} -->
+
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title class="drawer__content-item--title">
+                        Personal data 
+                        <!-- {{ content.title }} -->
+                      </mat-panel-title>
+                      <mat-panel-description class="drawer__content-item--description">
+                        Type your name and age 
+                        <!-- {{ content.shortDescription }} -->
+                      
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                
+                    <div class="drawer__content-item--body">
+                      Long Description
+                      <!-- {{ content.description }}  -->
+                    </div>
+                
+                    <mat-action-row class="drawer__content-item--actions">
+                      <button mat-stroked-button color="accent">Delete</button>
+                      <button mat-raised-button color="primary">Edit</button>
+                      
+                    </mat-action-row>
+                  </mat-expansion-panel>
+
+
+              </div>
+            </ng-container>
+            
+        </div>
+        
+      </div>
+      <mat-divider></mat-divider>
+      
+    </mat-card-content>
+    <mat-card-actions class="card__actions card-1__actions">
+      <button mat-stroked-button color="accent">Create a New App</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
