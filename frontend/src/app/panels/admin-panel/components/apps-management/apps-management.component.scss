@@ -55,7 +55,7 @@
 
 .drawer {
   display: grid;
-  grid-template-columns: max-content minmax(min-content, 1fr);
+  grid-template-columns: max-content max-content minmax(min-content, 1fr);
   grid-column-gap: 2rem;
   margin-bottom: 5rem;
 
@@ -72,7 +72,7 @@
   }
 
   &__content {
-    grid-column: 2 / 3;
+    grid-column: 3 / 4;
 
     
     &-item {
@@ -101,12 +101,10 @@
 .line {
   display: inline-block;
   
-  position: absolute;
-  top: 10%;
-  left: 13%;
+  grid-column: 2 / 3;
   
   width: 1px;
-  height: 75%;
+  height: 100%;
   
   border:none;
   background-image: radial-gradient(circle, $color-black, transparent);
