@@ -19,6 +19,11 @@ import { CustomValidatingService } from '../../validators/custom-validators';
 import { HelperService } from './../../../core/services/helper.service';
 import { AuthService } from './../../../core/services/auth.service';
 
+import { Store } from '@ngrx/store';
+
+import * as fromApp from './../../../store/app.reducers';
+import * as AuthActions from './../../store/auth.actions';
+
 /**
  * @param {FormGroup} employeeForm User form object.
  */
@@ -73,7 +78,8 @@ export class EmployeeSignupComponent implements OnInit {
     private helperService: HelperService,
     private authService: AuthService,
     private customValidators: CustomValidatingService,
-    private router: Router
+    private router: Router,
+    private store: Store<fromApp.AppState>
   ) {}
 
   ngOnInit() {
@@ -161,21 +167,32 @@ export class EmployeeSignupComponent implements OnInit {
       this.isLoading = true;
 
       // And call `createAdmin` function user method provided by AuthService
-      this.authService.createUser(
-        this.employeeSignup.value.firstName,
-        this.employeeSignup.value.lastName,
-        this.employeeSignup.value.email,
-        this.employeeSignup.value.passwords.password,
-        this.employeeSignup.value.token,
-        this.employeeSignup.value.image
-      ).subscribe(result => {
-        console.log('User Creation Successful');
-        console.log(result.message);
-        setTimeout(() => {
-          this.router.navigate(['/auth/login']);
-        }, 2000);
-      }, error => {
-        this.isLoading = false;
+      // this.authService.createUser(
+      //   this.employeeSignup.value.firstName,
+      //   this.employeeSignup.value.lastName,
+      //   this.employeeSignup.value.email,
+      //   this.employeeSignup.value.passwords.password,
+      //   this.employeeSignup.value.token,
+      //   this.employeeSignup.value.image
+      // ).subscribe(result => {
+      //   console.log('User Creation Successful');
+      //   console.log(result.message);
+      //   setTimeout(() => {
+      //     this.router.navigate(['/auth/login']);
+      //   }, 2000);
+      // }, error => {
+      //   this.isLoading = false;
+      // });
+      this.store.dispatch({
+        type: AuthActions.ActionTypes.TryCreateUser,
+        payload: {
+          firstName: this.employeeSignup.value.firstName,
+          lastName: this.employeeSignup.value.lastName,
+          email: this.employeeSignup.value.email,
+          password: this.employeeSignup.value.passwords.password,
+          token: this.employeeSignup.value.token,
+          image: this.employeeSignup.value.image
+        }
       });
     }
   }
