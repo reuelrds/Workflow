@@ -17,6 +17,11 @@ import { CustomValidatingService } from '../../validators/custom-validators';
 import { HelperService } from './../../../core/services/helper.service';
 import { AuthService } from './../../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+
+import * as fromApp from './../../../store/app.reducers';
+import * as AuthActions from './../../store/auth.actions';
+
 
 /**
  * @param {FormGroup} companyForm Admin form object.
@@ -68,7 +73,8 @@ export class CompanySignupComponent implements OnInit {
     private helperService: HelperService,
     private authService: AuthService,
     private customValidators: CustomValidatingService,
-    private router: Router
+    private router: Router,
+    private store: Store<fromApp.AppState>
   ) {}
 
   ngOnInit() {
@@ -130,18 +136,26 @@ export class CompanySignupComponent implements OnInit {
       this.isLoading = true;
 
       // And call `createAdmin` function user method provided by AuthService
-      this.authService.createAdmin(
-        this.companySignup.value.name,
-        this.companySignup.value.email,
-        this.companySignup.value.passwords.password
-      ).subscribe(result => {
-        console.log('User Creation Successful');
-        console.log(result.message);
-        setTimeout(() => {
-          this.router.navigate(['/auth/login']);
-        }, 2000);
-      }, error => {
-        this.isLoading = false;
+      // this.authService.createAdmin(
+      //   this.companySignup.value.name,
+      //   this.companySignup.value.email,
+      //   this.companySignup.value.passwords.password
+      // ).subscribe(result => {
+      //   console.log('User Creation Successful');
+      //   console.log(result.message);
+      //   setTimeout(() => {
+      //     this.router.navigate(['/auth/login']);
+      //   }, 2000);
+      // }, error => {
+      //   this.isLoading = false;
+      // });
+      this.store.dispatch({
+        type: AuthActions.ActionTypes.TryCreateAdmin,
+        payload: {
+          companyName: this.companySignup.value.name,
+          email: this.companySignup.value.email,
+          password: this.companySignup.value.passwords.password
+        }
       });
     }
   }
