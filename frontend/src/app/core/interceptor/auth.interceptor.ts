@@ -1,7 +1,11 @@
 import { HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { take, switchMap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 
 import { AuthService } from '../services/auth.service';
+import * as fromApp from './../../store/app.reducers';
+import * as fromAuth from './../../auth/store/auth.reducers';
 
 
 /**
@@ -18,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
   * Injecting required services
   * @param authService Provides the JWT token received from the server on Successfull login
   */
-  constructor(private authService: AuthService) {}
+  constructor(private store: Store<fromApp.AppState>) {}
 
   /**
    * intercept method provided by HttpInterceptor that allows to intercept outgoing requests
@@ -28,18 +32,21 @@ export class AuthInterceptor implements HttpInterceptor {
    */
   intercept(req: HttpRequest<any>, next: HttpHandler) {
 
-    // get the token from auth service
-    const authToken = this.authService.getToken();
+    // get the token from auth store
+    return this.store.select('auth').pipe(
+      take(1),
+      switchMap((authState: fromAuth.State) => {
 
-    // Clone the request and set Authorization header with JWT token
-    // Note: Requests are cloned because directly editing them may cause some internal errors
-    //      Because the way that Angular handles requests internally
-    const authRequest = req.clone({
-      headers: req.headers.set('Authorization', 'Bearer ' + authToken)
-    });
-    console.log(req);
 
-    // Foward the requet
-    return next.handle(authRequest);
+        // Clone the request and set Authorization header with JWT token
+        // Note: Requests are cloned because directly editing them may cause some internal errors
+        //      Because the way that Angular handles requests internally
+
+        const authRequest = req.clone({
+          headers: req.headers.set('Authorization', 'Bearer ' + authState.token)
+        });
+        return next.handle(authRequest);
+      })
+    );
   }
 }

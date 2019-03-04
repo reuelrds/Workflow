@@ -6,6 +6,10 @@ import { AuthService } from '../../../core/services/auth.service';
 import { AppsManagementComponent } from './apps-management/apps-management.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { UserManagementComponent } from './user-management/user-management.component';
+import { Store } from '@ngrx/store';
+
+import * as fromApp from './../../../store/app.reducers';
+import * as AuthActions from './../../../auth/store/auth.actions';
 
 @Component({
   selector: 'app-admin-panel',
@@ -20,7 +24,7 @@ export class AdminPanelComponent implements OnInit {
           {label: 'App Management', component: AppsManagementComponent},
           {label: 'Account Settings', component: AccountSettingsComponent}];
 
-  constructor(private adminService: AdminService, private authService: AuthService) { }
+  constructor(private adminService: AdminService, private authService: AuthService, private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
     // this.adminService.getAdminData().subscribe(res => {
@@ -30,6 +34,9 @@ export class AdminPanelComponent implements OnInit {
   }
 
   onLogout() {
+    this.store.dispatch({
+      type: AuthActions.ActionTypes.Logout
+    });
     // this.authService.logout();
   }
 

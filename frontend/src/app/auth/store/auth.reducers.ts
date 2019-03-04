@@ -2,13 +2,13 @@ import * as AuthActions from './auth.actions';
 
 export interface State {
   token: string;
-  userType: string;
+  tokenExpiry: number;
   isAuthenticated: boolean;
 }
 
 const initialState: State = {
   token: null,
-  userType: null,
+  tokenExpiry: null,
   isAuthenticated: false
 };
 
@@ -32,6 +32,11 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
       return {
         ...state,
         token: action.payload
+      };
+    case AuthActions.ActionTypes.SetTokenExpiry:
+      return {
+        ...state,
+        tokenExpiry: action.payload
       };
     default:
       return state;

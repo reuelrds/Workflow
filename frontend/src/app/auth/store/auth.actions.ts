@@ -5,8 +5,10 @@ export enum ActionTypes {
   Login = '[Login Page] Signin',
   Logout = '[Panel] Logout',
   SetToken = '[Login Page] Set Token',
+  SetTokenExpiry = '[Signup Page] Set Token Expiry',
   TryCreateAdmin = '[Signup Page] Try Create Admin',
-  TryCreateUser = '[Signup Page] Try Create User'
+  TryCreateUser = '[Signup Page] Try Create User',
+  TryLogin = '[Login Page] Try Login'
 }
 
 export class Signup implements Action {
@@ -25,6 +27,12 @@ export class SetToken implements Action {
   readonly type = ActionTypes.SetToken;
 
   constructor(public payload: string) {}
+}
+
+export class SetTokenExpiry implements Action {
+  readonly type = ActionTypes.SetTokenExpiry;
+
+  constructor(public payload: number) {}
 }
 
 export class TryCreateAdmin implements Action {
@@ -46,4 +54,10 @@ export class TryCreateUser implements Action {
   }) {}
 }
 
-export type AuthActions = Signup | Login | Logout | SetToken | TryCreateAdmin | TryCreateUser;
+export class TryLogin implements Action {
+  readonly type = ActionTypes.TryLogin;
+
+  constructor(public payload: {email: string, password: string}) {}
+}
+
+export type AuthActions = Signup | Login | Logout | SetToken | SetTokenExpiry | TryCreateAdmin | TryCreateUser | TryLogin;

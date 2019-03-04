@@ -47,10 +47,21 @@ exports.createUser = async (req, res, next) => {
         // Saving admin credentials to the database
         const result = await user.save();
 
+        const jetToken = jwt.sign({
+          email: req.body.email,
+      password: req.body.password
+        }, config.jwtsecret, {
+          expiresIn: "1h"
+        });
+    
         // Saving successfull
         res.status(201).json({
-          message: "User Created!"
-        });        
+          message: "User Created!",
+          jwtToken,
+          usertype: 'User',
+          expiresIn: 3600,
+          userId: admin.id
+        });     
       } else {
         throw new Error("Invalid Token");
       }
@@ -83,9 +94,21 @@ exports.createAdmin = async (req, res, next) => {
     // Saving admin credentials to the database
     const result = await admin.save();
 
+    console.log("vervebeb", admin.id);
+    const jwtToken = jwt.sign({
+      email: req.body.email,
+      password: req.body.password
+    }, config.jwtsecret, {
+      expiresIn: "1h"
+    });
+
     // Saving successfull
     res.status(201).json({
-      message: "User Created!"
+      message: "User Created!",
+      jwtToken,
+      usertype: 'Admin',
+      expiresIn: 3600,
+      userId: admin.id
     });
 
   } catch (err) {
