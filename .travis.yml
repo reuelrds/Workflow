@@ -1,0 +1,33 @@
+language: node_js
+
+node_js:
+  - "stable"
+
+branches:
+  only:
+    - master
+
+addons:
+  chrome: stable
+
+before_script:
+  - npm install -g @angular/cli
+
+cache:
+  npm: true
+  directories: 
+    - node_modules
+
+script:
+  - cd frontend
+  - ng lint
+  - ng test
+  - ng build --prod
+
+deploy:
+  provider: s3
+  access_key_id: "AKIAJCQHZKNXRU64HDWA"
+  secret_access_key: "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"
+  bucket: "sepm-workflow"
+  skip_cleanup: true
+  region: "ap-southeast-1"
