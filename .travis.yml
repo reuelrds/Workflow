@@ -28,9 +28,9 @@ deploy:
   provider: s3
   access_key_id: $Access_key_id
   secret_access_key: $Secret_Access_key
-  bucket: "sepm-workflow"
-  local_dir: "frontend/dist/workflow"
+  bucket: sepm-workflow
+  local_dir: dist/workflow
   skip_cleanup: true
-  region: "ap-southeast-1"
+  region: ap-southeast-1
   on:
     branch: master
