@@ -21,7 +21,7 @@ cache:
 script:
   - cd frontend
   - ng lint
-  - ng test --watch=false --browsers=ChromeHeadless
+  - ng test --watch=false --browsers=ChromeHeadless --code-coverage=true | ../node_modules/.bin/coveralls
   - ng build --prod
 
 deploy:
