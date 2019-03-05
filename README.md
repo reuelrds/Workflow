@@ -1,4 +1,5 @@
 # Workflow Management 
+[![Build Status](https://travis-ci.com/reuelrds/Workflow.svg?branch=master)](https://travis-ci.com/reuelrds/Workflow)
 
 ##### *This website was a part of Internet Programming Mini Project
 ***
