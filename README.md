@@ -1,6 +1,6 @@
 # Workflow Management 
 [![Build Status](https://travis-ci.com/reuelrds/Workflow.svg?branch=master)](https://travis-ci.com/reuelrds/Workflow)
-[![Coverage Status](https://coveralls.io/repos/github/reuelrds/Workflow/badge.svg?branch=master)](https://coveralls.io/github/reuelrds/Workflow?branch=master)
+
 
 ##### *This website was a part of Internet Programming Mini Project
 ***
