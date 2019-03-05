@@ -25,6 +25,9 @@ script:
   - ng build --prod
   - cd ..
   - cp package.json backend
+  - cd backend
+  - zip -r -v backend.zip .
+  - cd ..
 
 deploy:
   - provider: s3
@@ -42,7 +45,7 @@ deploy:
     secret_access_key: $Secret_Access_key
     region: ap-southeast-1
     skip_cleanup: true
-    local_dir: backend
+    zip_file: backend/backend.zip
     app: SEPM-Workflow 
     env: SepmWorkflow-env
     bucket_name: elasticbeanstalk-ap-southeast-1-959131551477
