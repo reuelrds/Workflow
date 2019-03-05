@@ -32,3 +32,5 @@ deploy:
   local_dir: "./frontend/dist/"
   skip_cleanup: true
   region: "ap-southeast-1"
+  on:
+    branch: master
