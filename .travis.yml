@@ -12,6 +12,7 @@ addons:
 
 before_script:
   - npm install -g @angular/cli
+  - npm install codecov -g
 
 cache:
   npm: true
@@ -30,7 +31,7 @@ script:
   - cd ..
 
 after_script:
-  - cat frontend/coverage/workflow/lcov.info | node_modules/coveralls/bin/coveralls.js
+  - codecov
 
 deploy:
   - provider: s3
