@@ -28,6 +28,8 @@ script:
   - cd backend
   - zip -r -v backend.zip .
   - cd ..
+
+after_script:
   - cat frontend/coverage/workflow/lcov.info | node_modules/coveralls/bin/coveralls.js
 
 deploy:
