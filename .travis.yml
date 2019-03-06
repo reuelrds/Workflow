@@ -21,13 +21,14 @@ cache:
 script:
   - cd frontend
   - ng lint
-  - ng test --watch=false --browsers=ChromeHeadless
+  - ng test --watch=false --browsers=ChromeHeadless --code-coverage=true
   - ng build --prod
   - cd ..
   - cp package.json backend
   - cd backend
   - zip -r -v backend.zip .
   - cd ..
+  - cat frontend/coverage/workflow/lcov.info | node_modules/coveralls/bin/coveralls.js
 
 deploy:
   - provider: s3
