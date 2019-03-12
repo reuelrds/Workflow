@@ -1,14 +1,14 @@
 import { Action } from '@ngrx/store';
 
 export enum ActionTypes {
-  Signup = '[Signup Page] Signup',
-  Login = '[Login Page] Signin',
   Logout = '[Panel] Logout',
-  SetToken = '[Login Page] Set Token',
-  SetTokenExpiry = '[Signup Page] Set Token Expiry',
-  TryCreateAdmin = '[Signup Page] Try Create Admin',
+  TryLogin = '[Login Page] Try Login',
   TryCreateUser = '[Signup Page] Try Create User',
-  TryLogin = '[Login Page] Try Login'
+  TryCreateAdmin = '[Signup Page] Try Create Admin',
+  Login = '[Auth API] Signin',
+  Signup = '[Auth API] Signup',
+  SetToken = '[Auth API] Set Token',
+  SetTokenExpiry = '[Auth API] Set Token Expiry'
 }
 
 export class Signup implements Action {

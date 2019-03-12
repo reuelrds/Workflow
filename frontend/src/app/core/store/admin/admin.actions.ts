@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
 export enum ActionTypes {
-  SetAdminId = '[Signup Page] Set Admin Id',
+  SetAdminId = '[Auth API] Set Admin Id'
 }
 
 export class SetAdminId implements Action {
