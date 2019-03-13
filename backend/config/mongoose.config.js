@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 exports.connectDatabase = async () => {
   try {
-    const url = `mongodb+srv://${config.mongodb.username}:${config.mongodb.password}@${config.mongodb.host}/${config.mongodb.authdb}`;
+    const url = config.mongodb.url;
     const opts = {
       useNewUrlParser: true,
       useCreateIndex: true
