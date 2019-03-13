@@ -1,38 +1,37 @@
 // Configuration File: It Contains values for various variables
+const yargs = require('yargs');
 
-const env = process.argv.slice(2);
+const env = yargs.argv._[0] ? yargs.argv._[0] : yargs.argv.env;
 
 const defaults = {
   env,
+  PORT: process.env.PORT || "3000",
   bcrypt: {
     saltLength: 10
-  }
+  },
+  jwtsecret: "Ave atque vale. pulvis et umbra sumus",
 }
 
 const config = {
   dev : {
     ...defaults,
-    PORT: 3000,
-    jwtsecret: "Ave atque vale. pulvis et umbra sumus",
+    
     mongodb: {
-      host: "cluster0-jc3gm.mongodb.net",
-      username: "reuelrds",
-      password: "7w56L7IkTOmHiQLC",
-      authdb: "test"
+      url: 'mongodb+srv://reuelrds:7w56L7IkTOmHiQLC@cluster0-jc3gm.mongodb.net/test'
     },
-    imageFolder: "./workflow/backend/images"
+    uploadsFolder: "./workflow/backend/files/uploads"
   },
   production: {
     ...defaults,
-    PORT: process.env.PORT || "3000",
     mongodb: {
-      host: "prod-egpb8.mongodb.net",
-      username: "reuelrds",
-      password: "mD0InLgQ55XrY6t3",
-      authdb: "workflow"
+      url: 'mongodb+srv://reuelrds:mD0InLgQ55XrY6t3@prod-egpb8.mongodb.net/workflow'
     },
-    jwtsecret: "Noli timere mortem. Latin nihil enim mori timeret. Quoniam non sumus Pulvis et umbra sumus. Ita, ave atque vale. Sit autem iterum conveniant",
-    imageFolder: "images"
+    uploadsFolder: "./files/uploads"
+  },
+  test: {
+    ...defaults,
+    url: `mongodb://127.0.0.1:24017/workflow-test`,
+    uploadsFolder: "./__tests__/files/uploads"
   }
 };
 

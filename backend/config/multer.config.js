@@ -11,8 +11,7 @@ const MIME_TYPE_MAP = {
 };
 
 // Configuring filename and destination
-// Note: Currently only image Uploads are supported
-const storage = multer.diskStorage({
+const avatar = multer.diskStorage({
   destination: (req, file, cb) => {
     const isValid = MIME_TYPE_MAP[file.mimetype];
     let error = new Error("Invalid mime type");
@@ -20,7 +19,7 @@ const storage = multer.diskStorage({
       error = null;
     }
 
-    cb(error, config.imageFolder);
+    cb(error, config.uploadsFolder);
   },
   filename: (req, file, cb) => {
     const name = file.originalname
@@ -32,4 +31,7 @@ const storage = multer.diskStorage({
   }
 });
 
-module.exports = multer({ storage:storage }).single("img");
+module.exports = {
+  avatar
+}
+// module.exports = multer({ storage:storage }).single("img");
