@@ -47,9 +47,9 @@ exports.createUser = async (req, res, next) => {
         // Saving admin credentials to the database
         const result = await user.save();
 
-        const jetToken = jwt.sign({
+        const jwtToken = jwt.sign({
           email: req.body.email,
-      password: req.body.password
+        password: req.body.password
         }, config.jwtsecret, {
           expiresIn: "1h"
         });

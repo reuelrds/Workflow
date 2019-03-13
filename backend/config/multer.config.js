@@ -19,7 +19,7 @@ const avatar = multer.diskStorage({
       error = null;
     }
 
-    cb(error, config.uploadsFolder);
+    cb(error, `${config.uploadsFolder}/avatars`);
   },
   filename: (req, file, cb) => {
     const name = file.originalname

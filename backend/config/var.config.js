@@ -17,20 +17,20 @@ const config = {
     ...defaults,
     
     mongodb: {
-      url: 'mongodb+srv://reuelrds:7w56L7IkTOmHiQLC@cluster0-jc3gm.mongodb.net/test'
+      url: 'mongodb://127.0.0.1:27017/workflow-dev'
     },
-    uploadsFolder: "./workflow/backend/files/uploads"
+    uploadsFolder: "./backend/files/uploads"
   },
   production: {
     ...defaults,
     mongodb: {
-      url: 'mongodb+srv://reuelrds:mD0InLgQ55XrY6t3@prod-egpb8.mongodb.net/workflow'
+      url: 'mongodb+srv://reuelrds:7w56L7IkTOmHiQLC@cluster0-jc3gm.mongodb.net/admin'
     },
     uploadsFolder: "./files/uploads"
   },
   test: {
     ...defaults,
-    url: `mongodb://127.0.0.1:24017/workflow-test`,
+    url: 'mongodb://127.0.0.1:27017/workflow-test',
     uploadsFolder: "./__tests__/files/uploads"
   }
 };
