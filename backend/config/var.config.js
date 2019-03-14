@@ -1,7 +1,7 @@
 // Configuration File: It Contains values for various variables
 const yargs = require('yargs');
 
-const env = yargs.argv._[0] ? yargs.argv._[0] : yargs.argv.env;
+const env = yargs.argv.env ?  yargs.argv.env : yargs.argv._[0];
 
 const defaults = {
   env,
@@ -30,9 +30,12 @@ const config = {
   },
   test: {
     ...defaults,
-    url: 'mongodb://127.0.0.1:27017/workflow-test',
+    mongodb: {
+      url: 'mongodb://127.0.0.1:27017/workflow-test'
+    },
     uploadsFolder: "./__tests__/files/uploads"
   }
 };
+
 
 module.exports = config[env];
