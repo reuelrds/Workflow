@@ -2,7 +2,7 @@
 const config = require('./var.config');
 const mongoose = require('mongoose');
 
-exports.connectDatabase = async () => {
+const connectDatabase = async () => {
   try {
     const url = config.mongodb.url;
     const opts = {
@@ -10,8 +10,16 @@ exports.connectDatabase = async () => {
       useCreateIndex: true
     }
     await mongoose.connect(url, opts);
-    console.log('Connected to database!');
   } catch (error) {
     console.log("Error Connecting to database");
   }
+}
+
+const disconnectDatabase = async () => {
+  await mongoose.disconnect()
+}
+
+module.exports = {
+  connect: connectDatabase,
+  disconnect: disconnectDatabase
 }
