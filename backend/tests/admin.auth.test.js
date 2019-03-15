@@ -52,7 +52,7 @@ describe('Testing Admin Auth Route', () => {
     try {
       res = await request(app).post('/api/auth/admin-signup').send({
         companyName: 'ref',
-        email: 'admintest1@email.com',
+        email: 'postmanadmintest@email.com',
         password: '12345678'
       });
     } catch(error) {
@@ -67,7 +67,7 @@ describe('Testing Admin Auth Route', () => {
     let res;
     try {
       res = await request(app).post('/api/auth/admin-signup').send({
-        companyName: 'AdminTest1',
+        companyName: 'Postman Test',
         email: 'test@email.com',
         password: '12345678'
       });
