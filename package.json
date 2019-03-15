@@ -9,7 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start:server": "nodemon ./backend/src/bin/server.js --env='test'",
-    "start:localDB": "mongod --dbpath C:/mongodb/data --directoryperdb"
+    "start:localDB": "mongod --dbpath C:/mongodb/data --directoryperdb",
+    "test:server": "jest --runInBand --watch"
   },
   "jest": {
     "verbose": true,
