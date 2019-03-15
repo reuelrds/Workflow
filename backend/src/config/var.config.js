@@ -33,7 +33,7 @@ const config = {
     mongodb: {
       url: 'mongodb://127.0.0.1:27017/workflow-test'
     },
-    uploadsFolder: "./__tests__/files/uploads"
+    uploadsFolder: "./backend/tests/files/uploads"
   }
 };
 

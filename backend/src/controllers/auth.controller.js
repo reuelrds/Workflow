@@ -29,7 +29,7 @@ exports.createUser = async (req, res, next) => {
     }
 
     let userData = {
-      profileImagePath: url+"/images/" + imgpath,
+      profileImagePath: url+ config.uploadsFolder.slice(-14) + '/avatars/' + imgpath,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
