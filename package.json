@@ -8,14 +8,14 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start:server": "nodemon ./backend/bin/server.js"
+    "start:server": "nodemon ./backend/src/bin/server.js"
   },
   "jest": {
     "verbose": true,
     "rootDir": "backend",
     "testEnvironment": "node",
     "setupFiles": [
-      "./tests/__fixtures__/env.setup.js"
+      "./tests/fixtures/env.setup.js"
     ]
   },
   "private": true,
