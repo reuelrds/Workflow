@@ -25,7 +25,7 @@ script:
   - ng build --prod
   - cd ..
   - cp package.json backend
-  - jest --runInBand
+  - jest --runInBand --coverage
   - cd backend
   - zip -r -v backend.zip .
   - cd ..
