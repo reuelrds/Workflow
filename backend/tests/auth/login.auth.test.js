@@ -1,12 +1,12 @@
 const request = require('supertest')
 
-const dbSetup = require('./fixtures/testdb.config');
+const dbSetup = require('../fixtures/testdb.config');
 
-const app = require('./../src/app');
-const db = require('./../src/config/mongoose.config');
+const app = require('./../../src/app');
+const db = require('./../../src/config/mongoose.config');
 
-const User = require('./../src/models/user.model');
-const Admin = require('./../src/models/admin.model');
+const User = require('./../../src/models/user.model');
+const Admin = require('./../../src/models/admin.model');
 
 
 describe('Testing Login', () => {

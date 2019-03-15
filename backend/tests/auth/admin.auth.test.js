@@ -1,8 +1,8 @@
 const request = require('supertest');
-const app = require('./../src/app');
-const db = require('./../src/config/mongoose.config');
-const dbSetup = require('./fixtures/testdb.config');
-const Admin = require('./../src/models/admin.model');
+const app = require('./../../src/app');
+const db = require('./../../src/config/mongoose.config');
+const dbSetup = require('../fixtures/testdb.config');
+const Admin = require('./../../src/models/admin.model');
 
 describe('Testing Admin Auth Route', () => {
 
