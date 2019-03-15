@@ -1,6 +1,7 @@
 // Importing Required Libraries
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const uniqid = require('uniqid');
 
 const User = require("./../models/user.model");
 const Admin = require("./../models/admin.model");
@@ -82,19 +83,19 @@ exports.createAdmin = async (req, res, next) => {
 
     // Hashing Password
     const hashedPasswd = await bcrypt.hash(req.body.password, config.bcrypt.saltLength);
-    console.log(hashedPasswd);
 
     // Creating Admin object to be saved into the database
     const admin = new Admin({
       name: req.body.companyName,
       email: req.body.email,
-      password: hashedPasswd
+      password: hashedPasswd,
+      id: uniqid()
     });
 
     // Saving admin credentials to the database
     const result = await admin.save();
 
-    console.log("vervebeb", admin.id);
+    console.log("vervebeb", result);
     const jwtToken = jwt.sign({
       email: req.body.email,
       password: req.body.password
@@ -108,14 +109,14 @@ exports.createAdmin = async (req, res, next) => {
       jwtToken,
       usertype: 'Admin',
       expiresIn: 3600,
-      userId: admin.id
+      userId: result.id
     });
 
-  } catch (err) {
+  } catch(error) {
 
-    console.log(err);
+    // console.log(error);
     res.status(500).json({
-      message: `Creating Admin Failed! ${err.message}`
+      message: `Creating Admin Failed! ${error.message}`
     });
 
   }
