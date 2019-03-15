@@ -160,20 +160,21 @@ exports.loginUser = async (req, res, next) => {
 
       // as all the credentials match, create a jwt and sent back to client
       const jwtToken = jwt.sign({
-                      email: fetchedUser.email,
-                      userId: fetchedUser.id
-                  }, config.jwtsecret, {
-                      expiresIn: "1h"
-                  });
-  
+          email: fetchedUser.email,
+          userId: fetchedUser.id
+      }, config.jwtsecret, {
+          expiresIn: "1h"
+      });
+
       res.status(200).json({
-                      jwtToken,
-                      usertype: isAdmin ? 'Admin': 'User',
-                      expiresIn: 3600,
-                      userId: fetchedUser.id});
+        jwtToken,
+        usertype: isAdmin ? 'Admin': 'User',
+        expiresIn: 3600,
+        userId: fetchedUser.id
+      });
     } else {
       // The passwords aren't matching
-      throw new Error("Login Credientials do not exist. Please register before logging in.");
+      throw new Error("Login Credientials do not exist. Passwords don't match. Please register before logging in.");
     }
     
   } catch (error) {
