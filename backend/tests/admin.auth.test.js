@@ -4,7 +4,7 @@ const db = require('./../src/config/mongoose.config');
 const dbSetup = require('./fixtures/testdb.config');
 const Admin = require('./../src/models/admin.model');
 
-describe('Testing Auth Route', () => {
+describe('Testing Admin Auth Route', () => {
 
   beforeEach(async () => {
     await db.connect();
@@ -12,7 +12,6 @@ describe('Testing Auth Route', () => {
   });
 
   afterEach(async () => {
-    await dbSetup.teardownDatabase();
     await db.disconnect();
   })
 
@@ -28,10 +27,10 @@ describe('Testing Auth Route', () => {
       .expect(201);
 
       // Assert that the Database was changed correctly
-      console.log(res.body);
+      // console.log(res.body);
       const admin = await Admin.findOne({id: res.body.userId});
       expect(admin).not.toBeNull();
-      console.log(admin);
+      // console.log(admin);
       expect(admin.password).not.toBe('123456');
 
 
@@ -42,6 +41,8 @@ describe('Testing Auth Route', () => {
         expiresIn: 3600,
         userId: admin.id
       });
+
+      expect(res.body.jwtToken).toBeDefined();
 
       expect(res.body.jwtToken).toBeDefined();
   });
@@ -55,10 +56,25 @@ describe('Testing Auth Route', () => {
         password: '12345678'
       });
     } catch(error) {
-      console.log(error.response.body.message);
+      // console.log(error.response.body.message);
       expect(error.status).toBe(500);
       expect(error.response.body.message).toContain('Creating Admin Failed!');
     }
 
-  })
+  });
+
+  test('it should not create a new Admin with same Company name', async() => {
+    let res;
+    try {
+      res = await request(app).post('/api/auth/admin-signup').send({
+        companyName: 'AdminTest1',
+        email: 'test@email.com',
+        password: '12345678'
+      });
+    } catch(error) {
+      // console.log(error.response.body.message);
+      expect(error.status).toBe(500);
+      expect(error.response.body.message).toContain('Creating Admin Failed!');
+    }
+  });
 });
