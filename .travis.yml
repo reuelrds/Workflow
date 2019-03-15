@@ -9,11 +9,14 @@ addons:
 before_script:
   - npm install -g @angular/cli
   - npm install codecov -g
+  - npm install -g jest
 
 cache:
   npm: true
   directories: 
     - node_modules
+services:
+  - mongodb
 
 script:
   - cd frontend
@@ -23,6 +26,7 @@ script:
   - cd ..
   - cp package.json backend
   - cd backend
+  - jest --runInBand
   - zip -r -v backend.zip .
   - cd ..
 
