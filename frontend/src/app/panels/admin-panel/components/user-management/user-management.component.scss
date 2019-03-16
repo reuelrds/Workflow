@@ -54,15 +54,17 @@
 }
 
 .users {
-  display: flex;
+  display: grid;
   position: relative;
   width: 50%;
   height: 60%;
-  justify-content: space-around;
+  grid-template-columns: max-content minmax(min-content, 1fr) max-content;
 
   &__active{
 
     text-align: center;
+    grid-column: 1 / 2;
+
     &--text {
       font-size: 1.5rem;
     }
@@ -76,6 +78,8 @@
   &__inactive{
     
     text-align: center;
+    grid-column: 3 / 4;
+
     &--text {
       font-size: 1.5rem;
     }
@@ -89,7 +93,7 @@
 
 .line {
   display: inline-block;
-  
+  grid-column: 2 / 3;
   position: absolute;
   top: 10%;
   left: 45%;
