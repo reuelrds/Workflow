@@ -29,6 +29,7 @@ script:
   - cd backend/src
   - zip -r -v backend.zip .
   - cd ..
+  - cd ..
 
 after_script:
   - codecov
