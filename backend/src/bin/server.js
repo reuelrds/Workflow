@@ -2,6 +2,7 @@ const app = require("../app");
 const debug = require("debug")("node-workflow");
 const http = require("http");
 const config = require("./../config/var.config");
+const db = require('./../config/mongoose.config');
 
 /**
  * Normalize a port into a number, string, or false.
@@ -71,3 +72,5 @@ const server = http.createServer(app);
 server.on("error", onError);
 server.on("listening", onListening);
 server.listen(port);
+
+db.connect();

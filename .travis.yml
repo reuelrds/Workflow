@@ -3,21 +3,20 @@ language: node_js
 node_js:
   - "stable"
 
-branches:
-  only:
-    - master
-
 addons:
   chrome: stable
 
 before_script:
   - npm install -g @angular/cli
   - npm install codecov -g
+  - npm install -g jest
 
 cache:
   npm: true
   directories: 
     - node_modules
+services:
+  - mongodb
 
 script:
   - cd frontend
@@ -26,6 +25,7 @@ script:
   - ng build --prod
   - cd ..
   - cp package.json backend
+  - jest --runInBand --coverage
   - cd backend
   - zip -r -v backend.zip .
   - cd ..

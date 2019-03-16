@@ -8,7 +8,17 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start:server": "nodemon ./backend/bin/server.js"
+    "start:server": "nodemon ./backend/src/bin/server.js --env='test'",
+    "start:localDB": "mongod --dbpath C:/mongodb/data --directoryperdb",
+    "test:server": "jest --runInBand --watch"
+  },
+  "jest": {
+    "verbose": true,
+    "rootDir": "backend",
+    "testEnvironment": "node",
+    "setupFiles": [
+      "./tests/fixtures/env.setup.js"
+    ]
   },
   "private": true,
   "dependencies": {
@@ -39,12 +49,13 @@
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "uniqid": "^5.0.3",
+    "yargs": "^13.2.2",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
     "@angular/cli": "~7.3.1",
-    "@angular/compiler-cli": "~7.2.0",
+    "@angular/compiler-cli": "^7.2.9",
     "@angular/http": "^7.2.4",
     "@angular/language-service": "~7.2.0",
     "@types/jasmine": "~2.8.8",
@@ -52,15 +63,19 @@
     "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
     "coveralls": "^3.0.3",
+    "fs-extra": "^7.0.1",
     "jasmine-core": "~2.99.1",
+    "jasmine-marbles": "^0.4.1",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~3.1.1",
+    "jest": "^24.3.1",
+    "karma": "^4.0.1",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
     "nodemon": "^1.18.10",
     "protractor": "~5.4.0",
+    "supertest": "^4.0.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~3.2.2"

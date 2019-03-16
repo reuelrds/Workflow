@@ -5,7 +5,6 @@ const adminRoute = require('./routes/admin.route');
 const userRoute = require('./routes/user.route');
 const db = require("./config/mongoose.config");
 
-db.connectDatabase();
 
 // Routing requests according to their specified endpoints
 app.use("/api/auth", authRoute);

@@ -37,7 +37,104 @@ export class AuthService {
    * @param httpClient Used for HTTP requests.
    * @param router Used to navigate to different URL's.
    */
-  constructor(private httpClient: HttpClient, private router: Router, private store: Store<fromAuth.AppState>) {}
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+    private store: Store<fromAuth.AppState>
+  ) {}
+
+  /**
+   * Tries to Create a new Admin Account
+   * @param adminAuthData An object having properties:
+   *        companyName:  Organization Name
+   *        email         Admin email
+   *        password:     Admin password
+   */
+  createAdmin(adminAuthData): Observable<{
+    message: string;
+    jwtToken: string;
+    userType: string;
+    expiresIn: string;
+    userId: string;
+  }> {
+
+    // Sending data to backend using POST method
+    // This will return an observable to which we subscribe to get the data.
+    return this.httpClient
+      .post<{
+        message: string;
+        jwtToken: string;
+        userType: string;
+        expiresIn: string;
+        userId: string;
+      }>(
+        `${this.BACKEND_URL}/api/auth/admin-signup`,
+        adminAuthData
+      );
+  }
+
+  /**
+   * Tries to create a new user account
+   * @param userAuthData An object having properties:
+   *        image:      User Profile Picture
+   *        firstName:  User's First Name
+   *        lastName:   User's Last Name
+   *        email:      User's email address
+   *        password:   Password for user account
+   *        token ID:   issued to the user's Organizaation
+   */
+  createUser(userAuthData): Observable<{
+    message: string;
+    jwtToken: string;
+    userType: string;
+    expiresIn: string;
+    userId: string;
+  }> {
+
+    // We use FormData as JSON format supports only strings and not images
+    const userData = new FormData();
+    userData.append('img', userAuthData.image, `${userAuthData.firstName}-${userAuthData.lastName}`);
+    userData.append('firstName', userAuthData.firstName);
+    userData.append('lastName', userAuthData.lastName);
+    userData.append('email', userAuthData.email);
+    userData.append('password', userAuthData.password);
+    userData.append('token', userAuthData.token);
+
+    // Sending data to backend using POST method
+    // This will return an observable to which we subscribe to get the data.
+    return this.httpClient
+      .post<{
+        message: string;
+        jwtToken: string;
+        userType: string;
+        expiresIn: string;
+        userId: string;
+      }>(
+        `${this.BACKEND_URL}/api/auth/user-signup`,
+        userData
+      );
+  }
+
+  /**
+   * Tries to login the user
+   * @param loginData An Object havning:
+   *            email:     User's email
+   *            password:  User's password
+   */
+  loginUser(loginData): Observable<{
+    jwtToken: string;
+    usertype: string;
+    expiresIn: number;
+    userId: string;
+  }> {
+
+    return this.httpClient.post<{
+      jwtToken: string;
+      usertype: string;
+      expiresIn: number;
+      userId: string;
+    }>(`${this.BACKEND_URL}/api/auth/login`, loginData);
+  }
 
 
   /**
@@ -85,6 +182,7 @@ export class AuthService {
       // this.token = authInformation.token;
       // this.isAuthenticated = true;
       this.store.dispatch({type: AuthActions.ActionTypes.SetToken, payload: authInformation.token});
+      this.store.dispatch({type: AuthActions.ActionTypes.SetTokenExpiry, payload: expiresIn});
       // this.store.dispatch({type: Auth})
       console.log(`test  ${expiresIn}, type: ${typeof(expiresIn)}`);
       this.store.dispatch({type: AuthActions.ActionTypes.Login});
@@ -107,7 +205,7 @@ export class AuthService {
    * @param {string} expirationDate Token's expiration date
    * @param {string} userType Type of user that is loggedin
    */
-  private saveLocalData(
+  saveLocalData(
     jwtToken: string,
     expirationDate: Date,
     userType: string,
@@ -122,7 +220,7 @@ export class AuthService {
   /**
    * Clears data from LocalStorage
    */
-  private clearLocalData() {
+  clearLocalData() {
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('expiration');
     localStorage.removeItem('userType');
@@ -132,7 +230,7 @@ export class AuthService {
   /**
    * Tries to Fetch data from LocalStorage
    */
-  private getAuthData() {
+  getAuthData() {
     const token = localStorage.getItem('jwtToken');
     const expirationDate = localStorage.getItem('expiration');
     const userType = localStorage.getItem('userType');

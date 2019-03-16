@@ -24,13 +24,7 @@ export class AuthEffects {
       return action.payload;
     }),
     switchMap((adminAuthData: AdminAuth) => {
-      return this.httpClient.post<{
-        message: string;
-        jwtToken: string;
-        userType: string;
-        expiresIn: string;
-        userId: string;
-      }>(`${this.BACKEND_URL}/api/auth/admin-signup`, adminAuthData);
+      return this.authService.createAdmin(adminAuthData);
     }),
     mergeMap(res => {
       console.log('kkkkrgeg');
@@ -63,25 +57,7 @@ export class AuthEffects {
       return action.payload;
     }),
     switchMap(userAuthData => {
-      const userData = new FormData();
-      userData.append(
-        'img',
-        userAuthData.image,
-        `${userAuthData.firstName}-${userAuthData.lastName}`
-      );
-      userData.append('firstName', userAuthData.firstName);
-      userData.append('lastName', userAuthData.lastName);
-      userData.append('email', userAuthData.email);
-      userData.append('password', userAuthData.password);
-      userData.append('token', userAuthData.token);
-
-      return this.httpClient.post<{
-        message: string;
-        jwtToken: string;
-        userType: string;
-        expiresIn: string;
-        userId: string;
-      }>(`${this.BACKEND_URL}/api/auth/user-signup`, userData);
+      return this.authService.createUser(userAuthData);
     }),
     mergeMap(res => {
       console.log('gbbbvgerve');
@@ -114,12 +90,7 @@ export class AuthEffects {
       return action.payload;
     }),
     switchMap(loginData => {
-      return this.httpClient.post<{
-        jwtToken: string;
-        usertype: string;
-        expiresIn: number;
-        userId: string;
-      }>(`${this.BACKEND_URL}/api/auth/login`, loginData);
+      return this.authService.loginUser(loginData);
     }),
     mergeMap(res => {
 

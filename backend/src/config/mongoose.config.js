@@ -2,16 +2,24 @@
 const config = require('./var.config');
 const mongoose = require('mongoose');
 
-exports.connectDatabase = async () => {
+const connectDatabase = async () => {
   try {
-    const url = `mongodb+srv://${config.mongodb.username}:${config.mongodb.password}@${config.mongodb.host}/${config.mongodb.authdb}`;
+    const url = config.mongodb.url;
     const opts = {
       useNewUrlParser: true,
       useCreateIndex: true
     }
     await mongoose.connect(url, opts);
-    console.log('Connected to database!');
   } catch (error) {
     console.log("Error Connecting to database");
   }
+}
+
+const disconnectDatabase = async () => {
+  await mongoose.disconnect()
+}
+
+module.exports = {
+  connect: connectDatabase,
+  disconnect: disconnectDatabase
 }

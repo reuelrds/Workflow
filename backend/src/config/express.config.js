@@ -14,10 +14,6 @@ app.use(cors());
 
 // BodyParser parses incomming data stream into objects that can be used
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
-
-
-app.use("/images", express.static(path.join(config.imageFolder)));
-
+app.use(bodyParser.urlencoded({extended: true}));
 
 module.exports = app;

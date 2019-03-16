@@ -5,7 +5,7 @@ const uniqid = require('uniqid');
 const userSchema = mongoose.Schema({
   id: {
     type: String,
-    default: uniqid()
+    unique: true
   },
   profileImagePath: {
     type: String
@@ -20,15 +20,15 @@ const userSchema = mongoose.Schema({
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   password: {
     type: String,
     required: true
   },
   companyId: {
-    type: String,
-    required: true
+    type: String
   }
 });
 

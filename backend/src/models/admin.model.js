@@ -1,16 +1,18 @@
 const mongoose = require('mongoose');
-const uniqid = require('uniqid');
+
 
 const uniqueVlaidator = require('mongoose-unique-validator');
 
 const adminSchema = mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   password: {
     type: String,
@@ -18,7 +20,7 @@ const adminSchema = mongoose.Schema({
   },
   id: {
     type: String,
-    default: uniqid()
+    unique: true
   }
 });
 
