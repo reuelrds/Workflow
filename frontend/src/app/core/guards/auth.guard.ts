@@ -8,6 +8,11 @@ import {
 import { Observable } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
+import { Store } from '@ngrx/store';
+
+import * as fromApp from './../../store/app.reducers';
+import * as fromAuth from './../../auth/store/auth.reducers';
+import { take, map } from 'rxjs/operators';
 
 /**
  * AuthGuard implements a Guard to test whether a user should be routed foward to the requested URL
@@ -21,7 +26,7 @@ export class AuthGuard implements CanActivate {
    * @param authService Used to verify whether the user is Authenticated or not
    * @param router Used to navigate user back to login page if he isn't authenticated
    */
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private store: Store<fromApp.AppState>) {}
 
   /**
    * Decides if a route can be activated.
@@ -33,11 +38,12 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> | Promise<boolean> {
-    const isAuth = this.authService.getIsAuth();
-    if (!isAuth) {
-      this.router.navigate(['/auth/login']);
-    }
-    console.log(isAuth);
-    return isAuth;
+
+    return this.store.select('auth').pipe(
+      take(1),
+      map((authState: fromAuth.State) => {
+        return authState.isAuthenticated;
+      })
+    );
   }
 }

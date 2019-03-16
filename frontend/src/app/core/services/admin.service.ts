@@ -40,10 +40,10 @@ export class AdminService {
   }
 
   getAdminId() {
-    this.authService.getUserIdListener().subscribe(result => {
-      this.adminId = result;
-      console.log(this.adminId);
-    });
+    // this.authService.getUserIdListener().subscribe(result => {
+    //   this.adminId = result;
+    //   console.log(this.adminId);
+    // });
   }
 
   getAdminData() {

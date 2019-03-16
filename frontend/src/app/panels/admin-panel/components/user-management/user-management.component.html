@@ -1,0 +1,51 @@
+<div class="userSettingsTab">
+
+  <!-- <div class="cards"> -->
+  <mat-card class="card" *ngFor="let card of cardsText; index as i; first as isFirst; last as isLast">
+    <mat-card-header>
+      <mat-card-title>{{ card.title }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content *ngIf="!isFirst && !isLast">
+      {{ card.body }}
+    </mat-card-content>
+
+    <mat-card-content *ngIf="isFirst">
+      <!-- <div> -->
+        <div class="users">
+          <div class="users__active">
+            <div class="users__active--count lato default">
+              {{ activeUsers }}
+            </div>
+            <div class="users__active--text">
+              {{ card.body[0] }}
+            </div>
+          </div>
+          <span class="line">&nbsp;</span>
+          <div class="users__inactive">
+            <div class="users__inactive--count lato">
+              {{ inactiveUsers }}
+            </div>
+            <div class="users__inactive--text">
+              {{ card.body[1] }}
+            </div>
+          </div>
+        </div>
+      <!-- </div> -->
+    </mat-card-content>
+
+    <mat-card-content *ngIf="isLast">
+      {{ card.body[0] }} {{ pendingRequests }} {{ card.body[1] }}
+    </mat-card-content>
+
+    <mat-card-actions *ngIf="isFirst">
+      <button mat-raised-button color="primary">{{ card.action[0] }}</button>
+      <button mat-stroked-button color="accent">{{ card.action[1] }}</button>
+    </mat-card-actions>
+    <mat-card-actions *ngIf="!isFirst">
+      <button mat-raised-button color="primary">{{ card.action }}</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- </div> -->
+</div>

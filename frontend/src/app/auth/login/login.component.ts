@@ -7,6 +7,10 @@ import { HelperService } from './../../core/services/helper.service';
 import { CustomValidatingService } from '../validators/custom-validators';
 import { AuthService } from './../../core/services/auth.service';
 
+import * as fromApp from './../../store/app.reducers';
+import * as AuthActions from './../../auth/store/auth.actions';
+import { Store } from '@ngrx/store';
+
 
 /**
  * Login Component. Instantiates Login Form and handles events when the form is Submitted
@@ -53,7 +57,8 @@ export class LoginComponent implements OnInit {
     private helperService: HelperService,
     private authService: AuthService,
     private customValidators: CustomValidatingService,
-    private router: Router
+    private router: Router,
+    private store: Store<fromApp.AppState>
   ) { }
 
   ngOnInit() {
@@ -100,24 +105,30 @@ export class LoginComponent implements OnInit {
     } else if (this.loginForm.valid) {
 
       // Else display the spinner and call login user method provided by AuthService
-      this.isLoading = true;
-      this.authService.loginUser(
-        this.loginForm.value.email,
-        this.loginForm.value.password,
-      ).subscribe(result => {
-        this.isLoading = false;
-        console.log('From Login Component');
-        console.log(result);
+      // this.isLoading = true;
+      // this.authService.loginUser(
+      //   this.loginForm.value.email,
+      //   this.loginForm.value.password,
+      // ).subscribe(result => {
+      //   this.isLoading = false;
+      //   console.log('From Login Component');
+      //   console.log(result);
 
-        if (result.usertype === 'Admin') {
-          this.router.navigate(['/admin-panel']);
-        } else {
-          this.router.navigate(['/client-panel']);
-        }
+      //   if (result.usertype === 'Admin') {
+      //     this.router.navigate(['/admin-panel']);
+      //   } else {
+      //     this.router.navigate(['/client-panel']);
+      //   }
 
-      }, error => {
-        this.isLoading = false;
-      });
+      // }, error => {
+      //   this.isLoading = false;
+      // });
+      this.store.dispatch({
+        type: AuthActions.ActionTypes.TryLogin,
+        payload: {
+          email: this.loginForm.value.email,
+          password: this.loginForm.value.password
+        }});
     }
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subject, Observable, pipe, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -8,8 +9,11 @@ import { AdminAuth } from '../../shared/models/admin-auth';
 import { LoginData } from '../../shared/models/login-data';
 import { environment } from './../../../environments/environment';
 
+import * as fromAuth from './../../store/app.reducers';
+import * as AuthActions from './../../auth/store/auth.actions';
+
 /**
- * Handles all Authentication, Sigining up & Logging in, Logic
+ * Helps in Handleling all Authentication, Sigining up & Logging in, Logic
  */
 
 @Injectable({
@@ -22,33 +26,10 @@ export class AuthService {
   private BACKEND_URL: string = environment.apiUrl;
 
   /**
-   * @param {string} token Stores the JWT Token received from the server on successfull login
-   */
-  private token: string;
-
-  /**
    * @param {string} tokenTimer Stores the expiration value of the JWT Token in seconds
    */
   private tokenTimer: any;
 
-  /**
-   * @param {boolean} isAuthenticated Stores whether the user is Authenticated or not.
-   *
-   * Note:  This property is used along with the `getIsAuth` method to notify subscribing components
-   *        the authentication status. This is required as some components may get instantiated later and may
-   *        miss the value that the `authStatusListener` emitts.
-   */
-  private isAuthenticated = false;
-
-  /**
-   * @param {Subject<boolean>} authStatusListener Emitts events specifying authentication status to which components can subscribe to.
-   */
-  private authStatusListener: Subject<boolean> = new Subject<boolean>();
-
-  /**
-   * @param {BehaviourSubject<string>} userIdListener Emitts events specifying userid to which components can subscribe to.
-   */
-  private userIdListener: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   /**
    * Injecting required Services
@@ -56,66 +37,37 @@ export class AuthService {
    * @param httpClient Used for HTTP requests.
    * @param router Used to navigate to different URL's.
    */
-  constructor(private httpClient: HttpClient, private router: Router) {}
-
-  /**
-   * Getter that returns the token
-   * @returns {string} The JWT Token provided by the server
-   */
-  getToken() {
-    return this.token;
-  }
-
-  /**
-   * Getter that returns the token
-   * @returns {string} The JWT Token provided by the server
-   */
-  getIsAuth() {
-    return this.isAuthenticated;
-  }
-
-  /**
-   * Emitts True or False based on whether the user is Authenticated or not
-   * @returns {Observable<boolean>} Returns an Observable of type boolean that components can subscribe to
-   */
-  getAuthStatusListener() {
-    return this.authStatusListener.asObservable();
-  }
-
-  /**
-   * Emitts Logged in User's id
-   * @returns {Observable<string>} Returns an Observable of type boolean that components can subscribe to
-   */
-  getUserIdListener() {
-    return this.userIdListener.asObservable();
-  }
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+    private store: Store<fromAuth.AppState>
+  ) {}
 
   /**
    * Tries to Create a new Admin Account
-   *
-   * @param companyName Organization Name
-   * @param email Admin email
-   * @param password Admin password
+   * @param adminAuthData An object having properties:
+   *        companyName:  Organization Name
+   *        email         Admin email
+   *        password:     Admin password
    */
-  createAdmin(companyName: string, email: string, password: string): Observable<{message: string}> {
-
-    // Check if form inputs are not null or undefined
-    if (!companyName || !email || !password) {
-      throw new Error('Invalid Form Inputs');
-    }
-
-    // Create an admin object.
-    // An Object is created and sent instead of individual values as extracting these values will be easier on the backend
-    const adminAuthData: AdminAuth = {
-      companyName,
-      email,
-      password
-    };
+  createAdmin(adminAuthData): Observable<{
+    message: string;
+    jwtToken: string;
+    userType: string;
+    expiresIn: string;
+    userId: string;
+  }> {
 
     // Sending data to backend using POST method
     // This will return an observable to which we subscribe to get the data.
     return this.httpClient
-      .post<{ message: string }>(
+      .post<{
+        message: string;
+        jwtToken: string;
+        userType: string;
+        expiresIn: string;
+        userId: string;
+      }>(
         `${this.BACKEND_URL}/api/auth/admin-signup`,
         adminAuthData
       );
@@ -123,41 +75,41 @@ export class AuthService {
 
   /**
    * Tries to create a new user account
-   *
-   * @param {File} image User Profile Picture
-   * @param {string} firstName User's First Name
-   * @param {string} lastName User's Last Name
-   * @param {string} email User's email address
-   * @param {string} password Password for user account
-   * @param {string} token ID issued to the user's Organizaation
+   * @param userAuthData An object having properties:
+   *        image:      User Profile Picture
+   *        firstName:  User's First Name
+   *        lastName:   User's Last Name
+   *        email:      User's email address
+   *        password:   Password for user account
+   *        token ID:   issued to the user's Organizaation
    */
-  createUser(
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-    token: string,
-    image?: File
-  ): Observable<{message: string}> {
-
-    // Check if form inputs are not null or undefined
-    if (!firstName || !lastName || !email || !password || !token) {
-      throw new Error('Invalid Form Inputs');
-    }
+  createUser(userAuthData): Observable<{
+    message: string;
+    jwtToken: string;
+    userType: string;
+    expiresIn: string;
+    userId: string;
+  }> {
 
     // We use FormData as JSON format supports only strings and not images
     const userData = new FormData();
-    userData.append('img', image, `${firstName}-${lastName}`);
-    userData.append('firstName', firstName);
-    userData.append('lastName', lastName);
-    userData.append('email', email);
-    userData.append('password', password);
-    userData.append('token', token);
+    userData.append('img', userAuthData.image, `${userAuthData.firstName}-${userAuthData.lastName}`);
+    userData.append('firstName', userAuthData.firstName);
+    userData.append('lastName', userAuthData.lastName);
+    userData.append('email', userAuthData.email);
+    userData.append('password', userAuthData.password);
+    userData.append('token', userAuthData.token);
 
     // Sending data to backend using POST method
     // This will return an observable to which we subscribe to get the data.
     return this.httpClient
-      .post<{ message: string }>(
+      .post<{
+        message: string;
+        jwtToken: string;
+        userType: string;
+        expiresIn: string;
+        userId: string;
+      }>(
         `${this.BACKEND_URL}/api/auth/user-signup`,
         userData
       );
@@ -165,34 +117,25 @@ export class AuthService {
 
   /**
    * Tries to login the user
-   *
-   * @param {string} email User's email
-   * @param {string} password User's password
+   * @param loginData An Object havning:
+   *            email:     User's email
+   *            password:  User's password
    */
-  loginUser(email: string, password: string): Observable<{ jwtToken: string, usertype: string, expiresIn: number, userId: string}> {
-
-    // Check if email and password are not null or undefined
-    if (!email || !password) {
-      throw new Error('Invalid Credentials');
-    }
-
-    const loginData: LoginData = {
-      email,
-      password
-    };
+  loginUser(loginData): Observable<{
+    jwtToken: string;
+    usertype: string;
+    expiresIn: number;
+    userId: string;
+  }> {
 
     return this.httpClient.post<{
       jwtToken: string;
       usertype: string;
       expiresIn: number;
       userId: string;
-    }>(`${this.BACKEND_URL}/api/auth/login`, loginData).pipe(
-      tap(result => {
-        this.saveLoginData(result);
-        return result;
-      })
-    );
+    }>(`${this.BACKEND_URL}/api/auth/login`, loginData);
   }
+
 
   /**
    * Saves JWT Token, Authentication status.
@@ -200,38 +143,24 @@ export class AuthService {
    * @param { jwtToken: string, usertype: string, expiresIn: number, userId: string } result The result
    *  object received from the server containing JWT Token, It's expiration duration & User Type
    */
-  private saveLoginData(result: {
+  saveLoginData(result: {
     jwtToken: string;
     usertype: string;
     expiresIn: number;
     userId: string;
   }) {
-    console.log('login Successful');
-    console.log(result);
-
-    this.token = result.jwtToken;
-
-    if (result.jwtToken) {
-      // If jwt token is present, then the user is Authenticated
-      this.isAuthenticated = true;
 
       // set timer to logout user after the token expires
-      this.tokenTimer = setTimeout(() => {
-        this.logout();
-      }, result.expiresIn * 1000);
+    this.tokenTimer = setTimeout(() => {
+      this.store.dispatch({type: AuthActions.ActionTypes.Logout});
+    }, result.expiresIn * 1000);
 
-      // tell the subscribing components that user is authenticated
-      this.authStatusListener.next(true);
-      console.log('sent dev');
-      this.userIdListener.next(result.userId);
 
-      // Save the expiration date to local storage
-      const now = new Date();
-      const expiration = new Date(now.getTime() + result.expiresIn * 1000);
-      this.saveLocalData(this.token, expiration, result.usertype, result.userId);
+    // Save the expiration date to local storage
+    const now = new Date();
+    const expiration = new Date(now.getTime() + result.expiresIn * 1000);
+    this.saveLocalData(result.jwtToken, expiration, result.usertype, result.userId);
 
-      // Emitt new userid to subscribers
-    }
   }
 
   /**
@@ -250,14 +179,17 @@ export class AuthService {
 
     // if the token isn't expired, proceed to login the user
     if (expiresIn > 0) {
-      this.token = authInformation.token;
-      this.isAuthenticated = true;
+      // this.token = authInformation.token;
+      // this.isAuthenticated = true;
+      this.store.dispatch({type: AuthActions.ActionTypes.SetToken, payload: authInformation.token});
+      this.store.dispatch({type: AuthActions.ActionTypes.SetTokenExpiry, payload: expiresIn});
+      // this.store.dispatch({type: Auth})
+      console.log(`test  ${expiresIn}, type: ${typeof(expiresIn)}`);
+      this.store.dispatch({type: AuthActions.ActionTypes.Login});
       this.tokenTimer = setTimeout(() => {
-        this.logout();
+        this.store.dispatch({type: AuthActions.ActionTypes.Logout});
       }, expiresIn);
-      this.authStatusListener.next(true);
-      this.userIdListener.next(authInformation.userId);
-      console.log('devid: ' + authInformation.userId);
+
       if (authInformation.userType === 'User') {
         this.router.navigate(['/client-panel']);
       } else {
@@ -267,25 +199,13 @@ export class AuthService {
   }
 
   /**
-   * Routine to Logout the user.
-   * And also clear out the stored data
-   */
-  logout() {
-    this.token = null;
-    this.isAuthenticated = false;
-    this.authStatusListener.next(false);
-    this.clearLocalData();
-    this.router.navigate(['/']);
-  }
-
-  /**
    * Saves user data to LocalStorage
    *
    * @param {string} jwtToken JWT Token issued by the Server
    * @param {string} expirationDate Token's expiration date
    * @param {string} userType Type of user that is loggedin
    */
-  private saveLocalData(
+  saveLocalData(
     jwtToken: string,
     expirationDate: Date,
     userType: string,
@@ -300,7 +220,7 @@ export class AuthService {
   /**
    * Clears data from LocalStorage
    */
-  private clearLocalData() {
+  clearLocalData() {
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('expiration');
     localStorage.removeItem('userType');
@@ -310,7 +230,7 @@ export class AuthService {
   /**
    * Tries to Fetch data from LocalStorage
    */
-  private getAuthData() {
+  getAuthData() {
     const token = localStorage.getItem('jwtToken');
     const expirationDate = localStorage.getItem('expiration');
     const userType = localStorage.getItem('userType');

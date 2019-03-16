@@ -1,16 +1,23 @@
-<!-- <app-nav></app-nav> -->
-<mat-toolbar color="accent" class="nav">
-  Admin Panel
-  <span class="nav-space"></span>
-  <div class="nav__name">
-      {{ admin.name }}
+<div class="container">
+  <mat-toolbar color="primary" class="nav">
+    Admin Panel
+    <span class="nav-space"></span>
+    <div class="nav__name">
+        {{ admin.name }}
+  
+    </div>
+    <button mat-button (click)="onLogout()" class="nav__button">
+      Logout
+    </button>
+  </mat-toolbar>
+  
+  <mat-tab-group class="tabs" id="tab-group" selectedIndex="1">
 
-  </div>
-  <button mat-stroked-button (click)="onLogout()" class="nav__button">
-    Logout
-  </button>
-</mat-toolbar>
+    <mat-tab label="{{tab.label}}" class="tabs__content" *ngFor="let tab of tabs">
+      <ng-template matTabContent>
+        <ng-container *ngComponentOutlet="tab.component"></ng-container>
+      </ng-template>
+    </mat-tab>
 
-<p>
-  Under Construction
-</p>
+  </mat-tab-group>
+</div>

@@ -33,9 +33,9 @@ url("./fonts/icofont.woff") format("woff");
   -webkit-font-smoothing: antialiased;
 }
 
-.icofont-camera:before
+.icofont-rounded-expand:before
 {
-  content: "\eecf";
+  content: "\ea9a";
 }
 
 .icofont-dashboard:before
@@ -46,6 +46,11 @@ url("./fonts/icofont.woff") format("woff");
 .icofont-hand-drag1:before
 {
   content: "\ea80";
+}
+
+.icofont-camera:before
+{
+  content: "\eecf";
 }
 
 .icofont-xs

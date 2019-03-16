@@ -10,6 +10,7 @@ import { CoreModule } from '../core/core.module';
 import { TimesPipe } from './pipes/times.pipe';
 import { ErrorComponent } from './components/error/error.component';
 import { MaterialModule } from './material.module';
+import { DecodeHtmlStringsPipe } from './pipes/decode-html-strings.pipe';
 
 @NgModule({
   imports: [
@@ -24,14 +25,16 @@ import { MaterialModule } from './material.module';
     InvalidUnderlineDirective,
     StrokeColorDirective,
     TimesPipe,
-    ErrorComponent
+    ErrorComponent,
+    DecodeHtmlStringsPipe
   ],
   exports: [
     NavComponent,
     FormUnderlineComponent,
     InvalidUnderlineDirective,
     StrokeColorDirective,
-    TimesPipe
+    TimesPipe,
+    DecodeHtmlStringsPipe
   ],
   entryComponents: [
     ErrorComponent

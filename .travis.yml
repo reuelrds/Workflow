@@ -1,0 +1,57 @@
+language: node_js
+
+node_js:
+  - "stable"
+
+addons:
+  chrome: stable
+
+before_script:
+  - npm install -g @angular/cli
+  - npm install codecov -g
+  - npm install -g jest
+
+cache:
+  npm: true
+  directories: 
+    - node_modules
+services:
+  - mongodb
+
+script:
+  - cd frontend
+  - ng lint
+  - ng test --watch=false --browsers=ChromeHeadless --code-coverage=true
+  - ng build --prod
+  - cd ..
+  - cp package.json backend
+  - jest --runInBand --coverage
+  - cd backend
+  - zip -r -v backend.zip .
+  - cd ..
+
+after_script:
+  - codecov
+
+deploy:
+  - provider: s3
+    access_key_id: $Access_key_id
+    secret_access_key: $Secret_Access_key
+    bucket: sepm-workflow
+    local_dir: frontend/dist/workflow
+    skip_cleanup: true
+    region: ap-southeast-1
+    on:
+      branch: master
+  
+  - provider: elasticbeanstalk
+    access_key_id: $Access_key_id
+    secret_access_key: $Secret_Access_key
+    region: ap-southeast-1
+    skip_cleanup: true
+    zip_file: backend/backend.zip
+    app: SEPM-Workflow 
+    env: SepmWorkflow-env
+    bucket_name: elasticbeanstalk-ap-southeast-1-959131551477
+    on:
+      branch: master

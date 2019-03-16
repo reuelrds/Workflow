@@ -1,17 +1,28 @@
 @import '../../../shared/styles/abstracts/variables';
 
+:host {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  flex-flow: column;
+}
+
+.container{
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  // background-color: #eee;
+}
+
 p {
   padding: 6rem;
   font-weight: 300;
   font-size: 2rem;
 }
 
-app-nav {
-  background-color: $color-primary-4;
-}
-
 .nav {
-
+  grid-column: full-start / full-end;
+  
   &-space {
     flex: 1 1 auto;
 
@@ -21,4 +32,23 @@ app-nav {
     padding: 1rem 3rem;
     text-transform: capitalize;
   }
+}
+
+.tabs {
+  flex: 1;
+  grid-column: full-start / full-end;
+  &__content {
+    flex: 1;
+    grid-column: col-start 2 / col-end 7;
+  }
+}
+
+#tab-group{
+  height: 100%;
+}
+
+
+
+#tab-group mat-tab-body {
+  flex-grow: 1;
 }

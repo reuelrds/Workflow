@@ -36,10 +36,10 @@ export class UserService {
   }
 
   getUserId() {
-    this.authService.getUserIdListener().subscribe(result => {
-      this.userId = result;
-      console.log(this.userId);
-    });
+    // this.authService.getUserIdListener().subscribe(result => {
+    //   this.userId = result;
+    //   console.log(this.userId);
+    // });
   }
 
   getUserData() {
