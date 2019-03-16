@@ -8,7 +8,7 @@ const db = require('./../../src/config/mongoose.config');
 const User = require('./../../src/models/user.model');
 
 
-describe('Testing User Endpoint', async () => {
+describe('Testing User Endpoint', () => {
   beforeEach(async () => {
     await db.connect();
     await dbSetup.setupDatabase();

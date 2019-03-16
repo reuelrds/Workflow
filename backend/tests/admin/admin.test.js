@@ -7,7 +7,7 @@ const db = require('./../../src/config/mongoose.config');
 
 const Admin = require('./../../src/models/admin.model');
 
-describe('Testing Admin Endpoint', async () => {
+describe('Testing Admin Endpoint', () => {
   beforeEach(async () => {
     await db.connect();
     await dbSetup.setupDatabase();
