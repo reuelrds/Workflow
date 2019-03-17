@@ -9,6 +9,8 @@ import { UserManagementComponent } from './components/user-management/user-manag
 import { AccountSettingsComponent } from './components/account-settings/account-settings.component';
 import { AppsManagementComponent } from './components/apps-management/apps-management.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserManagementDialogComponent } from './dialogComponents/user-management-dialog/user-management-dialog.component';
+import { AddUserDialogComponent } from './dialogComponents/add-user-dialog/add-user-dialog.component';
 
 @NgModule({
   imports: [
@@ -18,7 +20,20 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     MaterialModule
   ],
-  declarations: [AdminPanelComponent, UserManagementComponent, AccountSettingsComponent, AppsManagementComponent],
-  entryComponents: [AppsManagementComponent, UserManagementComponent, AccountSettingsComponent]
+  declarations: [
+    AdminPanelComponent,
+    UserManagementComponent,
+    AccountSettingsComponent,
+    AppsManagementComponent,
+    UserManagementDialogComponent,
+    AddUserDialogComponent
+  ],
+  entryComponents: [
+    AppsManagementComponent,
+    UserManagementComponent,
+    AccountSettingsComponent,
+    UserManagementDialogComponent,
+    AddUserDialogComponent
+  ]
 })
 export class AdminPanelModule { }

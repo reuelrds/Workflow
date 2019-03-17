@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+
+import { UserManagementDialogComponent } from './../../dialogComponents/user-management-dialog/user-management-dialog.component';
 
 @Component({
   selector: 'app-user-management',
@@ -29,7 +32,7 @@ export class UserManagementComponent implements OnInit {
       action: 'Manage'
     },
     {
-      title: 'Groups',
+      title: 'Pending Requests For Accesss',
       body: ['You have', 'users requesting access to link to your account.'],
       action: 'Manage'
     },
@@ -38,9 +41,20 @@ export class UserManagementComponent implements OnInit {
   pendingRequests = 10;
   activeUsers = 15;
   inactiveUsers = 200;
-  constructor() { }
+
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
+  }
+
+  openUserManagementDialog() {
+    const dialogRef = this.dialog.open(UserManagementDialogComponent, {
+      width: 'max-content',
+      height: 'max-content',
+      minWidth: '80vw',
+      minHeight: '70vh',
+      autoFocus: false
+    });
   }
 
 }
