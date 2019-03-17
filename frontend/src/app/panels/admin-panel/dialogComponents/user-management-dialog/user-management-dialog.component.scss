@@ -1,0 +1,44 @@
+@import './../../../../shared//styles/abstracts/variables';
+
+.toolbar {
+  background-color: transparent;
+  display: flex;
+
+  &__title {
+    flex-grow: 2;
+    font-size: 2.5rem;
+  }
+  
+  &__search {
+    flex-grow: 1;
+    font-size: 1.4rem;
+    margin-right: 1rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  &__actions {
+    margin: 0 1rem;
+    
+    & > * {
+      font-size: 1.4rem;
+      margin: 0 .5rem;
+    }
+
+    &--more{
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    &--button {
+      padding: 0 2rem;
+      background-color: $color-grey-light-1;
+    }
+  }
+}
+
+.search__box {
+  width: 80%;
+}

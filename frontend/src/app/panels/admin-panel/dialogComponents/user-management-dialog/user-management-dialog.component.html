@@ -1,0 +1,37 @@
+<mat-toolbar class="toolbar">
+    <div class="toolbar__title">
+      Users
+    </div>
+    <div class="toolbar__search">
+      <mat-form-field class="search__box" [@slideIn]="isSearchBoxVisible ? true : false">
+        <input matInput class="search__box--input"  [formControl]='searchBox' (keyup)='searchUsers()'>
+        <mat-hint>Search</mat-hint>
+      </mat-form-field>
+      <mat-icon fontSet="icofont" fontIcon="icofont-close-line" *ngIf="isSearchBoxVisible" (click)="hideSearchBox()"></mat-icon>
+      <mat-icon fontSet="icofont" fontIcon="icofont-search" (click)='showSearchBox()' *ngIf="isSearchBoxIconVisible"></mat-icon>
+    </div>
+  <div class="toolbar__actions">
+    <mat-form-field class="toolbar__actions--selectusertype">
+      <mat-select [(value)]="showUserType">
+        <mat-option value="allUsers">All Users</mat-option>
+        <mat-option value="active">Active</mat-option>
+        <mat-option value="inActive">Active</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button class="toolbar__actions--button">Activate</button>
+    <button mat-raised-button class="toolbar__actions--button">Deactivate</button>
+    <button mat-raised-button class="toolbar__actions--button" (click)="openAddUserDialog()">Add User</button>
+    <button mat-raised-button class="toolbar__actions--button">Import</button>
+    <button mat-raised-button [matMenuTriggerFor]="moreActions" class="toolbar__actions--button toolbar__actions--more">...</button>
+    <mat-menu #moreActions="matMenu">
+      <button mat-menu-item>Export</button>
+      <button mat-menu-item>Change Department</button>
+      <button mat-menu-item>Change Location</button>
+      <button mat-menu-item>Change Manager</button>
+      <button mat-menu-item>Delete</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+<p>
+  user-management-dialog works!
+</p>
