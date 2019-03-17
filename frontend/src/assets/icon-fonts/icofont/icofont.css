@@ -53,6 +53,16 @@ url("./fonts/icofont.woff") format("woff");
   content: "\eecf";
 }
 
+.icofont-search:before
+{
+  content: "\ed1b";
+}
+
+.icofont-close-line:before
+{
+  content: "\eee1";
+}
+
 .icofont-xs
 {
   font-size: .5em;
