@@ -15,26 +15,28 @@ import { MatProgressSpinnerModule,
    MatDividerModule,
    MatRippleModule,
    MatExpansionModule,
-   MatIconModule} from '@angular/material';
+   MatIconModule,
+   MatMenuModule} from '@angular/material';
 
 @NgModule({
   exports: [
-    MatProgressSpinnerModule,
     MatButtonModule,
-    MatDialogModule,
-    MatToolbarModule,
-    MatTabsModule,
     MatCardModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSlideToggleModule,
     MatDatepickerModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
+    MatDialogModule,
     MatDividerModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatProgressSpinnerModule,
     MatRippleModule,
-    MatExpansionModule
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatTabsModule,
+    MatToolbarModule
   ]
 })
 export class MaterialModule { }
