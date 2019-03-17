@@ -1,0 +1,35 @@
+<mat-toolbar mat-dialog-title class="toolbar__title">
+  Add User
+</mat-toolbar>
+<mat-dialog-content>
+  <form class="form add-user" [formGroup]="addUserForm" id="addUserForm" (submit)="onSubmitAddUser()" >
+    <ng-container *ngFor="let item of addUserFormDataItems; let i=index">
+      
+        <mat-form-field *ngIf="i < 3">
+          <div class="add-user__{{ item.name }}">
+            <input matInput type="text" formControlName="{{ item.name }}" placeholder="{{ item.placeholder }}">
+          </div>
+        </mat-form-field>
+      
+      <ng-container *ngIf="i >= 3">
+        <mat-form-field>
+          <div class="add-user__{{ item.name }}">
+            <mat-select placeholder="{{ item.placeholder }}" formControlName="{{ item.name }}">
+              <mat-option>None</mat-option>
+              <ng-container *ngFor="let value of item.values">
+                <mat-option value="{{ value.name }}">{{ value.name }}</mat-option>
+              </ng-container>
+            </mat-select>
+          </div>
+        </mat-form-field>
+      </ng-container>
+
+    </ng-container>
+    
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="toolbar__actions">
+  <button mat-stroked-button mat-dialog-close>Cancel</button>
+  <button mat-stroked-button color="accent" form="addUserForm">Save & Add Another</button>
+  <button mat-raised-button [mat-dialog-close]="addUserForm" color="primary" form="addUserForm">Save</button>
+</mat-dialog-actions>
