@@ -6,7 +6,7 @@ import { ReplaySubject, of, Observable } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Router } from '@angular/router';
 import { provideMockStore } from '@ngrx/store/testing';
-import { hot, cold } from 'jasmine-marbles';
+import { hot, cold, getTestScheduler } from 'jasmine-marbles';
 
 import { AuthService } from '../../core/services/auth.service';
 
@@ -119,17 +119,24 @@ describe('Testing Auth Effects', () => {
       }
     ];
 
-    actions = hot('--a-', {a: action});
-    const expected = cold('--(bcde)', {
-      b: completion[0],
-      c: completion[1],
-      d: completion[2],
-      e: completion[3]
-    });
+    const schedular = getTestScheduler();
 
-    expect(effects.adminSignup).toBeObservable(expected);
-    expect(routerSpy).toHaveBeenCalledWith(['/admin-panel']);
+    schedular.run(helpers => {
+      const {expectObservable} = helpers;
+
+      actions = hot('--a-', {a: action});
+      const expected = '-- 500ms (bcde)';
+      const marb =  {
+        b: completion[0],
+        c: completion[1],
+        d: completion[2],
+        e: completion[3]
+      };
+      expectObservable(effects.adminSignup).toBe(expected, marb);
+    });
     expect(createAdminSpy).toHaveBeenCalledWith(data);
+    expect(routerSpy).toHaveBeenCalledWith(['/admin-panel']);
+
 
   });
 
@@ -160,15 +167,22 @@ describe('Testing Auth Effects', () => {
       }
     ];
 
-    actions = hot('--a-', {a: action});
-    const expected = cold('--(bcde)', {
-      b: completion[0],
-      c: completion[1],
-      d: completion[2],
-      e: completion[3],
+    const schedular = getTestScheduler();
+
+    schedular.run(helpers => {
+      const {expectObservable} = helpers;
+
+      actions = hot('--a-', {a: action});
+      const expected = '-- 500ms (bcde)';
+      const marb =  {
+        b: completion[0],
+        c: completion[1],
+        d: completion[2],
+        e: completion[3]
+      };
+      expectObservable(effects.userSignup).toBe(expected, marb);
     });
 
-    expect(effects.userSignup).toBeObservable(expected);
     expect(routerSpy).toHaveBeenCalledWith(['/client-panel']);
     expect(createUserSpy).toHaveBeenCalledWith(data);
   });
@@ -197,16 +211,22 @@ describe('Testing Auth Effects', () => {
     ];
     authService.setUserType('Admin');
 
+    const schedular = getTestScheduler();
 
-    actions = hot('--a-', {a: action});
-    const expected = cold('--(bcde)', {
-      b: completion[0],
-      c: completion[1],
-      d: completion[2],
-      e: completion[3],
+    schedular.run(helpers => {
+      const {expectObservable} = helpers;
+
+      actions = hot('--a-', {a: action});
+      const expected = '-- 500ms (bcde)';
+      const marb =  {
+        b: completion[0],
+        c: completion[1],
+        d: completion[2],
+        e: completion[3]
+      };
+      expectObservable(effects.login).toBe(expected, marb);
     });
 
-    expect(effects.login).toBeObservable(expected);
     expect(routerSpy).toHaveBeenCalledWith(['/admin-panel']);
     expect(loginSpy).toHaveBeenCalledWith(data);
 
@@ -236,16 +256,22 @@ describe('Testing Auth Effects', () => {
     ];
     authService.setUserType('User');
 
+    const schedular = getTestScheduler();
 
-    actions = hot('--a-', {a: action});
-    const expected = cold('--(bcde)', {
-      b: completion[0],
-      c: completion[1],
-      d: completion[2],
-      e: completion[3],
+    schedular.run(helpers => {
+      const {expectObservable} = helpers;
+
+      actions = hot('--a-', {a: action});
+      const expected = '-- 500ms (bcde)';
+      const marb =  {
+        b: completion[0],
+        c: completion[1],
+        d: completion[2],
+        e: completion[3]
+      };
+      expectObservable(effects.login).toBe(expected, marb);
     });
 
-    expect(effects.login).toBeObservable(expected);
     expect(routerSpy).toHaveBeenCalledWith(['/client-panel']);
     expect(loginSpy).toHaveBeenCalledWith(data);
 
