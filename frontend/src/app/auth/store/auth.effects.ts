@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { Effect, Actions, ofType } from '@ngrx/effects';
-import { map, switchMap, mergeMap, tap } from 'rxjs/operators';
+import { map, switchMap, mergeMap, tap, delay } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import { AdminAuth } from './../../shared/models/admin-auth';
@@ -26,10 +26,11 @@ export class AuthEffects {
     switchMap((adminAuthData: AdminAuth) => {
       return this.authService.createAdmin(adminAuthData);
     }),
+    tap(res => this.router.navigate(['/admin-panel'])),
+    delay(500),
     mergeMap(res => {
       console.log('kkkkrgeg');
       console.log(res);
-      this.router.navigate(['/admin-panel']);
       return [
         {
           type: AuthActions.ActionTypes.Signup
@@ -59,10 +60,11 @@ export class AuthEffects {
     switchMap(userAuthData => {
       return this.authService.createUser(userAuthData);
     }),
+    tap(res => this.router.navigate(['/client-panel'])),
+    delay(500),
     mergeMap(res => {
       console.log('gbbbvgerve');
       console.log(res);
-      this.router.navigate(['/client-panel']);
       return [
         {
           type: AuthActions.ActionTypes.Signup
@@ -92,6 +94,14 @@ export class AuthEffects {
     switchMap(loginData => {
       return this.authService.loginUser(loginData);
     }),
+    tap(res => {
+      if (res.usertype === 'Admin') {
+        this.router.navigate(['/admin-panel']);
+      } else {
+        this.router.navigate(['/client-panel']);
+      }
+    }),
+    delay(500),
     mergeMap(res => {
 
       const actions = [
@@ -108,11 +118,9 @@ export class AuthEffects {
         }
       ];
       if (res.usertype === 'Admin') {
-        this.router.navigate(['/admin-panel']);
 
         return [...actions, {type: AdminActions.ActionTypes.SetAdminId, payload: res.userId} as Action];
       } else {
-        this.router.navigate(['/client-panel']);
 
         return [...actions, {type: UserActions.ActionTypes.SetUserId, payload: res.userId} as Action];
     }})
