@@ -25,7 +25,7 @@ There’s also an Admin Panel, for system administrators of a company. It also a
 #### Start the local server in dev mode along with mongodb (For Backend)
 ```
 > npm run start:localDB
-> npm run start:server "dev"
+> npm run start:server --env="dev"
 ```
 
 #### Serve the application
