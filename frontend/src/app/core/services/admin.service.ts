@@ -60,4 +60,8 @@ export class AdminService {
       console.log(this.adminData.name);
     }));
   }
+
+  addNewUser(userData) {
+    return this.httpClient.post<{message: string}>(`${this.BACKEND_URL}/api/admin/add-new-user`, userData);
+  }
 }

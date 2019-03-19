@@ -10,8 +10,8 @@ import { AdminAuth } from './../../shared/models/admin-auth';
 import { AuthService } from '../../core/services/auth.service';
 
 import * as AuthActions from './auth.actions';
-import * as AdminActions from './../../core/store/admin/admin.actions';
-import * as UserActions from './../../core/store/user/user.actions';
+import * as AdminActions from './../../panels/admin-panel/store/admin/admin.actions';
+import * as UserActions from './../../panels/client-panel/store/user/user.actions';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 

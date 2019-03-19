@@ -7,7 +7,7 @@ import { ClientPanelComponent } from './components/client-panel.component';
 import { SharedModule } from './../../shared/shared.module';
 import { MaterialModule } from '../../shared/material.module';
 
-import { userReducer } from 'src/app/core/store/user/user.reducers';
+import { userReducer } from './store/user/user.reducers';
 
 @NgModule({
   imports: [

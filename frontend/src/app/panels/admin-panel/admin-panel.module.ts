@@ -12,7 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserManagementDialogComponent } from './dialogComponents/user-management-dialog/user-management-dialog.component';
 import { AddUserDialogComponent } from './dialogComponents/add-user-dialog/add-user-dialog.component';
 import { StoreModule } from '@ngrx/store';
-import { adminReducer } from 'src/app/core/store/admin/admin.reducers';
+import { adminReducer } from './store/admin/admin.reducers';
 
 @NgModule({
   imports: [

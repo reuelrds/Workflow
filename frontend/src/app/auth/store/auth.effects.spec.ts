@@ -11,8 +11,8 @@ import { hot, cold, getTestScheduler } from 'jasmine-marbles';
 import { AuthService } from '../../core/services/auth.service';
 
 import * as AuthActions from './auth.actions';
-import * as AdminActions from './../../core/store/admin/admin.actions';
-import * as UserActions from './../../core/store/user/user.actions';
+import * as AdminActions from './../../panels/admin-panel/store/admin/admin.actions';
+import * as UserActions from './../../panels/client-panel/store/user/user.actions';
 
 class RouterStub {
   navigate(params) {}
