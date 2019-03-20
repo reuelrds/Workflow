@@ -111,7 +111,7 @@ describe('Testing Auth Service', () => {
       const now = new Date();
       const expiresIn = data.expirationDate.getTime() - now.getTime();
 
-      expect(store.dispatch).toHaveBeenCalledTimes(3);
+      expect(store.dispatch).toHaveBeenCalledTimes(4);
 
       expect(store.dispatch).toHaveBeenCalledWith({type: AuthActions.ActionTypes.SetToken, payload: 'testToken'});
       expect(store.dispatch).toHaveBeenCalledWith({type: AuthActions.ActionTypes.Login});

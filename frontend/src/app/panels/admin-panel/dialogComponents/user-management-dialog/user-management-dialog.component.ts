@@ -1,7 +1,7 @@
 import { state, style, trigger, transition, animate } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { Store } from '@ngrx/store';
 
 import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
@@ -35,6 +35,7 @@ export class UserManagementDialogComponent implements OnInit {
   isSearchBoxVisible = false;
   isSearchBoxIconVisible = true;
   showUserType = 'allUsers';
+  addUserDialog: MatDialogRef<AddUserDialogComponent>;
 
   constructor(private dialog: MatDialog,  private store: Store<fromAdminPanel.AdminPanelState>) { }
 
@@ -57,7 +58,7 @@ export class UserManagementDialogComponent implements OnInit {
   }
 
   openAddUserDialog() {
-    const addUserDialog = this.dialog.open(AddUserDialogComponent, {
+     this.addUserDialog = this.dialog.open(AddUserDialogComponent, {
       width: 'max-content',
       height: 'max-content',
       minWidth: '35vw',
@@ -65,7 +66,7 @@ export class UserManagementDialogComponent implements OnInit {
       autoFocus: false
     });
 
-    addUserDialog.afterClosed().subscribe(result => {
+     this.addUserDialog.afterClosed().subscribe(result => {
       console.log(result);
       this.store.dispatch({type: UserActions.ActionTypes.TryAddUser, payload: result.value});
     });

@@ -46,6 +46,7 @@ To execute tests for backend
 ```
 > npm run test:server
 ```
+##### *If backend tests are randomly failing or premission to access files is denied, then install jest globally via `npm i -g jest` & run `jest --runInBand`*
 
 ## Running end-to-end tests
 
