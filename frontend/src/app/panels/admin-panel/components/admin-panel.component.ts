@@ -31,6 +31,7 @@ export class AdminPanelComponent implements OnInit {
       // console.log(res);
       // this.admin = res;
     // });
+    this.authService.autoAuthUser();
   }
 
   onLogout() {

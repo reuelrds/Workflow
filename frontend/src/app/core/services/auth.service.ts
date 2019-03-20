@@ -133,7 +133,9 @@ export class AuthService {
       usertype: string;
       expiresIn: number;
       userId: string;
-    }>(`${this.BACKEND_URL}/api/auth/login`, loginData);
+    }>(`${this.BACKEND_URL}/api/auth/login`, loginData).pipe(
+      tap(result => this.saveLoginData(result))
+    );
   }
 
 
