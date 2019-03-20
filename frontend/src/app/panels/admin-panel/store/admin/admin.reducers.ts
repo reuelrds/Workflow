@@ -4,12 +4,12 @@ import { User } from 'src/app/shared/models/user';
 
 export interface State {
   id: string;
-  users: string;
+  users: User[];
 }
 
 const initialState: State = {
   id: null,
-  users: null
+  users: []
 };
 
 export function adminReducer(state = initialState, action: AdminActions.AdminActions) {
@@ -23,7 +23,7 @@ export function adminReducer(state = initialState, action: AdminActions.AdminAct
     case AdminActions.ActionTypes.AddUser:
       return {
         ...state,
-        users: 'fer'
+        users: [...state.users, action.payload]
       };
     default:
       return state;
