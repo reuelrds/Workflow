@@ -11,6 +11,7 @@ import { environment } from './../../../environments/environment';
 
 import * as fromAuth from './../../store/app.reducers';
 import * as AuthActions from './../../auth/store/auth.actions';
+import * as AdminActions from './../../panels/admin-panel/store/admin/admin.actions';
 
 /**
  * Helps in Handleling all Authentication, Sigining up & Logging in, Logic
@@ -185,16 +186,15 @@ export class AuthService {
       // this.isAuthenticated = true;
       this.store.dispatch({type: AuthActions.ActionTypes.SetToken, payload: authInformation.token});
       this.store.dispatch({type: AuthActions.ActionTypes.SetTokenExpiry, payload: expiresIn});
-      // this.store.dispatch({type: Auth})
       console.log(`test  ${expiresIn}, type: ${typeof(expiresIn)}`);
       this.store.dispatch({type: AuthActions.ActionTypes.Login});
       this.tokenTimer = setTimeout(() => {
         this.store.dispatch({type: AuthActions.ActionTypes.Logout});
       }, expiresIn);
-
       if (authInformation.userType === 'User') {
         this.router.navigate(['/client-panel']);
       } else {
+        this.store.dispatch({type: AdminActions.ActionTypes.SetAdminId, payload: authInformation.userId});
         this.router.navigate(['/admin-panel']);
       }
     }
