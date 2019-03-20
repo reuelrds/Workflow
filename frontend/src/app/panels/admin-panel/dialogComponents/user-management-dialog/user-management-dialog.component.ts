@@ -1,8 +1,14 @@
+import { state, style, trigger, transition, animate } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { state, style, trigger, transition, animate } from '@angular/animations';
 import { MatDialog } from '@angular/material';
+import { Store } from '@ngrx/store';
+
 import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
+
+import * as fromAdminPanel from '../../store/admin-panel.reducers';
+import * as UserActions from '../../store/users/user.actions';
+
 
 @Component({
   selector: 'app-user-management-dialog',
@@ -30,7 +36,7 @@ export class UserManagementDialogComponent implements OnInit {
   isSearchBoxIconVisible = true;
   showUserType = 'allUsers';
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog,  private store: Store<fromAdminPanel.AdminPanelState>) { }
 
   ngOnInit() {
     this.searchBox = new FormControl('');
@@ -61,6 +67,7 @@ export class UserManagementDialogComponent implements OnInit {
 
     addUserDialog.afterClosed().subscribe(result => {
       console.log(result);
+      this.store.dispatch({type: UserActions.ActionTypes.TryAddUser, payload: result.value});
     });
   }
 
