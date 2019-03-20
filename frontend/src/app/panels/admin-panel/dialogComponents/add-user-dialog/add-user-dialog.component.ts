@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Store } from '@ngrx/store';
+
+import * as fromAdmin from '../../store/admin/admin.reducers';
+import * as AdminActions from '../../store/admin/admin.actions';
 
 @Component({
   selector: 'app-add-user-dialog',
@@ -30,7 +34,7 @@ export class AddUserDialogComponent implements OnInit {
     ]},
   ];
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private store: Store<fromAdmin.State>) { }
 
   ngOnInit() {
     this.addUserForm = this.formBuilder.group({
@@ -45,6 +49,7 @@ export class AddUserDialogComponent implements OnInit {
 
   onSubmitAddUser() {
     console.log(this.addUserForm);
+    this.store.dispatch({type: AdminActions.ActionTypes.TryAddUser, payload: this.addUserForm.value});
   }
 
 }

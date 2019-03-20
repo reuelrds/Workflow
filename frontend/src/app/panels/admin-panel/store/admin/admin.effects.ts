@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { map, switchMap, mergeMap } from 'rxjs/operators';
 
-import { AdminService } from '../../services/admin.service';
+import { AdminService } from './../../../../core/services/admin.service';
 
 import * as AdminActions from './admin.actions';
+import { Action } from '@ngrx/store';
 
 @Injectable()
 export class AdminEffects {
@@ -19,9 +20,8 @@ export class AdminEffects {
       return this.adminService.addNewUser(userData);
     }),
     mergeMap(res => {
-      return [
-
-      ];
+      console.log(res.user);
+      return [{type: AdminActions.ActionTypes.AddUser, payload: res.user}];
     })
   );
 

@@ -13,6 +13,8 @@ import { UserManagementDialogComponent } from './dialogComponents/user-managemen
 import { AddUserDialogComponent } from './dialogComponents/add-user-dialog/add-user-dialog.component';
 import { StoreModule } from '@ngrx/store';
 import { adminReducer } from './store/admin/admin.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { AdminEffects } from './store/admin/admin.effects';
 
 @NgModule({
   imports: [
@@ -21,7 +23,8 @@ import { adminReducer } from './store/admin/admin.reducers';
     SharedModule,
     ReactiveFormsModule,
     MaterialModule,
-    StoreModule.forFeature('admin', adminReducer)
+    StoreModule.forFeature('admin', adminReducer),
+    EffectsModule.forFeature([AdminEffects])
   ],
   declarations: [
     AdminPanelComponent,

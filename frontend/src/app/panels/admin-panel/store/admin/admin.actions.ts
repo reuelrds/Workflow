@@ -1,8 +1,10 @@
 import { Action } from '@ngrx/store';
+import { User } from 'src/app/shared/models/user';
 
 export enum ActionTypes {
   SetAdminId = '[Auth API] Set Admin Id',
-  TryAddUser = '[Add User Dialog] Try Add User'
+  TryAddUser = '[Add User Dialog] Try Add User',
+  AddUser = '[Admin API] Add User'
 }
 
 export class SetAdminId implements Action {
@@ -21,4 +23,10 @@ export class TryAddUser implements Action {
   }) {}
 }
 
-export type AdminActions = SetAdminId | TryAddUser;
+export class AddUser implements Action {
+  readonly type = ActionTypes.AddUser;
+
+  constructor(public payload: {user: User}) {}
+}
+
+export type AdminActions = SetAdminId | TryAddUser | AddUser;

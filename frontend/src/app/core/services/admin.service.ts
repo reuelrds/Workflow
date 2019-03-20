@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Admin } from '../../shared/models/admin';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { User } from 'src/app/shared/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +63,7 @@ export class AdminService {
   }
 
   addNewUser(userData) {
-    return this.httpClient.post<{message: string}>(`${this.BACKEND_URL}/api/admin/add-new-user`, userData);
+    console.log('service: ', userData);
+    return this.httpClient.post<{message: string, user: User}>(`${this.BACKEND_URL}/api/admin/add-new-user`, userData);
   }
 }
