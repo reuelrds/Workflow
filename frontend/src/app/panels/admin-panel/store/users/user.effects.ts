@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { map, switchMap, mergeMap } from 'rxjs/operators';
 
-import { AdminService } from './../../../../core/services/admin.service';
+import { AdminService } from '../../../../core/services/admin.service';
 
-import * as AdminActions from './admin.actions';
+import * as UserActions from './user.actions';
 import { Action } from '@ngrx/store';
 
 @Injectable()
-export class AdminEffects {
+export class UserEffects {
 
   @Effect()
   addUser = this.actions$.pipe(
-    ofType(AdminActions.ActionTypes.TryAddUser),
-    map((action: AdminActions.TryAddUser) => {
+    ofType(UserActions.ActionTypes.TryAddUser),
+    map((action: UserActions.TryAddUser) => {
       return action.payload;
     }),
     switchMap(userData => {
@@ -21,7 +21,7 @@ export class AdminEffects {
     }),
     mergeMap(res => {
       console.log(res.user);
-      return [{type: AdminActions.ActionTypes.AddUser, payload: res.user}];
+      return [{type: UserActions.ActionTypes.AddUser, payload: res.user}];
     })
   );
 
