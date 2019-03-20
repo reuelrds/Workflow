@@ -61,7 +61,7 @@ exports.createUser = async (req, res, next) => {
 
     const jwtToken = jwt.sign({
       email: req.body.email,
-      password: req.body.password
+      userId: result.id
     }, config.jwtsecret, {
       expiresIn: "1h"
     });
@@ -104,7 +104,7 @@ exports.createAdmin = async (req, res, next) => {
     // console.log("vervebeb", result);
     const jwtToken = jwt.sign({
       email: req.body.email,
-      password: req.body.password
+      userId: result.id
     }, config.jwtsecret, {
       expiresIn: "1h"
     });
