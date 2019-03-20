@@ -1,8 +1,10 @@
 import { adminReducer } from './admin.reducers';
 import * as AdminActions from './admin.actions';
+import { User } from 'src/app/shared/models/user';
 
 const initialState = {
-  id: null
+  id: null,
+  users: []
 };
 
 describe('Testing Admin Reducer', () => {
