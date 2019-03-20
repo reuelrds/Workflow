@@ -27,35 +27,26 @@ There’s also an Admin Panel, for system administrators of a company. It also a
 > npm run start:localDB
 > npm run start:server -- --env="dev"
 ```
+##### *You need to have mongoDB locally install on your machine to run the `start:localDB` script successfully*
 
 #### Serve the application
-Navigate to angular root directory
-```
-> cd ./frontend
-```
 Launch the website
 ```
-> ng serve -o
+> npm run start
 ```
 
 ## Running unit tests
 
 To execute the unit tests via [Karma](https://karma-runner.github.io) for frontend
 ```
-> cd ./frontend
-> ng test
+> npm run test
 ```
 
 To execute tests for backend
-```
-> jest
-```
-Or Alternatively
 ```
 > npm run test:server
 ```
 
 ## Running end-to-end tests
 
-Run `ng e2e` from frontend directory to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
+Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).

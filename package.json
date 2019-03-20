@@ -1,13 +1,30 @@
 {
   "name": "workflow",
   "version": "2.0.0",
+  "description": "A Website for basic Task & Workflow Management",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reuelrds/Workflow.git"
+  },
+  "keywords": [
+    "Workflow-Management",
+    "Task-Management",
+    "Angular",
+    "MongoDB",
+    "NodeJS",
+    "ExprgRx",
+    "RxJS"
+  ],
+  "author": "Reuel D'silva & Chinmay Khanolkar",
+  "license": "MIT",
+  "homepage": "https://github.com/reuelrds/Workflow#readme",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
+    "start": "cd frontend && ng serve -o",
+    "build": "cd frontend && ng build",
+    "test": "cd frontend && ng test",
+    "lint": "cd frontend && ng serve",
+    "e2e": "cd frontend && ng e2e",
     "start:server": "nodemon ./backend/src/bin/server.js",
     "start:localDB": "mongod --dbpath C:/mongodb/data --directoryperdb",
     "test:server": "jest --runInBand --watch"
@@ -59,7 +76,7 @@
     "@angular/compiler-cli": "^7.2.9",
     "@angular/http": "^7.2.4",
     "@angular/language-service": "~7.2.0",
-    "@ngrx/schematics": "^7.3.0", 
+    "@ngrx/schematics": "^7.3.0",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
