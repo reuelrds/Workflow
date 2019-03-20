@@ -182,15 +182,16 @@ export class AuthService {
 
     // if the token isn't expired, proceed to login the user
     if (expiresIn > 0) {
-      // this.token = authInformation.token;
-      // this.isAuthenticated = true;
+
       this.store.dispatch({type: AuthActions.ActionTypes.SetToken, payload: authInformation.token});
       this.store.dispatch({type: AuthActions.ActionTypes.SetTokenExpiry, payload: expiresIn});
       console.log(`test  ${expiresIn}, type: ${typeof(expiresIn)}`);
       this.store.dispatch({type: AuthActions.ActionTypes.Login});
+
       this.tokenTimer = setTimeout(() => {
         this.store.dispatch({type: AuthActions.ActionTypes.Logout});
       }, expiresIn);
+
       if (authInformation.userType === 'User') {
         this.router.navigate(['/client-panel']);
       } else {
