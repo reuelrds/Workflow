@@ -14,6 +14,16 @@ import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.compo
 import { Observable, of } from 'rxjs';
 
 
+
+const initialValue = {
+  firstName: 'Test',
+  lastName: 'Lmane',
+  email: 'test@email.com',
+  manager: '',
+  department: '',
+  location: ''
+};
+
 export class MatDialogMock {
   open() {
     return {
@@ -25,15 +35,6 @@ export class MatDialogMock {
 
   }
 }
-
-const initialValue = {
-  firstName: 'Test',
-  lastName: 'Lmane',
-  email: 'test@email.com',
-  manager: '',
-  department: '',
-  location: ''
-};
 
 describe('UserManagementDialogComponent', () => {
   let component: UserManagementDialogComponent;
