@@ -68,7 +68,9 @@ export class UserManagementDialogComponent implements OnInit {
 
      this.addUserDialog.afterClosed().subscribe(result => {
       console.log(result);
-      this.store.dispatch({type: UserActions.ActionTypes.TryAddUser, payload: result.value});
+      if (result) {
+        this.store.dispatch({type: UserActions.ActionTypes.TryAddUser, payload: result.value});
+      }
     });
   }
 

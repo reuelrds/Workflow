@@ -27,13 +27,11 @@ const initialValue = {
 export class MatDialogMock {
   open() {
     return {
-      afterClosed: () => of(initialValue)
+      afterClosed: () => of({value: initialValue})
     };
   }
 
-  close() {
-
-  }
+  close() {}
 }
 
 describe('UserManagementDialogComponent', () => {
@@ -69,15 +67,19 @@ describe('UserManagementDialogComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should dispatch an action when the form is submitted', fakeAsync(() => {
+  it('should dispatch an action when the form is submitted', () => {
 
     spyOn(dialog, 'open').and.callThrough();
     component.openAddUserDialog();
     dialog.close();
-    expect(store.dispatch).toHaveBeenCalledTimes(1);
-    expect(store.dispatch).toHaveBeenCalledWith({
-      type: UserAtions.ActionTypes.TryAddUser,
-      payload: undefined
+    component.addUserDialog.afterClosed().subscribe(result => {
+      console.log(result);
+      expect(result.value).toEqual(initialValue);
+      expect(store.dispatch).toHaveBeenCalledTimes(1);
+      expect(store.dispatch).toHaveBeenCalledWith({
+        type: UserAtions.ActionTypes.TryAddUser,
+        payload: result.value
+      });
     });
-  }));
+  });
 });
