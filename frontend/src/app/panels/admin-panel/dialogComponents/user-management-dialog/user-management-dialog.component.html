@@ -1,4 +1,5 @@
-<mat-toolbar class="toolbar">
+<div class="user-management-dialog">
+<mat-toolbar class="toolbar" mat-dialog-title>
     <div class="toolbar__title">
       Users
     </div>
@@ -32,6 +33,10 @@
     </mat-menu>
   </div>
 </mat-toolbar>
-<p>
-  user-management-dialog works!
-</p>
+<mat-dialog-content class="user-management-dialog__data-table">
+  <app-data-table [data]="dataSet" [displayedColumns]="cols"></app-data-table>
+</mat-dialog-content>
+<mat-dialog-actions>
+sdvvvssewe
+</mat-dialog-actions>
+</div>

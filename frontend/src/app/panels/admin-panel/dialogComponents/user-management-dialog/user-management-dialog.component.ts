@@ -1,13 +1,17 @@
 import { state, style, trigger, transition, animate } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material';
-import { Store } from '@ngrx/store';
+import { MatDialog, MatDialogRef, MatPaginator } from '@angular/material';
+import { Store, select } from '@ngrx/store';
 
 import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
 
 import * as fromAdminPanel from '../../store/admin-panel.reducers';
 import * as UserActions from '../../store/users/user.actions';
+import * as fromUser from '../../store/users/user.reducers';
+import * as fromUserSelector from '../../store/users/user.selectors';
+// import { selectAllUsers } from '../../store/users/user.selectors';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -29,6 +33,8 @@ import * as UserActions from '../../store/users/user.actions';
     ])
   ]
 })
+
+
 export class UserManagementDialogComponent implements OnInit {
 
   searchBox: FormControl;
@@ -36,11 +42,19 @@ export class UserManagementDialogComponent implements OnInit {
   isSearchBoxIconVisible = true;
   showUserType = 'allUsers';
   addUserDialog: MatDialogRef<AddUserDialogComponent>;
+  users;
+  dataSet;
+  cols: string[] = ['select', 'firstName', 'lastName', 'email'];
+  // cols: string[] = ['id', 'name'];
 
-  constructor(private dialog: MatDialog,  private store: Store<fromAdminPanel.AdminPanelState>) { }
+  constructor(private dialog: MatDialog,  private store: Store<fromAdminPanel.State>) { }
 
   ngOnInit() {
     this.searchBox = new FormControl('');
+    this.users = this.store.pipe(select(fromUserSelector.getAllUsers));
+    this.users.subscribe(res => this.dataSet = res);
+    console.log('fw', this.dataSet);
+
   }
 
   searchUsers() {

@@ -42,3 +42,13 @@
 .search__box {
   width: 80%;
 }
+
+.user-management-dialog {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+
+  &__data-table {
+    flex-grow: 1;
+  }
+}

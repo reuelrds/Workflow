@@ -49,10 +49,8 @@ export class UserManagementComponent implements OnInit {
 
   openUserManagementDialog() {
     const dialogRef = this.dialog.open(UserManagementDialogComponent, {
-      width: 'max-content',
-      height: 'max-content',
-      minWidth: '80vw',
-      minHeight: '70vh',
+      width: '80vw',
+      height: '80vh',
       autoFocus: false
     });
   }
