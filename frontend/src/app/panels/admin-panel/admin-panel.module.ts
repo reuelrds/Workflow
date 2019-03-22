@@ -17,8 +17,10 @@ import { AppsManagementComponent } from './components/apps-management/apps-manag
 import { UserManagementDialogComponent } from './dialogComponents/user-management-dialog/user-management-dialog.component';
 import { AddUserDialogComponent } from './dialogComponents/add-user-dialog/add-user-dialog.component';
 
-import { reducers } from './store/admin-panel.reducers';
+import { reducers, AdminPanelState } from './store/admin-panel.reducers';
 import { UserEffects } from './store/users/user.effects';
+import { DataTableComponent } from './components/data-table/data-table.component';
+import { CdkTableModule } from '@angular/cdk/table';
 
 @NgModule({
   imports: [
@@ -27,8 +29,9 @@ import { UserEffects } from './store/users/user.effects';
     SharedModule,
     ReactiveFormsModule,
     MaterialModule,
-    StoreModule.forFeature('admin-panel', reducers),
-    EffectsModule.forFeature([UserEffects])
+    StoreModule.forFeature('adminpanel', reducers),
+    EffectsModule.forFeature([UserEffects]),
+    CdkTableModule
   ],
   declarations: [
     AdminPanelComponent,
@@ -36,7 +39,8 @@ import { UserEffects } from './store/users/user.effects';
     AccountSettingsComponent,
     AppsManagementComponent,
     UserManagementDialogComponent,
-    AddUserDialogComponent
+    AddUserDialogComponent,
+    DataTableComponent
   ],
   entryComponents: [
     AppsManagementComponent,
