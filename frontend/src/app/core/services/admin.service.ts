@@ -64,6 +64,6 @@ export class AdminService {
 
   addNewUser(userData) {
     console.log('service: ', userData);
-    return this.httpClient.post<{message: string, user: User}>(`${this.BACKEND_URL}/api/admin/add-new-user`, userData);
+    return this.httpClient.post<{message: string, user: User}>(`${this.BACKEND_URL}/api/user/add-new-user`, userData);
   }
 }
