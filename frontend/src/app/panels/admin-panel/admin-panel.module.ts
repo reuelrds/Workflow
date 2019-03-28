@@ -19,7 +19,6 @@ import { AddUserDialogComponent } from './dialogComponents/add-user-dialog/add-u
 
 import { reducers, AdminPanelState } from './store/admin-panel.reducers';
 import { UserEffects } from './store/users/user.effects';
-import { DataTableComponent } from './components/data-table/data-table.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { UserManagementDataTableComponent } from './components/data-tables/user-management.data-table/user-management.data-table.component';
 
