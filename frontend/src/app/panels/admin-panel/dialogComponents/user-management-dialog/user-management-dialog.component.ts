@@ -11,7 +11,7 @@ import * as UserActions from '../../store/users/user.actions';
 import * as fromUser from '../../store/users/user.reducers';
 import * as fromUserSelector from '../../store/users/user.selectors';
 // import { selectAllUsers } from '../../store/users/user.selectors';
-import { Observable } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 
 
 @Component({
@@ -44,7 +44,7 @@ export class UserManagementDialogComponent implements OnInit {
   addUserDialog: MatDialogRef<AddUserDialogComponent>;
   users;
   dataSet;
-  cols: string[] = ['select', 'firstName', 'lastName', 'email'];
+  cols: string[] = ['select', 'firstName', 'lastName', 'email', 'department', 'location', 'manager', 'Permissions', 'Status'];
   // cols: string[] = ['id', 'name'];
 
   constructor(private dialog: MatDialog,  private store: Store<fromAdminPanel.State>) { }
@@ -52,7 +52,7 @@ export class UserManagementDialogComponent implements OnInit {
   ngOnInit() {
     this.searchBox = new FormControl('');
     this.users = this.store.pipe(select(fromUserSelector.getAllUsers));
-    this.users.subscribe(res => this.dataSet = res);
+    this.users.subscribe(res => this.dataSet = of(res));
     console.log('fw', this.dataSet);
 
   }
