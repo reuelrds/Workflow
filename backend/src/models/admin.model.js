@@ -24,5 +24,11 @@ const adminSchema = mongoose.Schema({
   }
 });
 
+adminSchema.virtual('users', {
+  ref: 'User',
+  localField: 'id',
+  foreignField: 'companyId'
+});
+
 adminSchema.plugin(uniqueVlaidator);
-module.exports = mongoose.model('admin', adminSchema);
+module.exports = mongoose.model('Admin', adminSchema);
