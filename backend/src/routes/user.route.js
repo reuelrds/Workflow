@@ -2,11 +2,14 @@ const express = require('express');
 const router = express.Router();
 
 const CheckAuth = require('./../middleware/check-auth');
-const UserController = require('./../controllers/user.controller');
+const {getUsers, postUsers} = require('./../controllers/user.controller');
 
-router.get('/:id', UserController.getUserData);
+// console.log("ggr", UserController);
 
-router.post('/add-new-user', CheckAuth, UserController.addUser);
+router.get('/all-users', CheckAuth, getUsers.getAllUsers);
+router.get('/:id', CheckAuth, getUsers.getUserData);
+
+router.post('/add-new-user', CheckAuth, postUsers.addUser);
 
 
 module.exports = router;
