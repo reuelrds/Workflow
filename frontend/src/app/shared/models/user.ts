@@ -3,7 +3,9 @@ export interface User {
   firstName: string;
   lastName: string;
   email: string;
-  manager?: string;
+  isManager?: boolean;
   department?: string;
   location?: string;
+  permissions?: string;
+  status?: boolean;
 }
