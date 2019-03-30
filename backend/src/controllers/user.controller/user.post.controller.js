@@ -13,7 +13,7 @@ exports.addUser = async (req, res, next) => {
     const admin = await Admin.findOne({id: req.userData.userId});
     
     if(!admin) {
-      throw new Error('Invalid Request');
+      throw new Error('Admin Not Found. Invalid Request');
     }
 
     const id = uniqid()
@@ -43,7 +43,7 @@ exports.addUser = async (req, res, next) => {
   } catch (error) {
     console.log(error);
     res.status(404).json({
-      message: "Not Found"
+      message: error.message
     })
   }
 }
