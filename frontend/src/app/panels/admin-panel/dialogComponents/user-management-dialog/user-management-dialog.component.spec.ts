@@ -1,85 +1,101 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { Store } from '@ngrx/store';
-import { provideMockStore } from '@ngrx/store/testing';
+// import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+// import { Store } from '@ngrx/store';
+// import { provideMockStore } from '@ngrx/store/testing';
 
-import { UserManagementDialogComponent } from './user-management-dialog.component';
-import { MaterialModule } from 'src/app/shared/material.module';
-import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { UserManagementDialogComponent } from './user-management-dialog.component';
+// import { MaterialModule } from 'src/app/shared/material.module';
+// import { ReactiveFormsModule } from '@angular/forms';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import * as fromUser from '../../store/users/user.reducers';
-import * as UserAtions from '../../store/users/user.actions';
-import { MatDialog } from '@angular/material/dialog';
-import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
-import { Observable, of } from 'rxjs';
+// import * as fromUser from '../../store/users/user.reducers';
+// import * as UserAtions from '../../store/users/user.actions';
+// import { MatDialog } from '@angular/material/dialog';
+// import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
+// import { Observable, of } from 'rxjs';
+// import { Component } from '@angular/core';
 
 
 
-const initialValue = {
-  firstName: 'Test',
-  lastName: 'Lmane',
-  email: 'test@email.com',
-  manager: '',
-  department: '',
-  location: ''
-};
+// const initialValue = {
+//   firstName: 'Test',
+//   lastName: 'Lmane',
+//   email: 'test@email.com',
+//   manager: '',
+//   department: '',
+//   location: ''
+// };
 
-export class MatDialogMock {
-  open() {
-    return {
-      afterClosed: () => of({value: initialValue})
-    };
-  }
+// export class MatDialogMock {
+//   open() {
+//     return {
+//       afterClosed: () => of({value: initialValue})
+//     };
+//   }
 
-  close() {}
-}
+//   close() {}
+// }
 
-describe('UserManagementDialogComponent', () => {
-  let component: UserManagementDialogComponent;
-  let fixture: ComponentFixture<UserManagementDialogComponent>;
+// describe('UserManagementDialogComponent', () => {
+//   let component: UserManagementDialogComponent;
+//   let fixture: ComponentFixture<UserManagementDialogComponent>;
 
-  let store: Store<fromUser.State>;
-  let dialog: MatDialogMock;
+//   let testHostComponent: TestHostComponent;
+//   let testHostFixture: ComponentFixture<TestHostComponent>;
 
-  const initialState = {};
+//   let store: Store<fromUser.State>;
+//   let dialog: MatDialogMock;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [MaterialModule, ReactiveFormsModule, BrowserAnimationsModule],
-      declarations: [ UserManagementDialogComponent ],
-      providers: [{provide: MatDialog, useClass: MatDialogMock}, provideMockStore({initialState})]
-    })
-    .compileComponents();
-  }));
+//   const initialState = {};
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(UserManagementDialogComponent);
-    component = fixture.componentInstance;
+//   beforeEach(async(() => {
+//     TestBed.configureTestingModule({
+//       imports: [MaterialModule, ReactiveFormsModule, BrowserAnimationsModule],
+//       declarations: [ UserManagementDialogComponent, TestHostComponent ],
+//       providers: [{provide: MatDialog, useClass: MatDialogMock}, provideMockStore({initialState})]
+//     })
+//     .compileComponents();
+//   }));
 
-    store = TestBed.get(Store);
-    spyOn(store, 'dispatch').and.callThrough();
-    dialog = TestBed.get(MatDialog);
+//   beforeEach(() => {
+//     fixture = TestBed.createComponent(UserManagementDialogComponent);
+//     component = fixture.componentInstance;
 
-    fixture.detectChanges();
-  });
+//     testHostFixture = TestBed.createComponent(TestHostComponent);
+//     testHostComponent = testHostFixture.componentInstance;
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+//     store = TestBed.get(Store);
+//     spyOn(store, 'dispatch').and.callThrough();
+//     dialog = TestBed.get(MatDialog);
 
-  it('should dispatch an action when the form is submitted', () => {
+//     fixture.detectChanges();
+//     testHostFixture.detectChanges();
+//   });
 
-    spyOn(dialog, 'open').and.callThrough();
-    component.openAddUserDialog();
-    dialog.close();
-    component.addUserDialog.afterClosed().subscribe(result => {
-      console.log(result);
-      expect(result.value).toEqual(initialValue);
-      expect(store.dispatch).toHaveBeenCalledTimes(1);
-      expect(store.dispatch).toHaveBeenCalledWith({
-        type: UserAtions.ActionTypes.TryAddUser,
-        payload: result.value
-      });
-    });
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+
+//   it('should dispatch an action when the form is submitted', () => {
+
+//     spyOn(dialog, 'open').and.callThrough();
+//     component.openAddUserDialog();
+//     dialog.close();
+//     component.addUserDialog.afterClosed().subscribe(result => {
+//       console.log(result);
+//       expect(result.value).toEqual(initialValue);
+//       expect(store.dispatch).toHaveBeenCalledTimes(1);
+//       expect(store.dispatch).toHaveBeenCalledWith({
+//         type: UserAtions.ActionTypes.TryAddUser,
+//         payload: result.value
+//       });
+//     });
+//   });
+
+//   @Component({
+//     selector: `app-host-component`,
+//     template: `<app-user-management-data-table input="data"></app-user-management-data-table>`
+//   })
+//   class TestHostComponent {
+//     data = of([]);
+//   }
+// });
