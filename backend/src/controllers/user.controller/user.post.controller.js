@@ -47,3 +47,37 @@ exports.addUser = async (req, res, next) => {
     })
   }
 }
+
+exports.addManager = async (req, res, next) => {
+
+  try {
+
+    const admin = await Admin.findOne({id: req.userData.userId});
+    
+    if(!admin) {
+      throw new Error('Admin Not Found. Invalid Request');
+    }
+
+    let user = await User.findOne({id: req.body.id});
+      
+    if(!user || user.companyId !== admin.id) {
+      throw new Error('User Not Found. Invalid Request');
+    }
+  
+    user.isManager = true;
+    await user.save();
+
+    user = await User.findOne({id: req.body.id});
+    if (!user.isManager) {
+      throw new Error('User not updated to Manager');
+    }
+  
+    res.status(200).json({
+      message: "Successfully added new Manager"
+    })
+  } catch (error) {
+    res.status(404).json({
+      message: error.message
+    })
+  } 
+}
