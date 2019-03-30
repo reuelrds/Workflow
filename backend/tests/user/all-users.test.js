@@ -5,12 +5,13 @@ const dbSetup = require('../fixtures/testdb.config');
 const app = require('./../../src/app');
 const db = require('./../../src/config/mongoose.config');
 
-const User = require('./../../src/models/user.model');
 const Admin = require('./../../src/models/admin.model');
 
 
-describe('Testing get User Endpoint', () => {
+describe('testing all-users endpoint', () => {
+
   let token = null;
+  
   beforeEach(async () => {
     await db.connect();
     await dbSetup.setupDatabase();
@@ -28,28 +29,30 @@ describe('Testing get User Endpoint', () => {
     await db.disconnect();
   });
 
-  test('it should fetch user details', async () => {
+  test('it should fetch all users associated with the auth token', async () => {
+
     const res = await request(app)
-      .get(`/api/user/${dbSetup.userOne.id}`)
-      .set('Authorization', 'Bearer ' + token)
+      .get('/api/user/all-users')
+      .set('Authorization', `Bearer ${token}`)
       .expect(200);
 
-    expect(res.body).toMatchObject({
-      firstName: dbSetup.userOne.firstName,
-      lastName: dbSetup.userOne.lastName,
-      email: dbSetup.userOne.email
-    });
+    const {profileImagePath, companyId, password, ...userDetails} = dbSetup.userTwo;
+    const expectedUsers = [
+      userDetails
+    ];
+
+    expect(res.body.users).toEqual(expectedUsers);
   });
 
-  test('it should throw an error if an invalid id is passed', async () => {
+  test('it should throw an error if no admin is found', async () => {
     try {
+      await Admin.deleteOne({id: dbSetup.adminOne.id});
       await request(app)
-        .get(`/api/user/error`)
-        .set('Authorization', 'Bearer ' + token)
-      
+        .get('/api/user/all-users')
+        .set('Authorization', `Bearer ${token}`);
     } catch (error) {
       expect(error.status).toBe(404);
-      expect(error.response.body.message).toContain('User Data Not Found');
+      expect(error.response.body.message).toContain("Admin Not Found. Invalid Request");
     }
-  });
+  })
 });
