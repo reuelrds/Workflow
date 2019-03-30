@@ -1,2 +1,7 @@
-exports.getUsers = require('./user.get.controller');
-exports.postUsers = require('./user.post.controller');
+const getUsers = require('./user.get.controller');
+const postUsers = require('./user.post.controller');
+
+module.exports = {
+  getUsers,
+  postUsers
+};

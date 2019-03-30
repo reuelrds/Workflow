@@ -1,2 +1,5 @@
+const getAdmin = require('./admin.get.controller');
 
-exports.getAdmin = require('./admin.get.controller');
+module.exports = {
+  getAdmin
+}
