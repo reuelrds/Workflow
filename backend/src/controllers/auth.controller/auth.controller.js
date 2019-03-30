@@ -3,9 +3,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const uniqid = require('uniqid');
 
-const User = require("./../models/user.model");
-const Admin = require("./../models/admin.model");
-const config = require("./../config/var.config");
+const User = require("./../../models/user.model");
+const Admin = require("../../models/admin.model");
+const config = require("../../config/var.config");
 
 // Creating user
 exports.createUser = async (req, res, next) => {
