@@ -1,7 +1,7 @@
 import { state, style, trigger, transition, animate } from '@angular/animations';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MatPaginator } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { Store, select } from '@ngrx/store';
 
 import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
@@ -11,7 +11,7 @@ import * as UserActions from '../../store/users/user.actions';
 import * as fromUser from '../../store/users/user.reducers';
 import * as fromUserSelector from '../../store/users/user.selectors';
 // import { selectAllUsers } from '../../store/users/user.selectors';
-import { Observable, of, from } from 'rxjs';
+import { of } from 'rxjs';
 
 
 @Component({
@@ -45,15 +45,14 @@ export class UserManagementDialogComponent implements OnInit {
   users;
   dataSet;
   cols: string[] = ['select', 'firstName', 'lastName', 'email', 'department', 'location', 'manager', 'Permissions', 'Status'];
-  // cols: string[] = ['id', 'name'];
 
   constructor(private dialog: MatDialog,  private store: Store<fromAdminPanel.State>) { }
 
   ngOnInit() {
     this.searchBox = new FormControl('');
+    this.store.dispatch({type: UserActions.ActionTypes.TryGetUsers});
     this.users = this.store.pipe(select(fromUserSelector.getAllUsers));
     this.users.subscribe(res => this.dataSet = of(res));
-    console.log('fw', this.dataSet);
 
   }
 

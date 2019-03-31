@@ -47,10 +47,12 @@ export class UserManagementDataTableComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.selection = new SelectionModel<any>(this.allowMultiSelect, this.initialSelection);
-    this.dataSource = this.data;
+    // console.log(this.data);
   }
 
   ngOnChanges() {
+    this.dataSource = this.data;
+    console.log(this.dataSource);
     this.data.subscribe(result => this.paginator.length = result.length);
   }
 

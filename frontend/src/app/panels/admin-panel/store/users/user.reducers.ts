@@ -25,12 +25,15 @@ const defaultUser = {
   }
 };
 
-export const initialState: State = adapter.getInitialState(defaultUser);
+export const initialState: State = adapter.getInitialState();
 
 export function userReducer(state = initialState, action: UserActions.UserActions): State {
   switch (action.type) {
     case UserActions.ActionTypes.AddUser: {
       return adapter.addOne(action.payload, state);
+    }
+    case UserActions.ActionTypes.GetUsers: {
+      return adapter.addMany(action.payload, state);
     }
     default: {
       return state;

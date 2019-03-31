@@ -25,6 +25,18 @@ export class UserEffects {
     })
   );
 
+  @Effect()
+  getUsers = this.actions$.pipe(
+    ofType(UserActions.ActionTypes.TryGetUsers),
+    switchMap(() => {
+      return this.adminService.getUsers();
+    }),
+    mergeMap(res => {
+      console.log(res.users);
+      return [{type: UserActions.ActionTypes.GetUsers, payload: res.users}];
+    })
+  );
+
   constructor(
     private actions$: Actions,
     private adminService: AdminService
