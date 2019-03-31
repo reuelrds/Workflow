@@ -70,4 +70,16 @@ export class AdminService {
   getUsers() {
     return this.httpClient.get<{users: User[]}>(`${this.BACKEND_URL}/api/user/all-users`);
   }
+
+  updateUserManager(userId, newManagerId) {
+    console.log(userId);
+    let managerId;
+    if (!newManagerId) {
+      managerId = {managerId: undefined};
+    } else {
+      managerId = {managerId: newManagerId};
+    }
+    // return this.httpClient.patch<{message: string, user: User}>(`${this.BACKEND_URL}/api/user/update-manager/${userId}`, managerId);
+    return this.httpClient.patch<{message: string, user: User}>(`${this.BACKEND_URL}/api/user/update-manager/${userId}`, managerId);
+  }
 }

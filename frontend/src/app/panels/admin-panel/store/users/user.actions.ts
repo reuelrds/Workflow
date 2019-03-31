@@ -1,13 +1,16 @@
 import { Action } from '@ngrx/store';
 
 import { User } from 'src/app/shared/models/user';
+import { Update } from '@ngrx/entity';
 
 export enum ActionTypes {
 
   TryAddUser = '[Add User Dialog] Try Add User',
   AddUser = '[Add User API] Add User',
   TryGetUsers = '[User Management Dialog] Try Get Users',
-  GetUsers = '[User API] Get Users'
+  GetUsers = '[User API] Get Users',
+  TryUpdateUserManager = '[User Management Dialog] Try Update User Manager',
+  UpdateUserManager = '[User API] Update User Manager',
 }
 
 export class AddUser implements Action {
@@ -36,5 +39,17 @@ export class GetUsers implements Action {
   constructor(public payload: User[]) {}
 }
 
+export class TryUpdateUserManager implements Action {
+  readonly type = ActionTypes.TryUpdateUserManager;
 
-export type UserActions = AddUser | TryAddUser | TryGetUsers | GetUsers;
+  constructor(public payload: {userId: string, managerId: string}) {}
+}
+export class UpdateUserManager implements Action {
+  readonly type = ActionTypes.UpdateUserManager;
+
+  constructor(public payload: Update<User>) {}
+}
+
+
+
+export type UserActions = AddUser | TryAddUser | TryGetUsers | GetUsers | TryUpdateUserManager | UpdateUserManager;

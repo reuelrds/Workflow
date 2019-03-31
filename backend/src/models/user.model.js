@@ -31,11 +31,27 @@ const userSchema = mongoose.Schema({
     type: String,
     ref: 'Admin'
   },
+  managerId: {
+    type: String
+  },
   isManager: {
     type: Boolean
   }
 });
 
 userSchema.plugin(uniqueVlaidator);
+
+userSchema.methods.toJSON = function () {
+  const user = this
+  const userObject = user.toObject()
+
+  delete userObject.password
+  delete userObject._id
+  delete userObject.__v
+  delete userObject.companyId
+
+  return userObject
+}
+
 module.exports = mongoose.model('User', userSchema);
 

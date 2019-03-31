@@ -3,6 +3,7 @@ export interface User {
   firstName: string;
   lastName: string;
   email: string;
+  managerId?: string;
   isManager?: boolean;
   department?: string;
   location?: string;

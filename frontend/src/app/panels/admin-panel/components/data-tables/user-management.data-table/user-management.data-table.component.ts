@@ -3,7 +3,9 @@ import {
   OnInit,
   ViewChild,
   Input,
-  OnChanges } from '@angular/core';
+  OnChanges,
+  Output,
+  EventEmitter} from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import {
   MatPaginator,
@@ -37,6 +39,8 @@ export class UserManagementDataTableComponent implements OnInit, OnChanges {
    * Columns displayed in the table. Columns IDs can be added, removed, or reordered.
    */
   @Input() displayedColumns: string[];
+
+  @Output() updateManager = new EventEmitter();
 
   dataSource: Observable<User[]>;
 
@@ -76,7 +80,6 @@ export class UserManagementDataTableComponent implements OnInit, OnChanges {
   getSortedData(event) {
 
     if (!event.active || event.direction === '') {
-      console.log('fegre');
       return;
     }
 
@@ -125,5 +128,10 @@ export class UserManagementDataTableComponent implements OnInit, OnChanges {
 
   onClick(row) {
     console.log(row);
+  }
+
+  onSelectChange(userId, event) {
+    console.log(event, userId);
+    this.updateManager.emit({userId, managerId: event.value});
   }
 }

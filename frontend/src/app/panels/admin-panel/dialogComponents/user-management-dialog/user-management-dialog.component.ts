@@ -44,7 +44,8 @@ export class UserManagementDialogComponent implements OnInit {
   addUserDialog: MatDialogRef<AddUserDialogComponent>;
   users;
   dataSet;
-  cols: string[] = ['select', 'firstName', 'lastName', 'email', 'department', 'location', 'manager', 'Permissions', 'Status'];
+  // cols: string[] = ['select', 'firstName', 'lastName', 'email', 'department', 'location', 'manager', 'Permissions', 'Status'];
+  cols: string[] = ['select', 'firstName', 'lastName', 'email', 'manager'];
 
   constructor(private dialog: MatDialog,  private store: Store<fromAdminPanel.State>) { }
 
@@ -85,6 +86,11 @@ export class UserManagementDialogComponent implements OnInit {
         this.store.dispatch({type: UserActions.ActionTypes.TryAddUser, payload: result.value});
       }
     });
+  }
+
+  onUpdateManager(event) {
+    console.log(event);
+    this.store.dispatch({type: UserActions.ActionTypes.TryUpdateUserManager, payload: {userId: event.userId, managerId: event.managerId}});
   }
 
 }
