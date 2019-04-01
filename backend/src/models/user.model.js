@@ -31,11 +31,19 @@ const userSchema = mongoose.Schema({
     type: String,
     ref: 'Admin'
   },
+  isManager: {
+    type: Boolean
+  },
   managerId: {
     type: String
   },
-  isManager: {
-    type: Boolean
+  departmentId: {
+    type: String,
+    ref: 'Department'
+  },
+  LocationId: {
+    type: String,
+    ref: 'Location'
   }
 });
 
@@ -52,6 +60,12 @@ userSchema.methods.toJSON = function () {
 
   return userObject
 }
+
+userSchema.virtual('staff', {
+  ref: 'User',
+  localField: 'id',
+  foreignField: 'managerId'
+});
 
 module.exports = mongoose.model('User', userSchema);
 

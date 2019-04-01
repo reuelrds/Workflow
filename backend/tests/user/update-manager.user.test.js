@@ -57,8 +57,31 @@ describe('testing update-manager endpoint', () => {
 
     expect(result.body.message).toContain("Successfully Updated User's new Manager");
     expect(result.body.user.managerId).toMatch(manager.id);
+    expect(result.body.manager.isManager).toBeTruthy();
     
   });
+  
+  test('it should update an user\'s prevoius manager\'s  isManager to False if the manager has no staff working under him', async () => {
+
+    await request(app)
+      .patch(`/api/user/update-manager/${dbSetup.userTwo.id}`)
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        managerId: manager.id
+      }).expect(200);
+
+    const result = await request(app)
+      .patch(`/api/user/update-manager/${dbSetup.userTwo.id}`)
+      .set('Authorization', `Bearer ${token}`)
+      .send({}).expect(200);
+
+    expect(result.body.message).toContain("Successfully Updated User's new Manager");
+    expect(result.body.user.managerId).toBeUndefined();
+    expect(result.body.manager.isManager).toBeFalsy();
+    
+  });
+
+
 
   
   test('it should throw an error if no user is found', async () => {

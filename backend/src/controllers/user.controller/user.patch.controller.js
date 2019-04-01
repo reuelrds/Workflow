@@ -14,16 +14,33 @@ exports.updateManager = async (req, res, next) => {
       throw new Error('User Not Found. Invalid Request');
     }
 
+    const managerId = req.body.managerId
+      ? req.body.managerId
+      : user.managerId;
+
     user.managerId = req.body.managerId;
     await user.save();
+    const userPrev = user;
     
     user = await User.findOne({id: req.params.id});
     if (!user.managerId && req.body.managerId) {
       throw new Error('User not updated');
     }
+
+    user = await User.findOne({id: managerId});
+    await user.populate({
+      path: 'staff'
+    }).execPopulate();
+
+    user.isManager = user.staff.length === 0
+      ? false
+      : true;
+    await user.save();
+
     res.status(200).json({
       message: "Successfully Updated User's new Manager",
-      user
+      user: userPrev,
+      manager: user
     });
 
 
