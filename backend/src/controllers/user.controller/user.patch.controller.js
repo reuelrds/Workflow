@@ -14,14 +14,6 @@ exports.updateManager = async (req, res, next) => {
       throw new Error('User Not Found. Invalid Request');
     }
 
-    // if (!req.body.managerId) {
-      // throw new Error("New Manager Id not provided");
-    // }
-
-    console.log('fwewfw');
-    console.log(user);
-    console.log(req.body.managerId);
-
     user.managerId = req.body.managerId;
     await user.save();
     
@@ -29,7 +21,6 @@ exports.updateManager = async (req, res, next) => {
     if (!user.managerId && req.body.managerId) {
       throw new Error('User not updated');
     }
-  
     res.status(200).json({
       message: "Successfully Updated User's new Manager",
       user

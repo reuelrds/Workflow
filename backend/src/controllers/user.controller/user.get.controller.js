@@ -27,9 +27,16 @@ exports.getAllUsers = async (req, res, next) => {
     if (!admin) {
       throw new Error("Admin Not Found. Invalid Request");
     }
-    await admin.populate('users').execPopulate();
+    await admin.populate('users', 'id firstName lastName email isManager').execPopulate();
     console.log(admin.users);
     let users = admin.users;
+
+    users = users.map(user => {
+      user = user.toObject();
+      delete user._id;
+      delete user.companyId;
+      return user;
+    });
 
     res.status(200).json({
       users
@@ -51,13 +58,14 @@ exports.getManagers = async (req, res, next) => {
     }
     await admin.populate({
       path: 'users',
+      select: 'id firstName lastName email isManager',
       match: {isManager: true}
     }).execPopulate();
 
 
     const managers = admin.users.map(user => {
       user = user.toObject();
-      const {isManager, ...newUserDetails} = user;
+      const {_id, companyId, isManager, ...newUserDetails} = user;
       return newUserDetails;
     });
 
@@ -72,7 +80,3 @@ exports.getManagers = async (req, res, next) => {
   }
 }
 
-// module.exports = (
-//   getUserData,
-//   getAllUsers
-// );
