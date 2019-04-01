@@ -34,6 +34,13 @@ const userSchema = mongoose.Schema({
   isManager: {
     type: Boolean
   },
+  status: {
+    type: Boolean
+  },
+  permission: {
+    type: String,
+    enum: ['User Management', 'App Management', 'Admin']
+  },
   managerId: {
     type: String
   },
@@ -41,9 +48,13 @@ const userSchema = mongoose.Schema({
     type: String,
     ref: 'Department'
   },
-  LocationId: {
+  locationId: {
     type: String,
     ref: 'Location'
+  },
+  groupId: {
+    type: String,
+    ref: 'Group'
   }
 });
 

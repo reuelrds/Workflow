@@ -1,5 +1,6 @@
 const Admin = require('./../../src/models/admin.model');
 const User = require('./../../src/models/user.model');
+const Department = require('./../../src/models/department.model');
 
 
 const adminOne = {
@@ -27,12 +28,34 @@ const userTwo = {
   id : "105c1q1i6kjtagiauo",
   companyId : "105c1q1ebojta8xc5x",
 }
+
+const userThree = { 
+  firstName: 'Postman',
+  lastName: 'Client User 2',
+  email: 'postmanclientuser2@email.com',
+  password:'$2a$10$ZMFkFuj6C67DPrRj1umz3OOVkPuYUm8nuaUPJsYst.WjiB9E9V6Ay',
+  id: '105c1q1o04jtytbyhu',
+  companyId: '105c1qjksjtu5q682',
+}
+
+const departmentOne = {
+  id: "105c1q1os0jtyspts2",
+  departmentName: "Test Department",
+  departmentHead: "105c1q1i6kjtagiauo"
+}
+
 const setupDatabase = async () => {
   await Admin.deleteMany();
   await User.deleteMany();
+  await Department.deleteMany();
+
   await new Admin(adminOne).save();
+  
   await new User(userOne).save();
   await new User(userTwo).save();
+  await new User(userThree).save();
+  
+  await new Department(departmentOne).save();
 }
 
 
@@ -41,5 +64,7 @@ module.exports = {
   adminOne,
   userOne,
   userTwo,
+  userThree,
+  departmentOne,
   setupDatabase
 };
