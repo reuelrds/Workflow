@@ -1,6 +1,7 @@
 const Admin = require('./../../src/models/admin.model');
 const User = require('./../../src/models/user.model');
 const Department = require('./../../src/models/department.model');
+const Location = require('./../../src/models/location.model');
 
 
 const adminOne = {
@@ -44,10 +45,17 @@ const departmentOne = {
   departmentHead: "105c1q1i6kjtagiauo"
 }
 
+const locationOne = {
+  id: "105c1q1bawjtzfz4r6",
+  locationName: "Test Location",
+  locationHead: "105c1qjksjtu5r6lk"
+}
+
 const setupDatabase = async () => {
   await Admin.deleteMany();
   await User.deleteMany();
   await Department.deleteMany();
+  await Location.deleteMany();
 
   await new Admin(adminOne).save();
   
@@ -56,6 +64,8 @@ const setupDatabase = async () => {
   await new User(userThree).save();
   
   await new Department(departmentOne).save();
+  
+  await new Location(locationOne).save();
 }
 
 
@@ -66,5 +76,6 @@ module.exports = {
   userTwo,
   userThree,
   departmentOne,
+  locationOne,
   setupDatabase
 };
