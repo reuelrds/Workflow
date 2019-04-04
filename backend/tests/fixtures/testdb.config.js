@@ -2,6 +2,7 @@ const Admin = require('./../../src/models/admin.model');
 const User = require('./../../src/models/user.model');
 const Department = require('./../../src/models/department.model');
 const Location = require('./../../src/models/location.model');
+const Group = require('./../../src/models/group.model');
 
 
 const adminOne = {
@@ -51,11 +52,17 @@ const locationOne = {
   locationHead: "105c1qjksjtu5r6lk"
 }
 
+const groupOne = {
+  id: "105c1qcrkju2scltj",
+  groupName: "Test Group"
+}
+
 const setupDatabase = async () => {
   await Admin.deleteMany();
   await User.deleteMany();
   await Department.deleteMany();
   await Location.deleteMany();
+  await Group.deleteMany();
 
   await new Admin(adminOne).save();
   
@@ -66,6 +73,8 @@ const setupDatabase = async () => {
   await new Department(departmentOne).save();
   
   await new Location(locationOne).save();
+
+  await new Group(groupOne).save();
 }
 
 
@@ -77,5 +86,6 @@ module.exports = {
   userThree,
   departmentOne,
   locationOne,
+  groupOne,
   setupDatabase
 };
