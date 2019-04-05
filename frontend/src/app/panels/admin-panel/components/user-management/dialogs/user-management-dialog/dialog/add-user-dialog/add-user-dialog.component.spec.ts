@@ -3,12 +3,12 @@ import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 
-import { MaterialModule } from './../../../../shared/material.module';
+import { MaterialModule } from './../../../../../../../../shared/material.module';
 import { AddUserDialogComponent } from './add-user-dialog.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import * as fromUser from '../../store/users/user.reducers';
-import * as UserAtions from '../../store/users/user.actions';
+import * as fromUser from '../../../../../../store/users/user.reducers';
+import * as UserAtions from '../../../../../../store/users/user.actions';
 
 describe('AddUserDialogComponent', () => {
   let component: AddUserDialogComponent;
@@ -19,7 +19,7 @@ describe('AddUserDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MaterialModule, ReactiveFormsModule, BrowserAnimationsModule],
+      imports: [MaterialModule, ReactiveFormsModule, NoopAnimationsModule],
       declarations: [ AddUserDialogComponent],
       providers: [FormBuilder, provideMockStore({initialState})]
     })

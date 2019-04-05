@@ -4,12 +4,11 @@ import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { Store, select } from '@ngrx/store';
 
-import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
+import { AddUserDialogComponent } from './dialog/add-user-dialog/add-user-dialog.component';
 
-import * as fromAdminPanel from '../../store/admin-panel.reducers';
-import * as UserActions from '../../store/users/user.actions';
-import * as fromUser from '../../store/users/user.reducers';
-import * as fromUserSelector from '../../store/users/user.selectors';
+import * as fromAdminPanel from '../../../../store/admin-panel.reducers';
+import * as UserActions from '../../../../store/users/user.actions';
+import * as fromUserSelector from '../../../../store/users/user.selectors';
 // import { selectAllUsers } from '../../store/users/user.selectors';
 import { of } from 'rxjs';
 
