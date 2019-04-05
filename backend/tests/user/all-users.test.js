@@ -41,7 +41,7 @@ describe('testing all-users endpoint', () => {
       userDetails
     ];
 
-    expect(res.body.users).toEqual(expectedUsers);
+    expect(res.body.users).toMatchObject(expectedUsers);
   });
 
   test('it should throw an error if no admin is found', async () => {

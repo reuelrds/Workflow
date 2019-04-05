@@ -27,16 +27,9 @@ exports.getAllUsers = async (req, res, next) => {
     if (!admin) {
       throw new Error("Admin Not Found. Invalid Request");
     }
-    await admin.populate('users', 'id firstName lastName email isManager').execPopulate();
+    await admin.populate('users').execPopulate();
     console.log(admin.users);
     let users = admin.users;
-
-    users = users.map(user => {
-      user = user.toObject();
-      delete user._id;
-      delete user.companyId;
-      return user;
-    });
 
     res.status(200).json({
       users
