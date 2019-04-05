@@ -11,13 +11,16 @@ import { TimesPipe } from './pipes/times.pipe';
 import { ErrorComponent } from './components/error/error.component';
 import { MaterialModule } from './material.module';
 import { DecodeHtmlStringsPipe } from './pipes/decode-html-strings.pipe';
+import { TableSearchComponent } from './components/table-search/table-search.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     CoreModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
   declarations: [
     NavComponent,
@@ -26,7 +29,8 @@ import { DecodeHtmlStringsPipe } from './pipes/decode-html-strings.pipe';
     StrokeColorDirective,
     TimesPipe,
     ErrorComponent,
-    DecodeHtmlStringsPipe
+    DecodeHtmlStringsPipe,
+    TableSearchComponent
   ],
   exports: [
     NavComponent,
@@ -34,7 +38,8 @@ import { DecodeHtmlStringsPipe } from './pipes/decode-html-strings.pipe';
     InvalidUnderlineDirective,
     StrokeColorDirective,
     TimesPipe,
-    DecodeHtmlStringsPipe
+    DecodeHtmlStringsPipe,
+    TableSearchComponent
   ],
   entryComponents: [
     ErrorComponent

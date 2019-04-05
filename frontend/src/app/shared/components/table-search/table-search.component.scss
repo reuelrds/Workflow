@@ -1,0 +1,24 @@
+// .toolbar {
+//   &__search {
+//     flex-grow: 1;
+//     font-size: 1.4rem;
+//     margin-right: 1rem;
+//     overflow: hidden;
+//     display: flex;
+//     justify-content: flex-end;
+//     align-items: center;
+//   }
+// }
+:host {
+  flex-grow: 1;
+  font-size: 1.4rem;
+  margin-right: 1rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.search__box {
+  width: 80%;
+}
