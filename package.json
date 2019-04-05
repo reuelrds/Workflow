@@ -19,15 +19,15 @@
   "license": "MIT",
   "homepage": "https://github.com/reuelrds/Workflow#readme",
   "scripts": {
-    "ng": "ng",
+    "ng": "cd frontend && ng",
     "start": "cd frontend && ng serve -o",
     "build": "cd frontend && ng build",
     "test": "cd frontend && ng test",
-    "lint": "cd frontend && ng serve",
+    "lint": "cd frontend && ng lint",
     "e2e": "cd frontend && ng e2e",
     "start:server": "nodemon ./backend/src/bin/server.js",
     "start:localDB": "mongod --dbpath C:/mongodb/data --directoryperdb",
-    "test:server": "jest --runInBand --watch"
+    "test:server": "jest --runInBand --silent"
   },
   "jest": {
     "verbose": true,
