@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
-import { UserManagementDialogComponent } from './../../dialogComponents/user-management-dialog/user-management-dialog.component';
+import { UserManagementDialogComponent } from './dialogs/user-management-dialog/user-management-dialog.component';
 
 @Component({
   selector: 'app-user-management',
