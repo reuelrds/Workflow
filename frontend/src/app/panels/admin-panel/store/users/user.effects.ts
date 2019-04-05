@@ -58,7 +58,16 @@ export class UserEffects {
           managerId: res.user.managerId
         }
       };
-      return [{type: UserActions.ActionTypes.UpdateUserManager, payload: updatedUser}];
+      const updatedManager: Update<User> = {
+        id: res.manager.id,
+        changes: {
+          isManager: res.manager.isManager
+        }
+      };
+      return [
+        {type: UserActions.ActionTypes.UpdateUserManager, payload: updatedUser},
+        {type: UserActions.ActionTypes.UpdateManager, payload: updatedManager}
+      ];
     })
   );
 

@@ -11,6 +11,7 @@ export enum ActionTypes {
   GetUsers = '[User API] Get Users',
   TryUpdateUserManager = '[User Management Dialog] Try Update User Manager',
   UpdateUserManager = '[User API] Update User Manager',
+  UpdateManager = '[User API] Update Manager'
 }
 
 export class AddUser implements Action {
@@ -50,6 +51,12 @@ export class UpdateUserManager implements Action {
   constructor(public payload: Update<User>) {}
 }
 
+export class UpdateManager implements Action {
+  readonly type = ActionTypes.UpdateManager;
+
+  constructor(public payload: Update<User>) {}
+}
 
 
-export type UserActions = AddUser | TryAddUser | TryGetUsers | GetUsers | TryUpdateUserManager | UpdateUserManager;
+
+export type UserActions = AddUser | TryAddUser | TryGetUsers | GetUsers | TryUpdateUserManager | UpdateUserManager | UpdateManager;

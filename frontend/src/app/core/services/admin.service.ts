@@ -80,6 +80,8 @@ export class AdminService {
       managerId = {managerId: newManagerId};
     }
     // return this.httpClient.patch<{message: string, user: User}>(`${this.BACKEND_URL}/api/user/update-manager/${userId}`, managerId);
-    return this.httpClient.patch<{message: string, user: User}>(`${this.BACKEND_URL}/api/user/update-manager/${userId}`, managerId);
+    return this.httpClient.patch<{message: string, user: User, manager: User}>(
+      `${this.BACKEND_URL}/api/user/update-manager/${userId}`, managerId
+    );
   }
 }
