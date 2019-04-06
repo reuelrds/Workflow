@@ -6,6 +6,7 @@ import { Admin } from '../../shared/models/admin';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from 'src/app/shared/models/user';
+import { Department } from 'src/app/shared/models/department';
 
 @Injectable({
   providedIn: 'root'
@@ -83,5 +84,9 @@ export class AdminService {
     return this.httpClient.patch<{message: string, user: User, manager: User}>(
       `${this.BACKEND_URL}/api/user/update-manager/${userId}`, managerId
     );
+  }
+
+  getDepartments() {
+    return this.httpClient.get<{departments: Department[]}>(`${this.BACKEND_URL}/api/department/all-departments`);
   }
 }
