@@ -1,0 +1,66 @@
+<div class="mat-elevation-z8 data-table">
+    <table
+      mat-table
+      class="full-width-table"
+      [dataSource]="dataSource"
+      matSort
+      (matSortChange)="getSortedData($event)"
+      aria-label="Departments Table"
+      #table
+    >
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox
+            (change)="$event ? masterToggle() : null"
+            [checked]="selection?.hasValue() && isAllSelected()"
+            [indeterminate]="selection?.hasValue() && !isAllSelected()"
+          >
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox
+            (click)="$event.stopPropagation()"
+            (change)="$event ? selection?.toggle(row) : null"
+            (change)="$event ? selectRow($event, row) : null"
+            [checked]="selection?.isSelected(row)"
+          >
+          </mat-checkbox>
+        </td>
+      </ng-container>
+  
+      <!-- <ng-container *ngFor="let col of displayedColumns; let i=index">
+        <ng-container matColumnDef="{{ col }}" *ngIf="col != 'select' ">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ col | titlecase }}</th>
+          <td mat-cell *matCellDef="let row" (click)="onClick(row)">{{ row[col] }}</td>
+        </ng-container>
+      </ng-container> -->
+      <ng-container matColumnDef="departmentName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Department Name</th>
+        <td mat-cell *matCellDef="let row">{{ row.departmentName }}</td>
+      </ng-container>
+      <ng-container matColumnDef="departmentHead">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Department Head</th>
+        <td mat-cell *matCellDef="let row">{{ row.departmentHeadName }}</td>
+      </ng-container>
+      <ng-container matColumnDef="totalStaff">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Staff</th>
+        <td mat-cell *matCellDef="let row">{{ row.staffCount }}</td>
+      </ng-container>
+      
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  <mat-paginator
+    class="mat-paginator-sticky"
+    #paginator
+    [length]="paginator?.length"
+    [pageIndex]="0"
+    [pageSize]="10"
+    [pageSizeOptions]="[1, 5, 8, 10, 25]"
+    showFirstLastButtons
+    (page)="pageEvent($event)"
+  >
+  </mat-paginator>
+  
