@@ -89,4 +89,11 @@ export class AdminService {
   getDepartments() {
     return this.httpClient.get<{departments: Department[]}>(`${this.BACKEND_URL}/api/department/all-departments`);
   }
+
+  addNewDepartment(newDepartmentData) {
+    return this.httpClient.post<{message: string, department: Department}>(
+        `${this.BACKEND_URL}/api/department/new-department`,
+        newDepartmentData
+    );
+  }
 }
