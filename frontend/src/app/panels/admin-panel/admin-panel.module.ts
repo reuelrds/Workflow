@@ -30,6 +30,13 @@ import {
 import {
   DepartmentDialogComponent
 } from './components/user-management/dialogs/department-dialog/department-dialog.component';
+import { DepartmentEffects } from './store/department/department.effects';
+import {
+  DepartmentDataTableComponent
+} from './components/user-management/dialogs/department-dialog/department.data-table/department-data-table.component';
+import {
+  AddDepartmentDialogComponent
+} from './components/user-management/dialogs/department-dialog/dialog/add-department-dialog/add-department-dialog.component';
 
 @NgModule({
   imports: [
@@ -39,7 +46,10 @@ import {
     ReactiveFormsModule,
     MaterialModule,
     StoreModule.forFeature('adminpanel', reducers),
-    EffectsModule.forFeature([UserEffects]),
+    EffectsModule.forFeature([
+      UserEffects,
+      DepartmentEffects
+    ]),
     CdkTableModule
   ],
   declarations: [
@@ -50,15 +60,18 @@ import {
     UserManagementDialogComponent,
     AddUserDialogComponent,
     UserManagementDataTableComponent,
-    DepartmentDialogComponent
+    DepartmentDialogComponent,
+    DepartmentDataTableComponent,
+    AddDepartmentDialogComponent
   ],
   entryComponents: [
     AppsManagementComponent,
     UserManagementComponent,
     AccountSettingsComponent,
     UserManagementDialogComponent,
+    AddUserDialogComponent,
     DepartmentDialogComponent,
-    AddUserDialogComponent
+    AddDepartmentDialogComponent
   ]
 })
 export class AdminPanelModule { }

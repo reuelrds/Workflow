@@ -5,8 +5,9 @@ export interface User {
   email: string;
   managerId?: string;
   isManager?: boolean;
-  department?: string;
-  location?: string;
+  departmentId?: string;
+  locationId?: string;
+  groupId?: string;
   permissions?: string;
   status?: boolean;
 }
