@@ -1,3 +1,54 @@
-<p>
-  add-department-dialog works!
-</p>
+<mat-toolbar mat-dialog-title class="toolbar__title">
+  Add Department
+</mat-toolbar>
+
+<mat-dialog-content>
+  <form
+    class="form add-department"
+    [formGroup]="addDepartmentForm"
+    id="addDepartmentForm"
+  >
+    <mat-form-field class="add-depratment__departmentName">
+      <input
+        matInput
+        type="text"
+        formControlName="departmentName"
+        placeholder="Department Name"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="add-depratment__departmentHead">
+      <mat-select
+        placeholder="Department Head"
+        formControlName="departmentHead"
+      >
+        <mat-option>None</mat-option>
+        <mat-option
+          *ngFor="let user of (data?.users | async)"
+          value="{{ user.id }}"
+        >
+          {{ user.firstName }} {{ user.lastName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions class="toolbar__actions">
+  <button mat-stroked-button mat-dialog-close>Cancel</button>
+  <button
+    mat-raised-button
+    [mat-dialog-close]="addDepartmentForm"
+    color="primary"
+    form="addDepartmentForm"
+  >
+    Add
+  </button>
+  <button
+    mat-stroked-button
+    color="accent"
+    form="addDepartmentForm"
+  >
+    Add
+  </button>
+</mat-dialog-actions>

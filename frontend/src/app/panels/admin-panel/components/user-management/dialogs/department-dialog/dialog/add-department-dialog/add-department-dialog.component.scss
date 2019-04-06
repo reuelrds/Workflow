@@ -1,0 +1,25 @@
+.toolbar {
+
+  &__title {
+    background-color: transparent;
+    margin: 0;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 2rem;
+
+    & > * {
+      margin: 0 .5rem;
+    }
+  }
+}
+
+.add-department {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 2rem;
+  font-size: 1.6rem;
+  margin: 1rem 0 2rem 0;
+}

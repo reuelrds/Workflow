@@ -38,11 +38,11 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Department Name</th>
         <td mat-cell *matCellDef="let row">{{ row.departmentName }}</td>
       </ng-container>
-      <ng-container matColumnDef="departmentHead">
+      <ng-container matColumnDef="departmentHeadName">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Department Head</th>
         <td mat-cell *matCellDef="let row">{{ row.departmentHeadName }}</td>
       </ng-container>
-      <ng-container matColumnDef="totalStaff">
+      <ng-container matColumnDef="staffCount">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Staff</th>
         <td mat-cell *matCellDef="let row">{{ row.staffCount }}</td>
       </ng-container>

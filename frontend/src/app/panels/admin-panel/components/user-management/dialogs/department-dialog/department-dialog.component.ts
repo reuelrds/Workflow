@@ -12,6 +12,7 @@ import * as DepartmentActions from './../../../../store/department/department.ac
 import * as fromDepartmentSelector from './../../../../store/department/department.selectors';
 import * as fromUserSelector from './../../../../store/users/user.selectors';
 import * as UserActions from '../../../../store/users/user.actions';
+import { User } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-department-dialog',
@@ -22,7 +23,8 @@ export class DepartmentDialogComponent implements OnInit {
 
   addDepartmentDialog: MatDialogRef<AddDepartmentDialogComponent>;
   dataSet: Observable<Department[]>;
-  cols: string[] = ['select', 'departmentName', 'departmentHead', 'totalStaff'];
+  users: Observable<User[]>;
+  cols: string[] = ['select', 'departmentName', 'departmentHeadName', 'staffCount'];
 
   constructor(
     private dialog: MatDialog,
@@ -32,18 +34,25 @@ export class DepartmentDialogComponent implements OnInit {
     this.store.dispatch(new DepartmentActions.TryGetDepartments());
     this.store.dispatch(new UserActions.TryGetUsers());
     // const departmentState = this.store.pipe(select(fromDepartmentSelector.getAllDepartments));
+
     const departmentState = this.store.pipe(select(fromDepartmentSelector.dep));
-    // const userState = this.store.pipe(select(fromUserSelector.getAllUsers));
+    const userState = this.store.pipe(select(fromUserSelector.getAllUsers));
+
     departmentState.subscribe(departments => this.dataSet = of(departments));
+    userState.subscribe(users => this.users = of(users));
   }
 
   openAddDepartmentDialog() {
     this.addDepartmentDialog = this.dialog.open(AddDepartmentDialogComponent, {
       width: 'max-content',
       height: 'max-content',
-      minWidth: '35vw',
+      minWidth: '20vw',
       minHeight: '20vh',
-      autoFocus: false
+      autoFocus: false,
+      data: {
+        users: this.users,
+        // department: {departmentHead: '105c1qjksjtu5r6lk'}
+      }
     });
 
     this.addDepartmentDialog.afterClosed().subscribe(result => {
