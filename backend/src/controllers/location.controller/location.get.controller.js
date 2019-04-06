@@ -33,3 +33,30 @@ exports.getLocationData = async (req, res, next) => {
     })
   }
 }
+
+/**
+ * Get a list containing all locations
+ */
+exports.getAllLocations = async (req, res, next) => {
+  try {
+    
+    // Sanity Check
+    console.log("feggg");
+    const admin = await Admin.findOne({id: req.userData.userId});
+    if(!admin) {
+      throw new Error('Admin Not Found. Invalid Request');
+    }
+
+    // find all locations and return the result back to client
+    const locations = await Location.find();
+    res.status(200).json({
+      locations 
+    });
+    
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({
+      message: error.message
+    })
+  }
+}

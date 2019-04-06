@@ -2,6 +2,34 @@ const Admin = require("../../models/admin.model");
 const Department = require('../../models/department.model');
 
 
+exports.getAllDepartments = async (req, res, next) => {
+  try {
+    
+    // Sanity Check
+    console.log("feggg");
+    const admin = await Admin.findOne({id: req.userData.userId});
+    if(!admin) {
+      throw new Error('Admin Not Found. Invalid Request');
+    }
+
+    const departments = await Department.find();
+    console.log(departments);
+
+    console.log("fefew");
+
+    res.status(200).json({
+      departments 
+    });
+    
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({
+      message: error.message
+    })
+  }
+}
+
+
 exports.getDepartmentData = async (req, res, next) => {
   try {
 

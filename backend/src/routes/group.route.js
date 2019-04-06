@@ -19,6 +19,12 @@ router.patch(
 );
 
 router.get(
+  '/all-groups',
+  CheckAuth,
+  getGroup.getAllGroups
+);
+
+router.get(
   '/:groupId',
   CheckAuth,
   getGroup.getGroupData

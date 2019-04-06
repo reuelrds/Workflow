@@ -24,10 +24,16 @@ router.patch(
 );
 
 router.get(
+  '/all-departments',
+  CheckAuth,
+  getDepartment.getAllDepartments
+);
+
+router.get(
   '/:departmentId',
   CheckAuth,
   getDepartment.getDepartmentData
-)
+);
 
 
 module.exports = router;

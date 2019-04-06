@@ -24,6 +24,12 @@ router.patch(
 );
 
 router.get(
+  '/all-locations',
+  CheckAuth,
+  getLocation.getAllLocations
+);
+
+router.get(
   '/:locationId',
   CheckAuth,
   getLocation.getLocationData
