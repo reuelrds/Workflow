@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 import { UserManagementDialogComponent } from './dialogs/user-management-dialog/user-management-dialog.component';
+import { DepartmentDialogComponent } from './dialogs/department-dialog/department-dialog.component';
 
 @Component({
   selector: 'app-user-management',
@@ -14,27 +15,32 @@ export class UserManagementComponent implements OnInit {
     {
       title: 'Users',
       body: ['Active Users', 'Inactive Users'],
-      action: ['Manage', 'Invite']
+      action: ['Manage', 'Invite'],
+      method: this.openUserManagementDialog
     },
     {
       title: 'Groups',
       body: 'You can create User-Groups, which you can use for Task assignments, Report sharing and for restricting App usage.',
-      action: 'Manage'
+      action: 'Manage',
+      // method: this.openDepartmentDialog
     },
     {
       title: 'Departments',
       body: 'You will be able to restrict Apps to specific Departments & also be able to assign Tasks to the User\'s Department Head.',
-      action: 'Manage'
+      action: 'Manage',
+      method: this.openDepartmentDialog
     },
     {
       title: 'Locations',
       body: 'You will be able to restrict Apps to specific Locations. You will also be able to assign Tasks to the User\'s Location Head.',
-      action: 'Manage'
+      action: 'Manage',
+      // method: 'openDepartmentDialog'
     },
     {
       title: 'Pending Requests For Accesss',
       body: ['You have', 'users requesting access to link to your account.'],
-      action: 'Manage'
+      action: 'Manage',
+      // method: 'openDepartmentDialog'
     },
   ];
 
@@ -47,8 +53,16 @@ export class UserManagementComponent implements OnInit {
   ngOnInit() {
   }
 
-  openUserManagementDialog() {
-    const dialogRef = this.dialog.open(UserManagementDialogComponent, {
+  openUserManagementDialog(ref) {
+    const dialogRef = ref.dialog.open(UserManagementDialogComponent, {
+      width: '80vw',
+      height: '80vh',
+      autoFocus: false
+    });
+  }
+
+  openDepartmentDialog(ref) {
+    const dialogRef = ref.dialog.open(DepartmentDialogComponent, {
       width: '80vw',
       height: '80vh',
       autoFocus: false

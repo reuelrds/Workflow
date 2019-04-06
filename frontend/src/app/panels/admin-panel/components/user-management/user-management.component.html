@@ -39,11 +39,11 @@
     </mat-card-content>
 
     <mat-card-actions *ngIf="isFirst">
-      <button mat-raised-button color="primary" (click)="openUserManagementDialog()">{{ card.action[0] }}</button>
+      <button mat-raised-button color="primary" (click)="card.method(this)">{{ card.action[0] }}</button>
       <button mat-stroked-button color="accent">{{ card.action[1] }}</button>
     </mat-card-actions>
     <mat-card-actions *ngIf="!isFirst">
-      <button mat-raised-button color="primary">{{ card.action }}</button>
+      <button mat-raised-button color="primary" (click)="card.method(this)">{{ card.action }}</button>
     </mat-card-actions>
   </mat-card>
 
