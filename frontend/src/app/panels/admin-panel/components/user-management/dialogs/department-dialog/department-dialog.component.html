@@ -1,3 +1,26 @@
-<p>
-  department-dialog works!
-</p>
+<div class="department-dialog">
+  <mat-toolbar class="toolbar" mat-dialog-title>
+    <div class="toolbar__title">
+      Departments
+    </div>
+    <app-table-search></app-table-search>
+    <div class="toolbar__actions">
+      <button
+        mat-raised-button
+        class="toolbar__actions--button"
+        (click)="openAddDepartmentDialog()"
+      >
+        Add Department
+      </button>
+    </div>
+  </mat-toolbar>
+  <mat-dialog-content class="department-dialog__data-table">
+    <app-department-data-table
+      [data]="dataSet"
+      [displayedColumns]="cols"
+    ></app-department-data-table>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    sdvvvssewe
+  </mat-dialog-actions>
+</div>
