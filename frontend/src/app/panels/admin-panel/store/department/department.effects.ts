@@ -4,7 +4,7 @@ import { Effect, Actions, ofType } from '@ngrx/effects';
 import { AdminService } from 'src/app/core/services/admin.service';
 
 import * as DepartmentActions from './department.action';
-import { switchMap, mergeMap } from 'rxjs/operators';
+import { switchMap, mergeMap, map } from 'rxjs/operators';
 
 @Injectable()
 export class DepartmentEffects {
@@ -15,6 +15,16 @@ export class DepartmentEffects {
     switchMap(() => this.adminService.getDepartments()),
     mergeMap(res => {
       return [{type: DepartmentActions.ActionTypes.GetDepartments, payload: res.departments}];
+    })
+  );
+
+  @Effect()
+  addDepartment = this.actions$.pipe(
+    ofType(DepartmentActions.ActionTypes.TryAddDepartment),
+    map((action: DepartmentActions.TryAddDepartment) => action.payload),
+    switchMap(newDepartmentData => this.adminService.addNewDepartment(newDepartmentData)),
+    mergeMap(result => {
+      return [new DepartmentActions.AddDepartment(result.department)];
     })
   );
 
