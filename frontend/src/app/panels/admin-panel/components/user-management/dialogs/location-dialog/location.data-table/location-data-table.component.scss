@@ -1,0 +1,34 @@
+:host {
+  position: relative;
+}
+
+.data-table {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.full-width-table {
+  width: 100%;
+}
+
+.mat-paginator-sticky {
+  bottom: 0px;
+  position: sticky;
+  z-index: 100;
+  width: 90%;
+  margin: 1.5rem auto;
+}
+
+.mat-column-select {
+  overflow: initial;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-evenly;
+
+  & > * {
+    font-size: 1.6rem;
+    cursor: pointer;
+  }
+}

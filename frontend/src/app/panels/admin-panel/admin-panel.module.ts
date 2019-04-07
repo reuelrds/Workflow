@@ -37,6 +37,14 @@ import {
 import {
   AddDepartmentDialogComponent
 } from './components/user-management/dialogs/department-dialog/dialog/add-department-dialog/add-department-dialog.component';
+import { LocationDialogComponent } from './components/user-management/dialogs/location-dialog/location-dialog.component';
+import {
+  LocationDataTableComponent
+} from './components/user-management/dialogs/location-dialog/location.data-table/location-data-table.component';
+import {
+   AddLocationDialogComponent
+} from './components/user-management/dialogs/location-dialog/dialog/add-location-dialog/add-location-dialog.component';
+import { LocationEffects } from './store/location/location.effects';
 
 @NgModule({
   imports: [
@@ -48,7 +56,8 @@ import {
     StoreModule.forFeature('adminpanel', reducers),
     EffectsModule.forFeature([
       UserEffects,
-      DepartmentEffects
+      DepartmentEffects,
+      LocationEffects
     ]),
     CdkTableModule
   ],
@@ -62,7 +71,10 @@ import {
     UserManagementDataTableComponent,
     DepartmentDialogComponent,
     DepartmentDataTableComponent,
-    AddDepartmentDialogComponent
+    AddDepartmentDialogComponent,
+    LocationDialogComponent,
+    LocationDataTableComponent,
+    AddLocationDialogComponent
   ],
   entryComponents: [
     AppsManagementComponent,
@@ -71,7 +83,9 @@ import {
     UserManagementDialogComponent,
     AddUserDialogComponent,
     DepartmentDialogComponent,
-    AddDepartmentDialogComponent
+    AddDepartmentDialogComponent,
+    LocationDialogComponent,
+    AddLocationDialogComponent
   ]
 })
 export class AdminPanelModule { }

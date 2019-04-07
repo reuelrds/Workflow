@@ -1,0 +1,27 @@
+<div class="location-dialog">
+  <mat-toolbar class="toolbar" mat-dialog-title>
+    <div class="toolbar__title">
+      Office Locations
+    </div>
+    <app-table-search></app-table-search>
+    <div class="toolbar__actions">
+      <button
+        mat-raised-button
+        class="toolbar__actions--button"
+        (click)="openAddLocationDialog()"
+      >
+        Add Office Location
+      </button>
+    </div>
+  </mat-toolbar>
+  <mat-dialog-content class="location-dialog__data-table">
+    <app-location-data-table
+      [data]="dataSet"
+      [displayedColumns]="cols"
+      (openDialog)="onOpenDialog($event)"
+    ></app-location-data-table>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    sdvvvssewe
+  </mat-dialog-actions>
+</div>

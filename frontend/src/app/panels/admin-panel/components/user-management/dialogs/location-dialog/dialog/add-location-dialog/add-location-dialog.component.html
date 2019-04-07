@@ -1,0 +1,47 @@
+<mat-toolbar mat-dialog-title class="toolbar__title">
+  Add New Office Location
+</mat-toolbar>
+
+<mat-dialog-content>
+  <form
+    class="form add-location"
+    [formGroup]="addLocationForm"
+    id="addLocationForm"
+  >
+    <mat-form-field class="add-depratment__locationName">
+      <input
+        matInput
+        type="text"
+        formControlName="locationName"
+        placeholder="Location Name"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="add-depratment__locationHead">
+      <mat-select
+        placeholder="Location Head"
+        formControlName="locationHead"
+      >
+        <mat-option>None</mat-option>
+        <mat-option
+          *ngFor="let user of (data?.users | async)"
+          value="{{ user.id }}"
+        >
+          {{ user.firstName }} {{ user.lastName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions class="toolbar__actions">
+  <button mat-stroked-button mat-dialog-close>Cancel</button>
+  <button
+    mat-raised-button
+    [mat-dialog-close]="addLocationForm"
+    color="primary"
+    form="addLocationForm"
+  >
+    Add
+  </button>
+</mat-dialog-actions>

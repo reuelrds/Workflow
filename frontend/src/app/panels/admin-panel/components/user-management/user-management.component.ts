@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 
 import { UserManagementDialogComponent } from './dialogs/user-management-dialog/user-management-dialog.component';
 import { DepartmentDialogComponent } from './dialogs/department-dialog/department-dialog.component';
+import { LocationDialogComponent } from './dialogs/location-dialog/location-dialog.component';
 
 @Component({
   selector: 'app-user-management',
@@ -34,7 +35,7 @@ export class UserManagementComponent implements OnInit {
       title: 'Locations',
       body: 'You will be able to restrict Apps to specific Locations. You will also be able to assign Tasks to the User\'s Location Head.',
       action: 'Manage',
-      // method: 'openDepartmentDialog'
+      method: this.openLocationDialog
     },
     {
       title: 'Pending Requests For Accesss',
@@ -63,6 +64,14 @@ export class UserManagementComponent implements OnInit {
 
   openDepartmentDialog(ref) {
     const dialogRef = ref.dialog.open(DepartmentDialogComponent, {
+      width: '80vw',
+      height: '80vh',
+      autoFocus: false
+    });
+  }
+
+  openLocationDialog(ref) {
+    const dialogRef = ref.dialog.open(LocationDialogComponent, {
       width: '80vw',
       height: '80vh',
       autoFocus: false

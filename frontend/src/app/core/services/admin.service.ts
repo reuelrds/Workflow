@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from 'src/app/shared/models/user';
 import { Department } from 'src/app/shared/models/department';
+import { Location } from 'src/app/shared/models/location';
 
 @Injectable({
   providedIn: 'root'
@@ -125,6 +126,38 @@ export class AdminService {
           updatedDetails.department.id
         }/updateDepartmentHead`,
         { newDepartmentHead: updatedDetails.department.departmentHead }
+      );
+    }
+  }
+
+  getLocations() {
+    return this.httpClient.get<{ locations: Location[] }>(
+      `${this.BACKEND_URL}/api/location/all-locations`
+    );
+  }
+
+  addNewLocation(newLocationData) {
+    return this.httpClient.post<{ message: string; location: Location }>(
+      `${this.BACKEND_URL}/api/location/new-location`,
+      newLocationData
+    );
+  }
+
+  updateLocation(updatedDetails) {
+    console.log(updatedDetails);
+    if (updatedDetails.updateField === 'name') {
+      return this.httpClient.patch<{ message: string; location: Location }>(
+        `${this.BACKEND_URL}/api/location/${
+          updatedDetails.location.id
+        }/updateLocationName`,
+        { newLocationName: updatedDetails.location.locationName }
+      );
+    } else if (updatedDetails.updateField === 'head') {
+      return this.httpClient.patch<{ message: string; location: Location }>(
+        `${this.BACKEND_URL}/api/location/${
+          updatedDetails.location.id
+        }/updateLocationHead`,
+        { newLocationHead: updatedDetails.location.locationHead }
       );
     }
   }
