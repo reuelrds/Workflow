@@ -2,7 +2,7 @@
 * @package IcoFont 
 * @version 1.0.1 
 * @author IcoFont https://icofont.com 
-* @copyright Copyright (c) 2015 - 2018 IcoFont 
+* @copyright Copyright (c) 2015 - 2019 IcoFont 
 * @license - https://icofont.com/license/
 */
 
@@ -61,6 +61,16 @@ url("./fonts/icofont.woff") format("woff");
 .icofont-close-line:before
 {
   content: "\eee1";
+}
+
+.icofont-ui-delete:before
+{
+  content: "\ec53";
+}
+
+.icofont-edit-alt:before
+{
+  content: "\eded";
 }
 
 .icofont-xs
