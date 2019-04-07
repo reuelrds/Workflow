@@ -20,15 +20,21 @@ import { User } from 'src/app/shared/models/user';
   styleUrls: ['./department-dialog.component.scss']
 })
 export class DepartmentDialogComponent implements OnInit {
-
   addDepartmentDialog: MatDialogRef<AddDepartmentDialogComponent>;
   dataSet: Observable<Department[]>;
   users: Observable<User[]>;
-  cols: string[] = ['select', 'departmentName', 'departmentHeadName', 'staffCount'];
+  cols: string[] = [
+    'select',
+    'departmentName',
+    'departmentHeadName',
+    'staffCount',
+    'icons'
+  ];
 
   constructor(
     private dialog: MatDialog,
-    private store: Store<fromAdminPanel.State>) { }
+    private store: Store<fromAdminPanel.State>
+  ) {}
 
   ngOnInit() {
     this.store.dispatch(new DepartmentActions.TryGetDepartments());
@@ -38,11 +44,11 @@ export class DepartmentDialogComponent implements OnInit {
     const departmentState = this.store.pipe(select(fromDepartmentSelector.dep));
     const userState = this.store.pipe(select(fromUserSelector.getAllUsers));
 
-    departmentState.subscribe(departments => this.dataSet = of(departments));
-    userState.subscribe(users => this.users = of(users));
+    departmentState.subscribe(departments => (this.dataSet = of(departments)));
+    userState.subscribe(users => (this.users = of(users)));
   }
 
-  openAddDepartmentDialog() {
+  openAddDepartmentDialog(department) {
     this.addDepartmentDialog = this.dialog.open(AddDepartmentDialogComponent, {
       width: 'max-content',
       height: 'max-content',
@@ -51,18 +57,36 @@ export class DepartmentDialogComponent implements OnInit {
       autoFocus: false,
       data: {
         users: this.users,
-        // department: {departmentHead: '105c1qjksjtu5r6lk'}
+        department
       }
     });
 
     this.addDepartmentDialog.afterClosed().subscribe(result => {
-      if (result) {
+      if (result && !department) {
         this.store.dispatch({
           type: DepartmentActions.ActionTypes.TryAddDepartment,
           payload: result.value
         });
+      } else if (result && department) {
+        const updatedDetails = {
+          department: result.value,
+          updateField: ''
+        };
+
+        updatedDetails.updateField =
+          result.value.departmentName === department.departmentName
+            ? 'head'
+            : 'name';
+        console.log(updatedDetails);
+        this.store.dispatch(new DepartmentActions.TryUpdateDepartment(updatedDetails));
       }
     });
   }
 
+  onOpenDialog(event) {
+    console.log(event);
+    if (event.dialogType === 'editDialog') {
+      this.openAddDepartmentDialog(event.department);
+    }
+  }
 }

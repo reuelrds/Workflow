@@ -18,6 +18,7 @@
     <app-department-data-table
       [data]="dataSet"
       [displayedColumns]="cols"
+      (openDialog)="onOpenDialog($event)"
     ></app-department-data-table>
   </mat-dialog-content>
   <mat-dialog-actions>
