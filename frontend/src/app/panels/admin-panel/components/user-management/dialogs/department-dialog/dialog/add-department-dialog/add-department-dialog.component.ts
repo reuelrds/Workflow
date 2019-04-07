@@ -33,9 +33,4 @@ export class AddDepartmentDialogComponent implements OnInit {
       id: departmentId
     });
   }
-
-  onSubmitAddDepartment() {
-    console.log(this.addDepartmentForm);
-  }
-
 }

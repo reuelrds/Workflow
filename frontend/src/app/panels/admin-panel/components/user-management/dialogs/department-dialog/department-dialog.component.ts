@@ -48,7 +48,7 @@ export class DepartmentDialogComponent implements OnInit {
     userState.subscribe(users => (this.users = of(users)));
   }
 
-  openAddDepartmentDialog(department) {
+  openAddDepartmentDialog(department = null) {
     this.addDepartmentDialog = this.dialog.open(AddDepartmentDialogComponent, {
       width: 'max-content',
       height: 'max-content',
