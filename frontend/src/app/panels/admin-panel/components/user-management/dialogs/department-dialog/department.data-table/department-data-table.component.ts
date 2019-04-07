@@ -1,4 +1,12 @@
-import { Component, OnInit, ViewChild, Input, OnChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Input,
+  OnChanges,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { MatPaginator, MatSort, MatTable } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
@@ -11,7 +19,6 @@ import { Department } from 'src/app/shared/models/department';
   styleUrls: ['./department-data-table.component.scss']
 })
 export class DepartmentDataTableComponent implements OnInit, OnChanges {
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
@@ -28,7 +35,7 @@ export class DepartmentDataTableComponent implements OnInit, OnChanges {
    */
   @Input() displayedColumns: string[];
 
-  // @Output() updateManager = new EventEmitter();
+  @Output() openDialog = new EventEmitter();
 
   dataSource: Observable<Department[]>;
 
@@ -38,35 +45,44 @@ export class DepartmentDataTableComponent implements OnInit, OnChanges {
   constructor() {}
 
   ngOnInit() {
-    this.selection = new SelectionModel<any>(this.allowMultiSelect, this.initialSelection);
+    this.selection = new SelectionModel<any>(
+      this.allowMultiSelect,
+      this.initialSelection
+    );
     // console.log(this.data);
   }
 
   ngOnChanges() {
     this.dataSource = this.data;
     console.log(this.dataSource);
-    this.data.subscribe(result => this.paginator.length = result.length);
+    this.data.subscribe(result => (this.paginator.length = result.length));
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     let numRows: number;
-    this.dataSource.subscribe(result => numRows = result.length);
+    this.dataSource.subscribe(result => (numRows = result.length));
     let test;
-    this.dataSource.subscribe(result => test = JSON.stringify(result.sort()) === JSON.stringify(this.selection.selected.sort()));
-    return (numSelected === numRows) && test;
+    this.dataSource.subscribe(
+      result =>
+        (test =
+          JSON.stringify(result.sort()) ===
+          JSON.stringify(this.selection.selected.sort()))
+    );
+    return numSelected === numRows && test;
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.subscribe(result => result.forEach(row => this.selection.select(row)));
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.dataSource.subscribe(result =>
+          result.forEach(row => this.selection.select(row))
+        );
   }
 
   getSortedData(event) {
-
     if (!event.active || event.direction === '') {
       return;
     }
@@ -91,9 +107,7 @@ export class DepartmentDataTableComponent implements OnInit, OnChanges {
 
   pageEvent(event) {
     console.log(event);
-    this.dataSource = this.data.pipe(
-      map(result => this.getPagedData(result))
-    );
+    this.dataSource = this.data.pipe(map(result => this.getPagedData(result)));
     this.isAllSelected();
   }
 
@@ -121,5 +135,14 @@ export class DepartmentDataTableComponent implements OnInit, OnChanges {
   onSelectChange(departmentId, event) {
     console.log(event, departmentId);
     // this.updateManager.emit({userId, managerId: event.value});
+  }
+
+  openEditDialog(row) {
+    const { staffCount, ...department } = row;
+
+    this.openDialog.emit({
+      dialogType: 'editDialog',
+      department
+    });
   }
 }
