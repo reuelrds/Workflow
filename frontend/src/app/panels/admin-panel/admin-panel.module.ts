@@ -45,6 +45,12 @@ import {
    AddLocationDialogComponent
 } from './components/user-management/dialogs/location-dialog/dialog/add-location-dialog/add-location-dialog.component';
 import { LocationEffects } from './store/location/location.effects';
+import { GroupEffects } from './store/group/group.effects';
+import { GroupDialogComponent } from './components/user-management/dialogs/group-dialog/group-dialog.component';
+import { GroupDataTableComponent } from './components/user-management/dialogs/group-dialog/group.data-table/group-data-table.component';
+import {
+  AddGroupDialogComponent
+} from './components/user-management/dialogs/group-dialog/dialog/add-group-dialog/add-group-dialog.component';
 
 @NgModule({
   imports: [
@@ -57,7 +63,8 @@ import { LocationEffects } from './store/location/location.effects';
     EffectsModule.forFeature([
       UserEffects,
       DepartmentEffects,
-      LocationEffects
+      LocationEffects,
+      GroupEffects
     ]),
     CdkTableModule
   ],
@@ -74,7 +81,10 @@ import { LocationEffects } from './store/location/location.effects';
     AddDepartmentDialogComponent,
     LocationDialogComponent,
     LocationDataTableComponent,
-    AddLocationDialogComponent
+    AddLocationDialogComponent,
+    GroupDialogComponent,
+    GroupDataTableComponent,
+    AddGroupDialogComponent
   ],
   entryComponents: [
     AppsManagementComponent,
@@ -85,7 +95,9 @@ import { LocationEffects } from './store/location/location.effects';
     DepartmentDialogComponent,
     AddDepartmentDialogComponent,
     LocationDialogComponent,
-    AddLocationDialogComponent
+    AddLocationDialogComponent,
+    GroupDialogComponent,
+    AddGroupDialogComponent
   ]
 })
 export class AdminPanelModule { }

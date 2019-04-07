@@ -6,12 +6,14 @@ import * as fromAdmin from './admin/admin.reducers';
 import * as fromUser from './users/user.reducers';
 import * as fromDepartment from './department/department.reducers';
 import * as fromLocation from './location/location.reducers';
+import * as fromGroup from './group/group.reducers';
 
 export interface AdminPanelState {
   admin: fromAdmin.State;
   user: fromUser.State;
   department: fromDepartment.State;
   location: fromLocation.State;
+  group: fromGroup.State;
 }
 
 export interface State extends fromApp.AppState {
@@ -22,5 +24,6 @@ export const reducers: ActionReducerMap<AdminPanelState> = {
   admin: fromAdmin.adminReducer,
   user: fromUser.userReducer,
   department: fromDepartment.departmentReducer,
-  location: fromLocation.locationReducer
+  location: fromLocation.locationReducer,
+  group: fromGroup.groupReducer
 };

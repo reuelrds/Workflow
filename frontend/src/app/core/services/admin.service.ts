@@ -8,6 +8,7 @@ import { tap } from 'rxjs/operators';
 import { User } from 'src/app/shared/models/user';
 import { Department } from 'src/app/shared/models/department';
 import { Location } from 'src/app/shared/models/location';
+import { Group } from 'src/app/shared/models/group';
 
 @Injectable({
   providedIn: 'root'
@@ -160,5 +161,27 @@ export class AdminService {
         { newLocationHead: updatedDetails.location.locationHead }
       );
     }
+  }
+
+  getGroups() {
+    return this.httpClient.get<{ groups: Group[] }>(
+      `${this.BACKEND_URL}/api/group/all-groups`
+    );
+  }
+
+  addNewGroup(newGroupData) {
+    return this.httpClient.post<{ message: string; group: Group }>(
+      `${this.BACKEND_URL}/api/group/new-group`,
+      newGroupData
+    );
+  }
+
+  updateGroup(updatedDetails) {
+    return this.httpClient.patch<{ message: string; group: Group }>(
+      `${this.BACKEND_URL}/api/group/${
+        updatedDetails.group.id
+      }/updateGroupName`,
+      { newGroupName: updatedDetails.group.groupName }
+    );
   }
 }

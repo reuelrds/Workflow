@@ -1,0 +1,27 @@
+<div class="group-dialog">
+  <mat-toolbar class="toolbar" mat-dialog-title>
+    <div class="toolbar__title">
+      Groups
+    </div>
+    <app-table-search></app-table-search>
+    <div class="toolbar__actions">
+      <button
+        mat-raised-button
+        class="toolbar__actions--button"
+        (click)="openAddGroupDialog()"
+      >
+        Add Group
+      </button>
+    </div>
+  </mat-toolbar>
+  <mat-dialog-content class="group-dialog__data-table">
+    <app-group-data-table
+      [data]="dataSet"
+      [displayedColumns]="cols"
+      (openDialog)="onOpenDialog($event)"
+    ></app-group-data-table>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    sdvvvssewe
+  </mat-dialog-actions>
+</div>

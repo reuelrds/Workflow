@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material';
 import { UserManagementDialogComponent } from './dialogs/user-management-dialog/user-management-dialog.component';
 import { DepartmentDialogComponent } from './dialogs/department-dialog/department-dialog.component';
 import { LocationDialogComponent } from './dialogs/location-dialog/location-dialog.component';
+import { GroupDialogComponent } from './dialogs/group-dialog/group-dialog.component';
 
 @Component({
   selector: 'app-user-management',
@@ -23,7 +24,7 @@ export class UserManagementComponent implements OnInit {
       title: 'Groups',
       body: 'You can create User-Groups, which you can use for Task assignments, Report sharing and for restricting App usage.',
       action: 'Manage',
-      // method: this.openDepartmentDialog
+      method: this.openGroupDialog
     },
     {
       title: 'Departments',
@@ -72,6 +73,14 @@ export class UserManagementComponent implements OnInit {
 
   openLocationDialog(ref) {
     const dialogRef = ref.dialog.open(LocationDialogComponent, {
+      width: '80vw',
+      height: '80vh',
+      autoFocus: false
+    });
+  }
+
+  openGroupDialog(ref) {
+    const dialogRef = ref.dialog.open(GroupDialogComponent, {
       width: '80vw',
       height: '80vh',
       autoFocus: false

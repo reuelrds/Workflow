@@ -1,0 +1,35 @@
+@import './../../../../../../shared//styles/abstracts/variables';
+
+.toolbar {
+  background-color: transparent;
+  display: flex;
+
+  &__title {
+    flex-grow: 2;
+    font-size: 2.5rem;
+  }
+
+  &__actions {
+    margin: 0 1rem;
+    
+    & > * {
+      font-size: 1.4rem;
+      margin: 0 .5rem;
+    }
+
+    &--button {
+      padding: 0 2rem;
+      background-color: $color-grey-light-1;
+    }
+  }
+}
+
+.group-dialog {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+
+  &__data-table {
+    flex-grow: 1;
+  }
+}

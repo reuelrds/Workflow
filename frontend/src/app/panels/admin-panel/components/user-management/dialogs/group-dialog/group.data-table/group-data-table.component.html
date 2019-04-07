@@ -1,0 +1,74 @@
+<div class="mat-elevation-z8 data-table">
+  <table
+    mat-table
+    class="full-width-table"
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="getSortedData($event)"
+    aria-label="Groups Table"
+    #table
+  >
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox
+          (change)="$event ? masterToggle() : null"
+          [checked]="selection?.hasValue() && isAllSelected()"
+          [indeterminate]="selection?.hasValue() && !isAllSelected()"
+        >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection?.toggle(row) : null"
+          (change)="$event ? selectRow($event, row) : null"
+          [checked]="selection?.isSelected(row)"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="groupName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Group Name</th>
+      <td mat-cell *matCellDef="let row">{{ row.groupName }}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="staffCount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Staff</th>
+      <td mat-cell *matCellDef="let row">{{ row.staffCount }}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="icons">
+      <th mat-header-cell *matHeaderCellDef mat-header></th>
+      <td mat-cell *matCellDef="let row">
+        <div class="icons">
+          <i
+            class="icons__edit"
+            class="icofont-edit-alt"
+            (click)="openEditDialog(row)"
+          ></i>
+          <i
+            class="icons__delete"
+            class="icofont-ui-delete"
+            (click)="openDeleteDialog(row)"
+          ></i>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  
+  </table>
+</div>
+<mat-paginator
+  class="mat-paginator-sticky"
+  #paginator
+  [length]="paginator?.length"
+  [pageIndex]="0"
+  [pageSize]="10"
+  [pageSizeOptions]="[1, 5, 8, 10, 25]"
+  showFirstLastButtons
+  (page)="pageEvent($event)"
+>
+</mat-paginator>
