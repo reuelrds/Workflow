@@ -22,6 +22,9 @@ export function departmentReducer(
     case DepartmentActions.ActionTypes.GetDepartments:
       return adapter.addMany(action.payload, state);
 
+    case DepartmentActions.ActionTypes.UpdateDepartment:
+      return adapter.updateOne(action.payload, state);
+
     default:
       return state;
   }
