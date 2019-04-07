@@ -22,3 +22,13 @@
 .mat-column-select {
   overflow: initial;
 }
+
+.icons {
+  display: flex;
+  justify-content: space-evenly;
+
+  & > * {
+    font-size: 1.6rem;
+    cursor: pointer;
+  }
+}
