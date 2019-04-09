@@ -20,13 +20,17 @@ import { MatProgressSpinnerModule,
    MatSortModule,
    MatTableModule,
    MatPaginatorModule,
-   MatCheckboxModule} from '@angular/material';
+   MatCheckboxModule,
+   MatAutocompleteModule,
+   MatChipsModule} from '@angular/material';
 
 @NgModule({
   exports: [
+    MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatChipsModule,
     MatDatepickerModule,
     MatDialogModule,
     MatDividerModule,

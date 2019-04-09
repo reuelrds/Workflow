@@ -50,9 +50,9 @@ export class GroupDialogComponent implements OnInit {
   openAddGroupDialog(group = null) {
     this.addGroupDialog = this.dialog.open(AddGroupDialogComponent, {
       width: 'max-content',
-      height: 'max-content',
+      height: '45vh',
       minWidth: '20vw',
-      minHeight: '20vh',
+      // minHeight: '20vh',
       autoFocus: false,
       data: {
         users: this.users,

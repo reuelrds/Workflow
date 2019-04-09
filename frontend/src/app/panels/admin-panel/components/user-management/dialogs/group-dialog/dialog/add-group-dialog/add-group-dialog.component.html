@@ -1,12 +1,13 @@
-<mat-toolbar mat-dialog-title class="toolbar__title">
-  Add a New Group
-</mat-toolbar>
+<div class="add-group-dialog">
+  <mat-toolbar mat-dialog-title class="toolbar__title">
+    Add a New Group
+  </mat-toolbar>
 
-<mat-dialog-content>
   <form
     class="form add-group"
     [formGroup]="addGroupForm"
     id="addGroupForm"
+    (submit)="onSubmit()"
   >
     <mat-form-field class="add-depratment__groupName">
       <input
@@ -17,17 +18,67 @@
       />
     </mat-form-field>
 
+    <mat-form-field>
+      <input
+        type="text"
+        matInput
+        #memberInput
+        placeholder="Group Members"
+        formControlName="member"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        [matChipInputAddOnBlur]="true"
+        (matChipInputTokenEnd)="add($event)"
+      />
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        autoActiveFirstOption
+        [displayWith]="displayFn"
+        (optionSelected)="selected($event)"
+      >
+        <mat-option *ngFor="let user of (filteredUsers | async)" [value]="user">
+          {{ user.firstName }} {{ user.lastName }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
   </form>
-</mat-dialog-content>
+  <div class="chips__title" *ngIf="groupMembers.length > 0">
+    Group Members: 
+  </div>
+  <mat-dialog-content class="chips">
+    <mat-chip-list class="mat-chip-list-stacked" #chipList>
+      <mat-chip
+        *ngFor="let member of groupMembers"
+        color="accent"
+        [selectable]="true"
+        [removable]="true"
+        (removed)="remove(member)"
+        class="chip"
+      >
+        <div class="chip__text">
+          {{ member.firstName }} {{ member.lastName }}
+        </div>
+        <i
+          class="icofont-close-circled chip__remove"
+          matChipRemove
+          *ngIf="true"
+        ></i>
+      </mat-chip>
+    </mat-chip-list>
+  </mat-dialog-content>
 
-<mat-dialog-actions class="toolbar__actions">
-  <button mat-stroked-button mat-dialog-close>Cancel</button>
-  <button
-    mat-raised-button
-    [mat-dialog-close]="addGroupForm"
-    color="primary"
-    form="addGroupForm"
-  >
-    Add
-  </button>
-</mat-dialog-actions>
+  <mat-dialog-actions class="toolbar__actions">
+    <button mat-stroked-button mat-dialog-close>Cancel</button>
+    <button
+      mat-raised-button
+      [mat-dialog-close]="addGroupForm"
+      color="primary"
+      form="addGroupForm"
+    >
+      Add
+    </button>
+    <button mat-stroked-button color="accent" form="addGroupForm">
+      Add
+    </button>
+  </mat-dialog-actions>
+</div>
