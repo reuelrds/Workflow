@@ -24,7 +24,7 @@ const config = {
   production: {
     ...defaults,
     mongodb: {
-      url: 'mongodb+srv://reuelrds:7w56L7IkTOmHiQLC@cluster0-jc3gm.mongodb.net/admin'
+      url: 'mongodb+srv://reuelrds:7w56L7IkTOmHiQLC@cluster0-jc3gm.mongodb.net/workflow-prod'
     },
     uploadsFolder: "./files/uploads"
   },
