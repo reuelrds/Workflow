@@ -20,14 +20,14 @@ export const getGroupEntitiesState = createSelector(
 export const {
   selectIds: getGroupIds,
   selectEntities: getGroupEntities,
-  selectAll: getAllGroups,
+  selectAll,
   selectTotal: getTotalGroups
 } = fromGroup.adapter.getSelectors(getGroupEntitiesState);
 
 const allUsers = (state: fromAdminPanel.AdminPanelState) => state.user;
 
-export const dep = createSelector(
-  getAllGroups,
+export const getAllGroups = createSelector(
+  selectAll,
   fromUserSelector.getUserEntities,
   (groupEntities: Group[], userEntities) => {
     if (groupEntities && userEntities) {
