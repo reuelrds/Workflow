@@ -11,7 +11,13 @@ export enum ActionTypes {
   GetUsers = '[User API] Get Users',
   TryUpdateUserManager = '[User Management Dialog] Try Update User Manager',
   UpdateUserManager = '[User API] Update User Manager',
-  UpdateManager = '[User API] Update Manager'
+  UpdateManager = '[User API] Update Manager',
+  TryUpdateUsersGroup = '[Group Dialog | User Dialog] Try Update User\'s Group',
+  UpdateUsersGroup = '[User API] Update User\'s Group',
+  TryUpdateUsersDepartment = '[User Dialog] Try Update User\'s Department',
+  UpdateUsersDepartment = '[User API] Update User\'s Department',
+  TryUpdateUsersLocation = '[User Dialog] Try Update User\'s Location',
+  UpdateUsersLocation = '[User API] Update User\'s Location',
 }
 
 export class AddUser implements Action {
@@ -57,6 +63,53 @@ export class UpdateManager implements Action {
   constructor(public payload: Update<User>) {}
 }
 
+export class TryUpdateUsersGroup implements Action {
+  readonly type = ActionTypes.TryUpdateUsersGroup;
+
+  constructor(public payload: {userId: string, groupId: string}) {}
+}
+
+export class UpdateUsersGroup implements Action {
+  readonly type = ActionTypes.UpdateUsersGroup;
+
+  constructor(public payload: Update<User>) {}
+}
+export class TryUpdateUsersDepartment implements Action {
+  readonly type = ActionTypes.TryUpdateUsersDepartment;
+
+  constructor(public payload: {userId: string, departmentId: string}) {}
+}
+
+export class UpdateUsersDepartment implements Action {
+  readonly type = ActionTypes.UpdateUsersDepartment;
+
+  constructor(public payload: Update<User>) {}
+}
+export class TryUpdateUsersLocation implements Action {
+  readonly type = ActionTypes.TryUpdateUsersLocation;
+
+  constructor(public payload: {userId: string, locationId: string}) {}
+}
+
+export class UpdateUsersLocation implements Action {
+  readonly type = ActionTypes.UpdateUsersLocation;
+
+  constructor(public payload: Update<User>) {}
+}
 
 
-export type UserActions = AddUser | TryAddUser | TryGetUsers | GetUsers | TryUpdateUserManager | UpdateUserManager | UpdateManager;
+
+export type UserActions =
+  | AddUser
+  | TryAddUser
+  | TryGetUsers
+  | GetUsers
+  | TryUpdateUserManager
+  | UpdateUserManager
+  | UpdateManager
+  | TryUpdateUsersGroup
+  | UpdateUsersGroup
+  | TryUpdateUsersDepartment
+  | UpdateUsersDepartment
+  | TryUpdateUsersLocation
+  | UpdateUsersLocation;

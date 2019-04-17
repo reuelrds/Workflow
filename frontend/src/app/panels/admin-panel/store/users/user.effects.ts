@@ -71,6 +71,75 @@ export class UserEffects {
     })
   );
 
+  @Effect()
+  updateUsersGroup = this.actions$.pipe(
+    ofType(UserActions.ActionTypes.TryUpdateUsersGroup),
+    map((action: UserActions.TryUpdateUsersGroup) => {
+      console.log(action.payload);
+      return action.payload;
+    }),
+    mergeMap((payload) => {
+      return this.adminService.updateUserGroup(payload.userId, payload.groupId);
+    }),
+    mergeMap(res => {
+      const updatedUser: Update<User> = {
+        id: res.user.id,
+        changes: {
+          groupId: res.user.groupId
+        }
+      };
+      return [
+        {type: UserActions.ActionTypes.UpdateUsersGroup, payload: updatedUser}
+      ];
+    })
+  );
+
+  @Effect()
+  updateUsersDepartment = this.actions$.pipe(
+    ofType(UserActions.ActionTypes.TryUpdateUsersDepartment),
+    map((action: UserActions.TryUpdateUsersDepartment) => {
+      console.log(action.payload);
+      return action.payload;
+    }),
+    mergeMap((payload) => {
+      return this.adminService.updateUserDepartment(payload.userId, payload.departmentId);
+    }),
+    mergeMap(res => {
+      const updatedUser: Update<User> = {
+        id: res.user.id,
+        changes: {
+          departmentId: res.user.departmentId
+        }
+      };
+      return [
+        {type: UserActions.ActionTypes.UpdateUsersDepartment, payload: updatedUser}
+      ];
+    })
+  );
+
+  @Effect()
+  updateUsersLocation = this.actions$.pipe(
+    ofType(UserActions.ActionTypes.TryUpdateUsersLocation),
+    map((action: UserActions.TryUpdateUsersLocation) => {
+      console.log(action.payload);
+      return action.payload;
+    }),
+    mergeMap((payload) => {
+      return this.adminService.updateUserLocation(payload.userId, payload.locationId);
+    }),
+    mergeMap(res => {
+      const updatedUser: Update<User> = {
+        id: res.user.id,
+        changes: {
+          locationId: res.user.locationId
+        }
+      };
+      return [
+        {type: UserActions.ActionTypes.UpdateUsersLocation, payload: updatedUser}
+      ];
+    })
+  );
+
   constructor(
     private actions$: Actions,
     private adminService: AdminService

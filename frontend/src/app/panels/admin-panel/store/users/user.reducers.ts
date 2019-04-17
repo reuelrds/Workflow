@@ -41,6 +41,15 @@ export function userReducer(state = initialState, action: UserActions.UserAction
     case UserActions.ActionTypes.UpdateManager: {
       return adapter.updateOne(action.payload, state);
     }
+    case UserActions.ActionTypes.UpdateUsersGroup: {
+      return adapter.updateOne(action.payload, state);
+    }
+    case UserActions.ActionTypes.UpdateUsersDepartment: {
+      return adapter.updateOne(action.payload, state);
+    }
+    case UserActions.ActionTypes.UpdateUsersLocation: {
+      return adapter.updateOne(action.payload, state);
+    }
     default: {
       return state;
     }
