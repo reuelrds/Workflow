@@ -38,7 +38,7 @@ describe('Testing Admin Auth Route', () => {
       expect(res.body).toMatchObject({
         message: 'User Created!',
         usertype: 'Admin',
-        expiresIn: 3600,
+        expiresIn: 86400,
         userId: admin.id
       });
 

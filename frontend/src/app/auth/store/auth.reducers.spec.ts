@@ -35,7 +35,7 @@ describe('Testing Auth Reducers', () => {
   it('should reset state on Logout action', () => {
     const state = {
       token: 'testToken',
-      tokenExpiry: 3600,
+      tokenExpiry: 86400,
       isAuthenticated: true
     };
     expect(fromAuth.authReducer(
@@ -61,11 +61,11 @@ describe('Testing Auth Reducers', () => {
     expect(fromAuth.authReducer(
       initialState, {
         type: AuthActions.ActionTypes.SetTokenExpiry,
-        payload: 3600
+        payload: 86400
       }
     )).toEqual({
       ...initialState,
-      tokenExpiry: 3600
+      tokenExpiry: 86400
     });
   });
 

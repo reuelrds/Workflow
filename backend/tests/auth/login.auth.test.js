@@ -27,7 +27,7 @@ describe('Testing Login', () => {
 
     expect(res.body).toMatchObject({
       usertype: 'Admin',
-      expiresIn: 3600,
+      expiresIn: 86400,
       userId: dbSetup.adminOne.id
     });
     expect(res.body.jwtToken).toBeDefined();
@@ -41,7 +41,7 @@ describe('Testing Login', () => {
 
     expect(res.body).toMatchObject({
       usertype: 'User',
-      expiresIn: 3600,
+      expiresIn: 86400,
       userId: dbSetup.userOne.id
     });
     expect(res.body.jwtToken).toBeDefined();

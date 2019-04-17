@@ -63,7 +63,7 @@ exports.createUser = async (req, res, next) => {
       email: req.body.email,
       userId: result.id
     }, config.jwtsecret, {
-      expiresIn: "1h"
+      expiresIn: "24h"
     });
 
     // Saving successfull
@@ -71,7 +71,7 @@ exports.createUser = async (req, res, next) => {
       message: "User Created!",
       jwtToken,
       usertype: 'User',
-      expiresIn: 3600,
+      expiresIn: 86400,
       userId: result.id
     });     
   } catch(err) {
@@ -106,7 +106,7 @@ exports.createAdmin = async (req, res, next) => {
       email: req.body.email,
       userId: result.id
     }, config.jwtsecret, {
-      expiresIn: "1h"
+      expiresIn: "24h"
     });
 
     // Saving successfull
@@ -114,7 +114,7 @@ exports.createAdmin = async (req, res, next) => {
       message: "User Created!",
       jwtToken,
       usertype: 'Admin',
-      expiresIn: 3600,
+      expiresIn: 86400,
       userId: result.id
     });
 
@@ -163,13 +163,13 @@ exports.loginUser = async (req, res, next) => {
           email: fetchedUser.email,
           userId: fetchedUser.id
       }, config.jwtsecret, {
-          expiresIn: "1h"
+          expiresIn: "24h"
       });
 
       res.status(200).json({
         jwtToken,
         usertype: isAdmin ? 'Admin': 'User',
-        expiresIn: 3600,
+        expiresIn: 86400,
         userId: fetchedUser.id
       });
     } else {

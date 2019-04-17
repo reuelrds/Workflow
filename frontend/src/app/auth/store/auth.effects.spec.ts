@@ -29,7 +29,7 @@ class AuthServiceStub {
   createAdmin(params) {
     return of({
       jwtToken: 'testToken',
-      expiresIn: 3600,
+      expiresIn: 86400,
       userId: 'Admin01',
       usertype: 'Admin'
     });
@@ -38,7 +38,7 @@ class AuthServiceStub {
   createUser(params) {
     return of({
       jwtToken: 'testToken',
-      expiresIn: 3600,
+      expiresIn: 86400,
       userId: 'User01',
       usertype: 'User'
     });
@@ -48,13 +48,13 @@ class AuthServiceStub {
     return (this.userType === 'Admin') ?
       of({
         jwtToken: 'testToken',
-        expiresIn: 3600,
+        expiresIn: 86400,
         userId: 'Admin01',
         usertype: 'Admin'
       }) :
       of({
         jwtToken: 'testToken',
-        expiresIn: 3600,
+        expiresIn: 86400,
         userId: 'User01',
         usertype: 'User'
       });
@@ -111,7 +111,7 @@ describe('Testing Auth Effects', () => {
       },
       {
         type: AuthActions.ActionTypes.SetTokenExpiry,
-        payload: 3600
+        payload: 86400
       },
       {
         type: AdminActions.ActionTypes.SetAdminId,
@@ -159,7 +159,7 @@ describe('Testing Auth Effects', () => {
       },
       {
         type: AuthActions.ActionTypes.SetTokenExpiry,
-        payload: 3600
+        payload: 86400
       },
       {
         type: UserActions.ActionTypes.SetUserId,
@@ -203,7 +203,7 @@ describe('Testing Auth Effects', () => {
       },
       {
         type: AuthActions.ActionTypes.SetTokenExpiry,
-        payload: 3600
+        payload: 86400
       },
       { type: AdminActions.ActionTypes.SetAdminId,
         payload: 'Admin01'
@@ -248,7 +248,7 @@ describe('Testing Auth Effects', () => {
       },
       {
         type: AuthActions.ActionTypes.SetTokenExpiry,
-        payload: 3600
+        payload: 86400
       },
       { type: UserActions.ActionTypes.SetUserId,
         payload: 'User01'

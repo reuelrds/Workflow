@@ -17,13 +17,13 @@ import { environment } from '../../../environments/environment';
 const initialState: fromAuth.State = {
   isAuthenticated: true,
   token: 'testToken',
-  tokenExpiry: 3600
+  tokenExpiry: 86400
 };
 
 const testData = {
   jwtToken: 'testToken',
   usertype: 'Admin',
-  expiresIn: 3600,
+  expiresIn: 86400,
   userId: 'Admin01'
 };
 
@@ -62,7 +62,7 @@ describe('Testing Auth Service', () => {
     spyOn(authService, 'saveLocalData');
 
     authService.saveLoginData(testData);
-    tick(3600 * 1000);
+    tick(86400 * 1000);
 
     expect(store.dispatch).toHaveBeenCalledWith({
       type: AuthActions.ActionTypes.Logout
@@ -116,7 +116,7 @@ describe('Testing Auth Service', () => {
       expect(store.dispatch).toHaveBeenCalledWith({type: AuthActions.ActionTypes.SetToken, payload: 'testToken'});
       expect(store.dispatch).toHaveBeenCalledWith({type: AuthActions.ActionTypes.Login});
 
-      tick(3600 * 1000);
+      tick(86400 * 1000);
 
       expect(store.dispatch).toHaveBeenCalledWith({
         type: AuthActions.ActionTypes.Logout

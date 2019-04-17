@@ -44,7 +44,7 @@ describe('Testing User Auth Route', () => {
       expect(res.body).toMatchObject({
         message: 'User Created!',
         usertype: 'User',
-        expiresIn: 3600,
+        expiresIn: 86400,
         userId: user.id
       });
 
@@ -77,7 +77,7 @@ describe('Testing User Auth Route', () => {
       expect(res.body).toMatchObject({
         message: 'User Created!',
         usertype: 'User',
-        expiresIn: 3600,
+        expiresIn: 86400,
         userId: user.id
       });
 
