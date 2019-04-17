@@ -181,4 +181,43 @@ export class AdminService {
       { newGroupName: updatedDetails.group.groupName }
     );
   }
+
+  updateUserGroup(userId, newGroupId) {
+    console.log(userId);
+    let groupId;
+    if (!newGroupId) {
+      groupId = { groupId: undefined };
+    } else {
+      groupId = { groupId: newGroupId };
+    }
+    return this.httpClient.patch<{ message: string; user: User; manager: User; }>(
+      `${this.BACKEND_URL}/api/user/update-group/${userId}`, groupId
+      );
+  }
+
+  updateUserDepartment(userId, newDepartmentId) {
+    console.log(userId);
+    let departmentId;
+    if (!newDepartmentId) {
+      departmentId = { departmentId: undefined };
+    } else {
+      departmentId = { departmentId: newDepartmentId };
+    }
+    return this.httpClient.patch<{ message: string; user: User; manager: User; }>(
+      `${this.BACKEND_URL}/api/user/update-department/${userId}`, departmentId
+      );
+  }
+
+  updateUserLocation(userId, newLocationId) {
+    console.log(userId);
+    let locationId;
+    if (!newLocationId) {
+      locationId = { locationId: undefined };
+    } else {
+      locationId = { locationId: newLocationId };
+    }
+    return this.httpClient.patch<{ message: string; user: User; manager: User; }>(
+      `${this.BACKEND_URL}/api/user/update-location/${userId}`, locationId
+      );
+  }
 }
