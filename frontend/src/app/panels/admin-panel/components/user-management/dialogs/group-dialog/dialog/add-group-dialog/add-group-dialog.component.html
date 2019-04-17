@@ -71,14 +71,14 @@
     <button mat-stroked-button mat-dialog-close>Cancel</button>
     <button
       mat-raised-button
-      [mat-dialog-close]="addGroupForm"
+      [mat-dialog-close]="{form: addGroupForm, members: groupMembers}"
       color="primary"
       form="addGroupForm"
     >
       Add
     </button>
-    <button mat-stroked-button color="accent" form="addGroupForm">
+    <!-- <button mat-stroked-button color="accent" form="addGroupForm">
       Add
-    </button>
+    </button> -->
   </mat-dialog-actions>
 </div>
