@@ -16,6 +16,8 @@ import { Observable, } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { User } from 'src/app/shared/models/user';
+import { Group } from 'src/app/shared/models/group';
+import { Department } from 'src/app/shared/models/department';
 
 @Component({
   selector: 'app-user-management-data-table',
@@ -33,7 +35,10 @@ export class UserManagementDataTableComponent implements OnInit, OnChanges {
   /**
    * Input Data to be diaplayed
    */
-  @Input() data: Observable<User[]>;
+  @Input() users: Observable<User[]>;
+  @Input() groups: Observable<Group[]>;
+  @Input() departments: Observable<Department[]>;
+  @Input() locations: Observable<Location[]>;
 
   /**
    * Columns displayed in the table. Columns IDs can be added, removed, or reordered.
@@ -41,6 +46,9 @@ export class UserManagementDataTableComponent implements OnInit, OnChanges {
   @Input() displayedColumns: string[];
 
   @Output() updateManager = new EventEmitter();
+  @Output() updateGroup = new EventEmitter();
+  @Output() updateDepartment = new EventEmitter();
+  @Output() updateLocation = new EventEmitter();
 
   dataSource: Observable<User[]>;
 
@@ -55,9 +63,9 @@ export class UserManagementDataTableComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.dataSource = this.data;
-    console.log(this.dataSource);
-    this.data.subscribe(result => this.paginator.length = result.length);
+    this.dataSource = this.users;
+    console.log(this.groups);
+    this.users.subscribe(result => this.paginator.length = result.length);
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -83,7 +91,7 @@ export class UserManagementDataTableComponent implements OnInit, OnChanges {
       return;
     }
 
-    this.dataSource = this.data.pipe(
+    this.dataSource = this.users.pipe(
       map(result => {
         result = result.sort((a, b) => {
           const isAsc = event.direction === 'asc';
@@ -103,7 +111,7 @@ export class UserManagementDataTableComponent implements OnInit, OnChanges {
 
   pageEvent(event) {
     console.log(event);
-    this.dataSource = this.data.pipe(
+    this.dataSource = this.users.pipe(
       map(result => this.getPagedData(result))
     );
     this.isAllSelected();
@@ -130,8 +138,23 @@ export class UserManagementDataTableComponent implements OnInit, OnChanges {
     console.log(row);
   }
 
-  onSelectChange(userId, event) {
+  onUpdateManager(userId, event) {
     console.log(event, userId);
     this.updateManager.emit({userId, managerId: event.value});
+  }
+
+  onUpdateGroup(userId, event) {
+    console.log(event, userId);
+    this.updateGroup.emit({userId, groupId: event.value});
+  }
+
+  onUpdateDepartment(userId, event) {
+    console.log(event, userId);
+    this.updateDepartment.emit({userId, departmentId: event.value});
+  }
+
+  onUpdateLocation(userId, event) {
+    console.log(event, userId);
+    this.updateLocation.emit({userId, locationId: event.value});
   }
 }

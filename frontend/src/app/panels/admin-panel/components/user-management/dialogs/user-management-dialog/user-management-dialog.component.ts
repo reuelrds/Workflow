@@ -9,10 +9,16 @@ import * as fromAdminPanel from '../../../../store/admin-panel.reducers';
 import * as UserActions from '../../../../store/users/user.actions';
 import * as fromUserSelector from '../../../../store/users/user.selectors';
 // import { selectAllUsers } from '../../store/users/user.selectors';
-import { of, Observable } from 'rxjs';
+import { of, Observable, merge, zip, combineLatest } from 'rxjs';
 import { User } from 'src/app/shared/models/user';
 import { map } from 'rxjs/operators';
 
+import * as fromGroupSelector from './../../../../store/group/group.selectors';
+import * as fromDepartmentSelector from './../../../../store/department/department.selectors';
+import * as fromLocationSelector from './../../../../store/location/location.selectors';
+import { Group } from 'src/app/shared/models/group';
+import { Department } from 'src/app/shared/models/department';
+import { Location } from 'src/app/shared/models/location';
 
 @Component({
   selector: 'app-user-management-dialog',
@@ -25,17 +31,30 @@ export class UserManagementDialogComponent implements OnInit {
 
   showUserType = 'allUsers';
   addUserDialog: MatDialogRef<AddUserDialogComponent>;
-  users;
-  dataSet: Observable<User[]>;
+  users: Observable<User[]>;
+  groups: Observable<Group[]>;
+  departments: Observable<Department[]>;
+  locations: Observable<Location[]>;
+  // dataSet: Observable<any>;
   // cols: string[] = ['select', 'firstName', 'lastName', 'email', 'department', 'location', 'manager', 'Permissions', 'Status'];
-  cols: string[] = ['select', 'firstName', 'lastName', 'email', 'manager'];
+  cols: string[] = ['select', 'firstName', 'lastName', 'email', 'manager', 'department', 'location', 'group'];
 
   constructor(private dialog: MatDialog,  private store: Store<fromAdminPanel.State>) { }
 
   ngOnInit() {
-    this.store.dispatch({type: UserActions.ActionTypes.TryGetUsers});
-    this.users = this.store.pipe(select(fromUserSelector.getAllUsers));
-    this.users.subscribe(res => this.dataSet = of(res));
+    // this.store.dispatch({type: UserActions.ActionTypes.TryGetUsers});
+
+    const userState = this.store.pipe(select(fromUserSelector.getAllUsers));
+    const groupState = this.store.pipe(select(fromGroupSelector.getAllGroups));
+    const departmentState = this.store.pipe(select(fromDepartmentSelector.getAllDepartments));
+    const locationState = this.store.pipe(select(fromLocationSelector.getAllLocations));
+
+    userState.subscribe((users: User[]) => this.users = of(users));
+    groupState.subscribe((groups: Group[]) => this.groups = of(groups));
+    departmentState.subscribe((departments: Department[]) => this.departments = of(departments));
+    locationState.subscribe((locations: Location[]) => this.locations = of(locations));
+
+    // this.users.subscribe(res => this.dataSet = of(res));
 
   }
 
@@ -59,6 +78,21 @@ export class UserManagementDialogComponent implements OnInit {
   onUpdateManager(event) {
     console.log(event);
     this.store.dispatch({type: UserActions.ActionTypes.TryUpdateUserManager, payload: {userId: event.userId, managerId: event.managerId}});
+  }
+
+  onUpdateGroup(event) {
+    console.log(event);
+    this.store.dispatch(new UserActions.TryUpdateUsersGroup({userId: event.userId, groupId: event.groupId}));
+  }
+
+  onUpdateDepartment(event) {
+    console.log(event);
+    this.store.dispatch(new UserActions.TryUpdateUsersDepartment({userId: event.userId, departmentId: event.departmentId}));
+  }
+
+  onUpdateLocation(event) {
+    console.log(event);
+    this.store.dispatch(new UserActions.TryUpdateUsersLocation({userId: event.userId, locationId: event.locationId}));
   }
 
 }
