@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { Store } from '@ngrx/store';
 
 import { UserManagementDialogComponent } from './dialogs/user-management-dialog/user-management-dialog.component';
 import { DepartmentDialogComponent } from './dialogs/department-dialog/department-dialog.component';
 import { LocationDialogComponent } from './dialogs/location-dialog/location-dialog.component';
 import { GroupDialogComponent } from './dialogs/group-dialog/group-dialog.component';
+
+import * as fromAdminPanel from './../../store/admin-panel.reducers';
+import * as UserActions from './../../store/users/user.actions';
+import * as GroupActions from './../../store/group/group.action';
+import * as DepartmentActions from './../../store/department/department.action';
+import * as LocationActions from './../../store/location/location.action';
 
 @Component({
   selector: 'app-user-management',
@@ -50,9 +57,16 @@ export class UserManagementComponent implements OnInit {
   activeUsers = 15;
   inactiveUsers = 200;
 
-  constructor(private dialog: MatDialog) { }
+  constructor(
+    private dialog: MatDialog,
+    private store: Store<fromAdminPanel.State>
+  ) { }
 
   ngOnInit() {
+    this.store.dispatch(new UserActions.TryGetUsers());
+    this.store.dispatch(new GroupActions.TryGetGroups());
+    this.store.dispatch(new DepartmentActions.TryGetDepartments());
+    this.store.dispatch(new LocationActions.TryGetLocations());
   }
 
   openUserManagementDialog(ref) {
