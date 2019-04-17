@@ -37,8 +37,8 @@ export class LocationDialogComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.store.dispatch(new LocationActions.TryGetLocations());
-    this.store.dispatch(new UserActions.TryGetUsers());
+    // this.store.dispatch(new LocationActions.TryGetLocations());
+    // this.store.dispatch(new UserActions.TryGetUsers());
     // const locationState = this.store.pipe(select(fromLocationSelector.getAllLocations));
 
     const locationState = this.store.pipe(select(fromLocationSelector.dep));

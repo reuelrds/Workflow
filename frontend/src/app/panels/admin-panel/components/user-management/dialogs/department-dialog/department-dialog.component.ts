@@ -37,8 +37,8 @@ export class DepartmentDialogComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.store.dispatch(new DepartmentActions.TryGetDepartments());
-    this.store.dispatch(new UserActions.TryGetUsers());
+    // this.store.dispatch(new DepartmentActions.TryGetDepartments());
+    // this.store.dispatch(new UserActions.TryGetUsers());
     // const departmentState = this.store.pipe(select(fromDepartmentSelector.getAllDepartments));
 
     const departmentState = this.store.pipe(select(fromDepartmentSelector.dep));
