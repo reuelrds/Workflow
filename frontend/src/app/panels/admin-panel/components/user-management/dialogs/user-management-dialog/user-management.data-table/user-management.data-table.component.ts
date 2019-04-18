@@ -63,8 +63,9 @@ export class UserManagementDataTableComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.dataSource = this.users;
-    console.log(this.groups);
+    this.dataSource = this.users.pipe(
+      map(result => this.getPagedData(result))
+    );
     this.users.subscribe(result => this.paginator.length = result.length);
   }
 
@@ -119,7 +120,7 @@ export class UserManagementDataTableComponent implements OnInit, OnChanges {
 
   getPagedData(data) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
-    const endIndex = this.paginator.pageIndex + this.paginator.pageSize;
+    const endIndex = startIndex + this.paginator.pageSize;
     return data.slice(startIndex, endIndex);
   }
 

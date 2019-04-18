@@ -53,7 +53,7 @@
         <mat-form-field>
         <mat-select value="{{ row.managerId }}" (selectionChange)="onUpdateManager(row.id, $event)">
           <mat-option>None</mat-option>
-          <mat-option *ngFor="let user of dataSource|async" value="{{ user.id }}">
+          <mat-option *ngFor="let user of users|async" value="{{ user.id }}">
             {{user.firstName}} {{ user.lastName }}
           </mat-option>
         </mat-select>

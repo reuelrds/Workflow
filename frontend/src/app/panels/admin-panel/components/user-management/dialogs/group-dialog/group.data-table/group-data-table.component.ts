@@ -53,7 +53,8 @@ export class GroupDataTableComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.dataSource = this.data;
+    // this.dataSource = this.data;
+    this.dataSource = this.data.pipe(map(result => this.getPagedData(result)));
     console.log(this.dataSource);
     this.data.subscribe(result => (this.paginator.length = result.length));
   }
@@ -113,7 +114,7 @@ export class GroupDataTableComponent implements OnInit, OnChanges {
 
   getPagedData(data) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
-    const endIndex = this.paginator.pageIndex + this.paginator.pageSize;
+    const endIndex = startIndex + this.paginator.pageSize;
     return data.slice(startIndex, endIndex);
   }
 
