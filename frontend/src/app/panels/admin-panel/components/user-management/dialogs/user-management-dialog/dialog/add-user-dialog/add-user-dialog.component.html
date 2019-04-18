@@ -17,7 +17,7 @@
             <mat-select placeholder="{{ item.placeholder }}" formControlName="{{ item.name }}">
               <mat-option>None</mat-option>
               <ng-container *ngFor="let value of item.values">
-                <mat-option value="{{ value.name }}">{{ value.name }}</mat-option>
+                <mat-option value="{{ value.id }}">{{ value.name }}</mat-option>
               </ng-container>
             </mat-select>
           </div>
