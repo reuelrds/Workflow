@@ -18,6 +18,8 @@ exports.updateManager = async (req, res, next) => {
       ? req.body.managerId
       : user.managerId;
 
+    const prevManagerId = user.managerId;
+
     user.managerId = req.body.managerId;
     await user.save();
     const userPrev = user;
@@ -27,6 +29,20 @@ exports.updateManager = async (req, res, next) => {
       throw new Error('User not updated');
     }
 
+    let prevManager;
+    if(prevManagerId) {
+      user = await User.findOne({id: prevManagerId});
+      await user.populate({
+        path: 'staff'
+      }).execPopulate();
+      
+      user.isManager = user.staff.length === 0
+      ? false
+      : true;
+      await user.save();
+      prevManager = user;
+    }
+    
     user = await User.findOne({id: managerId});
     await user.populate({
       path: 'staff'
@@ -40,7 +56,8 @@ exports.updateManager = async (req, res, next) => {
     res.status(200).json({
       message: "Successfully Updated User's new Manager",
       user: userPrev,
-      manager: user
+      manager: user,
+      prevManager
     });
 
 
