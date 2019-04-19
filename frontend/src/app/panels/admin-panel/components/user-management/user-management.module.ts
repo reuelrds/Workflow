@@ -9,6 +9,7 @@ import { UserManagementDialogModule } from './dialogs/user-management-dialog/use
 import { GroupModule } from './dialogs/group-dialog/group.module';
 import { DepartmentModule } from './dialogs/department-dialog/department.module';
 import { LocationModule } from './dialogs/location-dialog/location.module';
+import { UserManagementComponent } from './user-management.component';
 
 
 
@@ -23,6 +24,12 @@ import { LocationModule } from './dialogs/location-dialog/location.module';
     GroupModule,
     DepartmentModule,
     LocationModule
+  ],
+  declarations: [
+    UserManagementComponent
+  ],
+  entryComponents: [
+    UserManagementComponent
   ]
 })
 
