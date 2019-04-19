@@ -18,10 +18,8 @@ import { reducers } from './store/admin-panel.reducers';
 
 import { CdkTableModule } from '@angular/cdk/table';
 
-import { DepartmentModule } from './components/user-management/dialogs/department-dialog/department.module';
-import { GroupModule } from './components/user-management/dialogs/group-dialog/group.module';
-import { LocationModule } from './components/user-management/dialogs/location-dialog/location.module';
 import { UserManagementDialogModule } from './components/user-management/dialogs/user-management-dialog/user-management-dialog.module';
+import { AppManagementModule } from './components/apps-management/app-management.module';
 
 @NgModule({
   imports: [
@@ -32,19 +30,17 @@ import { UserManagementDialogModule } from './components/user-management/dialogs
     MaterialModule,
     StoreModule.forFeature('adminpanel', reducers),
     CdkTableModule,
-    DepartmentModule,
-    GroupModule,
-    LocationModule,
-    UserManagementDialogModule
+    UserManagementDialogModule,
+    AppManagementModule
   ],
   declarations: [
     AdminPanelComponent,
     UserManagementComponent,
     AccountSettingsComponent,
-    AppsManagementComponent
+    // AppsManagementComponent
   ],
   entryComponents: [
-    AppsManagementComponent,
+    // AppsManagementComponent,
     UserManagementComponent,
     AccountSettingsComponent
   ]
