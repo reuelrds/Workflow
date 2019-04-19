@@ -1,6 +1,6 @@
 
 import * as fromUser from './user.reducers';
-import * as fromAdminPanel from './../admin-panel.reducers';
+import * as fromAdminPanel from '../../../../../store/admin-panel.reducers';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 export const getUserState = createFeatureSelector<fromAdminPanel.State, fromAdminPanel.AdminPanelState>('adminpanel');
 

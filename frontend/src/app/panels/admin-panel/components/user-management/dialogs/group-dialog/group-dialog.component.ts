@@ -8,10 +8,10 @@ import { AddGroupDialogComponent } from './dialog/add-group-dialog/add-group-dia
 import { Group } from 'src/app/shared/models/group';
 
 import * as fromAdminPanel from '../../../../store/admin-panel.reducers';
-import * as GroupActions from './../../../../store/group/group.action';
-import * as fromGroupSelector from './../../../../store/group/group.selectors';
-import * as fromUserSelector from './../../../../store/users/user.selectors';
-import * as UserActions from '../../../../store/users/user.actions';
+import * as GroupActions from './store/group.action';
+import * as fromGroupSelector from './store/group.selectors';
+import * as fromUserSelector from '../user-management-dialog/store/user.selectors';
+import * as UserActions from '../user-management-dialog/store/user.actions';
 import { User } from 'src/app/shared/models/user';
 import { Actions, ofType } from '@ngrx/effects';
 import { map, tap } from 'rxjs/operators';

@@ -8,10 +8,10 @@ import { AddLocationDialogComponent } from './dialog/add-location-dialog/add-loc
 import { Location } from 'src/app/shared/models/location';
 
 import * as fromAdminPanel from '../../../../store/admin-panel.reducers';
-import * as LocationActions from './../../../../store/location/location.action';
-import * as fromLocationSelector from './../../../../store/location/location.selectors';
-import * as fromUserSelector from './../../../../store/users/user.selectors';
-import * as UserActions from '../../../../store/users/user.actions';
+import * as LocationActions from './store/location.action';
+import * as fromLocationSelector from './store/location.selectors';
+import * as fromUserSelector from '../user-management-dialog/store/user.selectors';
+import * as UserActions from '../user-management-dialog/store/user.actions';
 import { User } from 'src/app/shared/models/user';
 
 @Component({

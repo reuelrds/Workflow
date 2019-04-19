@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { map, switchMap, mergeMap } from 'rxjs/operators';
 
-import { AdminService } from '../../../../core/services/admin.service';
+import { AdminService } from '../../../../../../../core/services/admin.service';
 
 import * as UserActions from './user.actions';
 import { Action } from '@ngrx/store';

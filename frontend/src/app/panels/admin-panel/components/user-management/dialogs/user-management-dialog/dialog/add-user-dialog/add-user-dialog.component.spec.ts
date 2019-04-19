@@ -7,8 +7,8 @@ import { MaterialModule } from './../../../../../../../../shared/material.module
 import { AddUserDialogComponent } from './add-user-dialog.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import * as fromUser from '../../../../../../store/users/user.reducers';
-import * as UserAtions from '../../../../../../store/users/user.actions';
+import * as fromUser from '../../store/user.reducers';
+import * as UserAtions from '../../store/user.actions';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable, of } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';

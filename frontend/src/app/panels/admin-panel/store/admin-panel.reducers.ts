@@ -3,10 +3,10 @@ import { ActionReducerMap } from '@ngrx/store';
 
 import * as fromApp from '../../../store/app.reducers';
 import * as fromAdmin from './admin/admin.reducers';
-import * as fromUser from './users/user.reducers';
-import * as fromDepartment from './department/department.reducers';
-import * as fromLocation from './location/location.reducers';
-import * as fromGroup from './group/group.reducers';
+import * as fromUser from '../components/user-management/dialogs/user-management-dialog/store/user.reducers';
+import * as fromDepartment from '../components/user-management/dialogs/department-dialog/store/department.reducers';
+import * as fromLocation from '../components/user-management/dialogs/location-dialog/store/location.reducers';
+import * as fromGroup from '../components/user-management/dialogs/group-dialog/store/group.reducers';
 
 export interface AdminPanelState {
   admin: fromAdmin.State;

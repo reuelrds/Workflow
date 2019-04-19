@@ -8,10 +8,10 @@ import { LocationDialogComponent } from './dialogs/location-dialog/location-dial
 import { GroupDialogComponent } from './dialogs/group-dialog/group-dialog.component';
 
 import * as fromAdminPanel from './../../store/admin-panel.reducers';
-import * as UserActions from './../../store/users/user.actions';
-import * as GroupActions from './../../store/group/group.action';
-import * as DepartmentActions from './../../store/department/department.action';
-import * as LocationActions from './../../store/location/location.action';
+import * as UserActions from './dialogs/user-management-dialog/store/user.actions';
+import * as GroupActions from './dialogs/group-dialog/store/group.action';
+import * as DepartmentActions from './dialogs/department-dialog/store/department.action';
+import * as LocationActions from './dialogs/location-dialog/store/location.action';
 
 @Component({
   selector: 'app-user-management',

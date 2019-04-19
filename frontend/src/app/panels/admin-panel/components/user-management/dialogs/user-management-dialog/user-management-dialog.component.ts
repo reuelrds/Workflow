@@ -6,16 +6,16 @@ import { Store, select } from '@ngrx/store';
 import { AddUserDialogComponent } from './dialog/add-user-dialog/add-user-dialog.component';
 
 import * as fromAdminPanel from '../../../../store/admin-panel.reducers';
-import * as UserActions from '../../../../store/users/user.actions';
-import * as fromUserSelector from '../../../../store/users/user.selectors';
+import * as UserActions from './store/user.actions';
+import * as fromUserSelector from './store/user.selectors';
 // import { selectAllUsers } from '../../store/users/user.selectors';
 import { of, Observable, merge, zip, combineLatest } from 'rxjs';
 import { User } from 'src/app/shared/models/user';
 import { map } from 'rxjs/operators';
 
-import * as fromGroupSelector from './../../../../store/group/group.selectors';
-import * as fromDepartmentSelector from './../../../../store/department/department.selectors';
-import * as fromLocationSelector from './../../../../store/location/location.selectors';
+import * as fromGroupSelector from '../group-dialog/store/group.selectors';
+import * as fromDepartmentSelector from '../department-dialog/store/department.selectors';
+import * as fromLocationSelector from '../location-dialog/store/location.selectors';
 import { Group } from 'src/app/shared/models/group';
 import { Department } from 'src/app/shared/models/department';
 import { Location } from 'src/app/shared/models/location';

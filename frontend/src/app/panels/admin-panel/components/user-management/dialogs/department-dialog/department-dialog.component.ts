@@ -8,10 +8,10 @@ import { AddDepartmentDialogComponent } from './dialog/add-department-dialog/add
 import { Department } from 'src/app/shared/models/department';
 
 import * as fromAdminPanel from '../../../../store/admin-panel.reducers';
-import * as DepartmentActions from './../../../../store/department/department.action';
-import * as fromDepartmentSelector from './../../../../store/department/department.selectors';
-import * as fromUserSelector from './../../../../store/users/user.selectors';
-import * as UserActions from '../../../../store/users/user.actions';
+import * as DepartmentActions from './store/department.action';
+import * as fromDepartmentSelector from './store/department.selectors';
+import * as fromUserSelector from '../user-management-dialog/store/user.selectors';
+import * as UserActions from '../user-management-dialog/store/user.actions';
 import { User } from 'src/app/shared/models/user';
 
 @Component({

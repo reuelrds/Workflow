@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import * as fromAdminPanel from '../../../../../../store/admin-panel.reducers';
-import * as UserActions from '../../../../../../store/users/user.actions';
+import * as UserActions from '../../store/user.actions';
 
 import { Department } from 'src/app/shared/models/department';
 import { Group } from 'src/app/shared/models/group';

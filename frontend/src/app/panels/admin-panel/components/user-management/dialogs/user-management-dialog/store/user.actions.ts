@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
+import { Update } from '@ngrx/entity';
 
 import { User } from 'src/app/shared/models/user';
-import { Update } from '@ngrx/entity';
 
 export enum ActionTypes {
 

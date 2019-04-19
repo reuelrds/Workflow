@@ -1,8 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as fromGroup from './group.reducers';
-import * as fromAdminPanel from './../admin-panel.reducers';
-import * as fromUserSelector from './../users/user.selectors';
+import * as fromAdminPanel from '../../../../../store/admin-panel.reducers';
+import * as fromUserSelector from '../../user-management-dialog/store/user.selectors';
 import { Group } from 'src/app/shared/models/group';
 import { User } from 'src/app/shared/models/user';
 
