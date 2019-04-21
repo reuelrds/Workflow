@@ -1,0 +1,33 @@
+<div class="template">
+  <mat-dialog-content class="template__body">
+    <div>
+      <div class="template__body--title heading__tertiary" mat-dialog-title>
+        {{ templateTitle }}
+      </div>
+    </div>
+    <mat-horizontal-stepper
+      [linear]="false"
+      #stepper
+      class="template__body--stepper"
+    >
+      <mat-step [stepControl]="firstFormGroup" label="Form Details">
+        <app-fill-form-details [appDetails]="app.details" (newAppDetails)="onUpdateDetaails($event)"></app-fill-form-details>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup" label="Design Form">
+        <app-design-form></app-design-form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup" label="Define Workflow">
+        <app-define-workflow></app-define-workflow>
+      </mat-step>
+      <mat-step label="Change Permissions">
+        <app-change-permissions></app-change-permissions>
+      </mat-step>
+      <mat-step label="Publish App">
+        <app-publish-app></app-publish-app>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    fweq
+  </mat-dialog-actions>
+</div>

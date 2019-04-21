@@ -1,0 +1,14 @@
+.template {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+
+  &__body {
+    flex-grow: 1;
+
+    &--stepper {
+      position: relative;
+    }
+  }
+
+}
