@@ -1,0 +1,45 @@
+<form class="form add-details" [formGroup]="addDetails" (submit)="onSubmit()">
+  <mat-form-field>
+    <input
+      matInput
+      type="text"
+      formControlName="name"
+      placeholder="Name of the App"
+      required
+    />
+    <mat-error *ngIf="addDetails.controls.name.hasError('required')">
+      App Name is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      type="text"
+      formControlName="shortDescription"
+      placeholder="Short Description"
+      required
+    />
+    <mat-error
+      *ngIf="addDetails.controls.shortDescription.hasError('required')"
+    >
+      A Short Description is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <textarea
+      matInput
+      cdkTextareaAutosize
+      formControlName="longDescription"
+      placeholder="Long Description"
+    ></textarea>
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    class="add-details__submit-btn"
+    matStepperNext
+  >
+    Next
+  </button>
+</form>

@@ -1,0 +1,12 @@
+.add-details {
+  width: 25%;
+  margin: 5rem auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+
+  &__submit-btn {
+    padding: 0 3.5rem;
+    width: max-content;
+  }
+}
