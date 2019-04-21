@@ -39,6 +39,7 @@ body {
     box-sizing: border-box;
     min-height: 100vh;
     min-width: 100vw;
+    font-size: $font-size;
 }
 
 ::selection {
@@ -47,7 +48,13 @@ body {
 }
 
 ::-webkit-scrollbar { 
-    display: none; 
+    // display: none; 
+    height: .5rem;
+    width: .5rem;
+
+    &-thumb {
+        background: rgba(0,0,0,.26);
+    }
 }
 
 .container {
