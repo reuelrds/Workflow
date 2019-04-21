@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { CreateAppComponent } from './dialogs/create-app/create-app.component';
 
 @Component({
   selector: 'app-apps-management',
@@ -25,7 +27,9 @@ export class AppsManagementComponent implements OnInit {
     {category: 'Human Resources', data: 'Management Works!!'},
   ];
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit() {
   }
@@ -35,4 +39,10 @@ export class AppsManagementComponent implements OnInit {
     this.selectedCategory = event.target.innerText;
   }
 
+  onCreateNewApp() {
+    this.dialog.open(CreateAppComponent, {
+      width: '80vw',
+      height: '80vh'
+    });
+  }
 }

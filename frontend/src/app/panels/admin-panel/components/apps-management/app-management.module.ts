@@ -6,6 +6,8 @@ import { MaterialModule } from 'src/app/shared/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { AppsManagementComponent } from './apps-management.component';
+import { CreateAppModule } from './dialogs/create-app/create-app.module';
+
 
 
 @NgModule({
@@ -13,7 +15,8 @@ import { AppsManagementComponent } from './apps-management.component';
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
-    SharedModule
+    SharedModule,
+    CreateAppModule
   ],
   declarations: [
     AppsManagementComponent
