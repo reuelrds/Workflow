@@ -10,6 +10,9 @@
     <mat-error *ngIf="addDetails.controls.name.hasError('required')">
       App Name is <strong>required</strong>
     </mat-error>
+    <mat-error *ngIf="addDetails.controls.name.hasError('maxlength')">
+      The App name should contain maximum {{ maxAppNameLength }} characters
+    </mat-error>
   </mat-form-field>
   <mat-form-field>
     <input
@@ -28,9 +31,9 @@
   <mat-form-field>
     <textarea
       matInput
-      cdkTextareaAutosize
       formControlName="longDescription"
       placeholder="Long Description"
+      class="add-details__longDesc"
     ></textarea>
   </mat-form-field>
   <button

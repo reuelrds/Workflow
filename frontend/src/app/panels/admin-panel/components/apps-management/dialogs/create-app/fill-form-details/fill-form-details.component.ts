@@ -12,6 +12,7 @@ export class FillFormDetailsComponent implements OnInit {
   @Output() newAppDetails = new EventEmitter();
 
   addDetails: FormGroup;
+  maxAppNameLength = 15;
 
   constructor(
     private formBuilder: FormBuilder
@@ -20,7 +21,7 @@ export class FillFormDetailsComponent implements OnInit {
   ngOnInit() {
 
     this.addDetails = this.formBuilder.group({
-      name: [this.appDetails.name, Validators.required],
+      name: [this.appDetails.name, [Validators.required, Validators.maxLength(this.maxAppNameLength)]],
       shortDescription: [this.appDetails.shortDescription, Validators.required],
       longDescription: this.appDetails.longDescription
     });
@@ -28,9 +29,9 @@ export class FillFormDetailsComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.addDetails);
     if (this.addDetails.valid) {
       this.newAppDetails.emit(this.addDetails.value);
-      console.log(this.addDetails);
     }
   }
 }
