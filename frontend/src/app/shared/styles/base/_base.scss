@@ -48,9 +48,8 @@ body {
 }
 
 ::-webkit-scrollbar { 
-    // display: none; 
-    height: .5rem;
-    width: .5rem;
+    height: .4rem;
+    width: .4rem;
 
     &-thumb {
         background: rgba(0,0,0,.26);
