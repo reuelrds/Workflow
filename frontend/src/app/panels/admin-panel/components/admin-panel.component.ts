@@ -24,6 +24,8 @@ export class AdminPanelComponent implements OnInit {
           {label: 'App Management', component: AppsManagementComponent},
           {label: 'Account Settings', component: AccountSettingsComponent}];
 
+  isDark = false;
+
   constructor(private adminService: AdminService, private authService: AuthService, private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
@@ -41,4 +43,8 @@ export class AdminPanelComponent implements OnInit {
     // this.authService.logout();
   }
 
+  setTheme(event) {
+    // console.log(event);
+    // this.isDark = event;
+  }
 }

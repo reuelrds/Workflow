@@ -18,6 +18,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 
 import { AppManagementModule } from './components/apps-management/app-management.module';
 import { UserManagementModule } from './components/user-management/user-management.module';
+import { ThemePickerModule } from 'src/app/shared/components/theme-picker/theme-picker.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { UserManagementModule } from './components/user-management/user-manageme
     StoreModule.forFeature('adminpanel', reducers),
     CdkTableModule,
     AppManagementModule,
-    UserManagementModule
+    UserManagementModule,
+    ThemePickerModule
   ],
   declarations: [
     AdminPanelComponent,
