@@ -11,21 +11,21 @@
       #stepper
       class="template__body--stepper"
     >
-      <mat-step [stepControl]="firstFormGroup" label="Form Details">
+      <mat-step label="Form Details">
         <app-fill-form-details
           [appDetails]="app.details"
           (newAppDetails)="onUpdateDetaails($event)"
           completed="isAppDetailsFilled"
         ></app-fill-form-details>
       </mat-step>
-      <mat-step [stepControl]="secondFormGroup" label="Design Form">
+      <mat-step label="Design Form">
         <app-design-form
         [appDetails]="app.details"
         (newFormDesign)="updateFormDesign($event)"
         completed="isFormDesignCompleted"
         ></app-design-form>
       </mat-step>
-      <mat-step [stepControl]="secondFormGroup" label="Define Workflow">
+      <mat-step label="Define Workflow">
         <app-define-workflow></app-define-workflow>
       </mat-step>
       <mat-step label="Change Permissions">
