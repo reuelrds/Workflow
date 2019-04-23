@@ -12,7 +12,7 @@ before_script:
   - npm install -g jest
 
 cache:
-  npm: true
+  npm: false
   directories: 
     - node_modules
 services:
