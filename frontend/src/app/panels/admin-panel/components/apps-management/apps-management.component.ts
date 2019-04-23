@@ -42,7 +42,7 @@ export class AppsManagementComponent implements OnInit {
   onCreateNewApp() {
     this.dialog.open(CreateAppComponent, {
       width: '80vw',
-      height: '80vh'
+      height: '85vh',
     });
   }
 }
