@@ -24,7 +24,9 @@ import { MatProgressSpinnerModule,
    MatCheckboxModule,
    MatAutocompleteModule,
    MatChipsModule,
-   MatStepperModule} from '@angular/material';
+   MatStepperModule,
+   MatTooltipModule,
+   MatGridListModule} from '@angular/material';
 
 @NgModule({
   exports: [
@@ -39,6 +41,7 @@ import { MatProgressSpinnerModule,
     MatDividerModule,
     MatExpansionModule,
     MatFormFieldModule,
+    MatGridListModule,
     MatIconModule,
     MatInputModule,
     MatMenuModule,
@@ -52,7 +55,8 @@ import { MatProgressSpinnerModule,
     MatStepperModule,
     MatTableModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTooltipModule
   ]
 })
 export class MaterialModule { }

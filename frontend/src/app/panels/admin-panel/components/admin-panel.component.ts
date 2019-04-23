@@ -14,7 +14,7 @@ import * as AuthActions from './../../../auth/store/auth.actions';
 @Component({
   selector: 'app-admin-panel',
   templateUrl: './admin-panel.component.html',
-  styleUrls: ['./admin-panel.component.scss']
+  styleUrls: ['./admin-panel.component.scss', './admin-panel-theme.component.scss']
 })
 export class AdminPanelComponent implements OnInit {
 

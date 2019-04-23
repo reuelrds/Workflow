@@ -7,7 +7,7 @@ import { EditTextFieldComponent } from '../form-components/text/edit-text-field/
 @Component({
   selector: 'app-design-form',
   templateUrl: './design-form.component.html',
-  styleUrls: ['./design-form.component.scss']
+  styleUrls: ['./design-form.component.scss', './design-form-theme.component.scss']
 })
 export class DesignFormComponent implements OnInit {
 

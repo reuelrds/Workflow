@@ -9,7 +9,7 @@ import { startWith, map, filter, switchMap, tap } from 'rxjs/operators';
 @Component({
   selector: 'app-add-group-dialog',
   templateUrl: './add-group-dialog.component.html',
-  styleUrls: ['./add-group-dialog.component.scss']
+  styleUrls: ['./add-group-dialog.component.scss', './add-group-dialog-theme.component.scss']
 })
 export class AddGroupDialogComponent implements OnInit {
 

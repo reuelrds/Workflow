@@ -1,0 +1,17 @@
+@mixin add-group-dialog-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .chip {
+    background-color: mat-color($background, background, .1) !important;
+    border: 1px solid mat-color($primary, darker);
+
+    & > * {
+      color: mat-color($foreground, text);
+    }
+  }
+
+}

@@ -3,7 +3,7 @@
 :host {
   display: block;
   height: 100%;
-  background-color: rgba($color: #eee, $alpha: 0.5);
+  // background-color: rgba($color: #eee, $alpha: 0.5);
 }
 
 .appSettingsTab {
@@ -66,7 +66,7 @@
       padding: 1rem .5rem;
 
       &:hover {
-        color: $color-primary-1;      
+        // color: $color-primary-1;      
       }
     }
   }
@@ -94,8 +94,8 @@
 }
 
 .selected {
-  color: $color-primary-3;
-  background-color: $color-grey-light-2;
+  // color: $color-primary-3;
+  // background-color: $color-grey-light-2;
 }
 
 .line {
@@ -107,5 +107,5 @@
   height: 100%;
   
   border:none;
-  background-image: radial-gradient(circle, $color-black, transparent);
+  // background-image: radial-gradient(circle, $color-black, transparent);
 }

@@ -5,7 +5,7 @@ import { CreateAppComponent } from './dialogs/create-app/create-app.component';
 @Component({
   selector: 'app-apps-management',
   templateUrl: './apps-management.component.html',
-  styleUrls: ['./apps-management.component.scss']
+  styleUrls: ['./apps-management.component.scss', './apps-management-theme.component.scss']
 })
 export class AppsManagementComponent implements OnInit {
 

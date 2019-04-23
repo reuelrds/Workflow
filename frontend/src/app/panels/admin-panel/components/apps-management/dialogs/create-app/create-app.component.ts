@@ -5,7 +5,7 @@ import { MatStepper } from '@angular/material';
 @Component({
   selector: 'app-create-app',
   templateUrl: './create-app.component.html',
-  styleUrls: ['./create-app.component.scss']
+  styleUrls: ['./create-app.component.scss', './create-app-theme.component.scss']
 })
 export class CreateAppComponent implements OnInit {
   templateTitle = 'Untitled';

@@ -27,15 +27,15 @@
 }
 
 .chip {
-  background-color: rgba($color-primary-0, .1);
+  // background-color: rgba($color-primary-0, .1);
   width: 100%;
-  border:  1px solid $color-primary-4;
+  // border:  1px solid $color-primary-4;
   border-radius: 5px;
   display: flex;
   justify-content: space-between;
 
   & > * {
-    color: $color-primary-4;
+    // color: $color-primary-4;
   }
   
   &__text{

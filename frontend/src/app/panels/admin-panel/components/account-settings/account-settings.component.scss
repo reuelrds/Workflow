@@ -1,9 +1,7 @@
-@import "./../../../../shared/styles/abstracts/variables";
 
 :host {
   display: block;
   height: 100%;
-  background-color: rgba($color: #eee, $alpha: 0.5);
 }
 
 .accountSettingsTab {
@@ -36,11 +34,8 @@
 
   &-1 {
     grid-column: 1/ 2;
-    // grid-row: 1 / 3;
 
     &__body {
-      // align-items: center;
-      // justify-content: center;
       margin: 1rem 2rem;
       
       & .form {
@@ -119,31 +114,6 @@
     }
   }
 }
-
-.line {
-  display: inline-block;
-
-  position: absolute;
-  top: 10%;
-  left: 45%;
-
-  width: 1px;
-  height: 80%;
-
-  border: none;
-  background-image: radial-gradient(circle, $color-black, transparent);
-}
-
-// .form__label {
-//   position: absolute;
-//   left: 0;
-//   top:0;
-// }
-
-span {
-  // display: inline;
-}
-// color: #f00;
 
 .inp {
   font-size: 1.6rem;

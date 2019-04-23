@@ -12,24 +12,26 @@
           <mat-option value="inActive">Active</mat-option>
         </mat-select>
       </mat-form-field>
-      <button mat-raised-button class="toolbar__actions--button">
+      <button mat-raised-button class="toolbar__actions--button" color="primary">
         Activate
       </button>
-      <button mat-raised-button class="toolbar__actions--button">
+      <button mat-raised-button class="toolbar__actions--button" color="primary">
         Deactivate
       </button>
       <button
         mat-raised-button
         class="toolbar__actions--button"
         (click)="openAddUserDialog()"
+        color="primary"
       >
         Add User
       </button>
-      <button mat-raised-button class="toolbar__actions--button">Import</button>
+      <button mat-raised-button class="toolbar__actions--button" color="primary">Import</button>
       <button
         mat-raised-button
         [matMenuTriggerFor]="moreActions"
         class="toolbar__actions--button toolbar__actions--more"
+        color="primary"
       >
         ...
       </button>

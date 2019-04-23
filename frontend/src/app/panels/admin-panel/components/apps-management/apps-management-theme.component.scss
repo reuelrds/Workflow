@@ -1,0 +1,24 @@
+@mixin apps-management-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .drawer__nav--items:hover {
+    color: mat-color($primary);
+  }
+
+  .selected {
+    color: mat-color($primary);
+    background-color: mat-color($background, selected-button, .3);
+  }
+
+  .line {
+    background-image: radial-gradient(
+      circle,
+      mat-color($foreground, text),
+      transparent
+    );
+  }
+}

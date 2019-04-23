@@ -1,5 +1,12 @@
 @import './../../../../../../node_modules/@angular/material/theming';
 
+@import './../../../panels/admin-panel/components/apps-management/apps-management-theme.component.scss';
+@import './../../../panels/admin-panel/components/admin-panel-theme.component.scss';
+@import './../../../panels/admin-panel/components/user-management/user-management-theme.component.scss';
+@import './../../../panels/admin-panel/components/user-management/dialogs/group-dialog/dialog/add-group-dialog/add-group-dialog-theme.component.scss';
+@import './../../../panels/admin-panel/components/apps-management/dialogs/create-app/create-app-theme.component.scss';
+@import './../../../panels/admin-panel/components/apps-management/dialogs/create-app/design-form/design-form-theme.component.scss';
+
 @mixin respond($breakpoint) {
   @if $breakpoint == 'phone-m' {
     @media only screen and (max-width: 23.44em) {
@@ -34,15 +41,26 @@
 }
 
 // Define a mixin that accepts a theme and outputs the theme-specific styles.
-@mixin default-theme($theme) {
+@mixin theme-colors($theme) {
   // Extract the palettes you need from the theme definition.
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  @include admin-panel-theme($theme);
+  @include apps-management-theme($theme);
+  @include user-management-theme($theme);
+  @include add-group-dialog-theme($theme);
+  @include create-app-theme($theme);
+  @include design-form-theme($theme);
+
 
   // Define any styles affected by the theme.
-  .default {
-    // Use mat-color to extract individual colors from a palette.
-    color: mat-color($accent);
+  .dark-theme {
+
+    // color: mat-color($primary);
+    // background-color: mat-color($background, background) !important;
   }
 }
