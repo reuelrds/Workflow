@@ -1,3 +1,122 @@
-<p>
-  design-form works!
-</p>
+<div class="design-form" cdkDropListGroup>
+  <div
+    class="design-form__elements"
+    cdkDropList
+    #elementse="cdkDropList"
+    [cdkDropListConnectedTo]="[fieldfr]"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <p class="design-form__elements--heading">Basic fields</p>
+    <div
+      class="design-form__elements--element"
+      cdkDrag
+      #drag
+      *ngFor="let element of elements; first as isFirst"
+    >
+      <mat-icon class="design-form__elements--element-icon">{{
+        element.icon
+      }}</mat-icon>
+      {{ element.name }}
+    </div>
+    <p
+      class="design-form__elements--heading design-form__elements--heading-adv"
+    >
+      Advanced fields
+    </p>
+    <div
+      class="design-form__elements--element"
+      *ngFor="let element of advelements; first as isFirst"
+      cdkDrag
+    >
+      <mat-icon class="design-form__elements--element-icon">{{
+        element.icon
+      }}</mat-icon>
+      {{ element.name }}
+    </div>
+  </div>
+  <mat-dialog-content class="design-form__form-fields">
+    <div
+      class="section"
+      attr.data-sectionId="i"
+      *ngFor="let section of sections; let i = index"
+    >
+      <div class="section__name heading__tertiary">
+        <!-- {{ section.name }} -->
+        <input
+          matInput
+          type="text"
+          [value]="section.name"
+          (input)="updateSectionNameValue(i, $event)"
+        />
+      </div>
+      <div class="section__help">
+        <input
+          matInput
+          type="text"
+          [value]="section.hint"
+          (input)="updateSectionHintValue(i, $event)"
+        />
+      </div>
+      <div class="section__fields">
+        <div
+          class="section__field"
+          *ngFor="let field of section.fields; let j = index"
+          cdkDrag
+        >
+          <ndc-dynamic
+            class="section__field--element"
+            [ndcDynamicComponent]="componentMap.get(field.type)"
+            [ndcDynamicInputs]="field.inputs"
+          ></ndc-dynamic>
+          <mat-icon
+            fontSet="icofont"
+            fontIcon="icofont-edit-alt"
+            class="section__field--edit-icon"
+            (click)="openEditFieldDialog($event, field.type, i, j)"
+          ></mat-icon>
+        </div>
+      </div>
+      <div
+        class="section__fields-container"
+        cdkDropList
+        #fieldfr="cdkDropList"
+        cdkDropListData="{{ i }}"
+        [cdkDropListConnectedTo]="[elementse]"
+        (cdkDropListDropped)="drop($event)"
+      ></div>
+      <div class="section__actions">
+        <div class="divider"></div>
+        <button
+          mat-button
+          color="primary"
+          class="section__actions--buttons"
+          (click)="addNewSection()"
+        >
+          Add Section
+        </button>
+        <button mat-button color="primary" class="section__actions--buttons">
+          Add Table
+        </button>
+        <div class="divider"></div>
+      </div>
+    </div>
+  </mat-dialog-content>
+</div>
+<mat-dialog-actions class="design-form__actions" (click)="updateSectionData()">
+  <button
+    mat-stroked-button
+    color="accent"
+    class="add-details__submit-btn"
+    matStepperPrevious
+  >
+    Previous
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    class="add-details__submit-btn"
+    matStepperNext
+  >
+    Next
+  </button>
+</mat-dialog-actions>

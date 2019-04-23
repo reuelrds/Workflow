@@ -1,0 +1,13 @@
+<mat-form-field class="input"> 
+    <input
+    matInput
+    type="text"
+    [name]="name"
+    [placeholder]="placeholder"
+    [required]="isRequired"
+    #input
+  />
+  <mat-error *ngIf="false">
+    {{ name }} is <strong>required</strong>
+  </mat-error>
+</mat-form-field>

@@ -1,0 +1,10 @@
+<form class="edit-text" [formGroup]="editTextField" (submit)="onSubmit()">
+  <mat-form-field>
+    <input matInput placeholder="Name" type="text" formControlName="name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Placeholder" type="text" formControlName="placeholder">
+  </mat-form-field>
+  <mat-slide-toggle formControlName="isRequired" color="primary">Required</mat-slide-toggle>
+  <button mat-raised-button type="submit" [mat-dialog-close]="editTextField.value" color="primary">Submit</button>
+</form>

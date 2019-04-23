@@ -2,12 +2,25 @@
   display: flex;
   height: 100%;
   flex-direction: column;
+  position: relative;
 
   &__body {
     flex-grow: 1;
 
-    &--stepper {
+    &--title {
+      display: inline-block;
       position: relative;
+      line-height: 4rem;
+      z-index: 100;
+    }
+
+    &--stepper {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 100%;
+      z-index: 10;
+      transform: translateX(-50%);
     }
   }
 
