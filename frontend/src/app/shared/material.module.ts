@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 import { MatProgressSpinnerModule,
    MatDialogModule,
    MatButtonModule,
@@ -27,6 +28,7 @@ import { MatProgressSpinnerModule,
 
 @NgModule({
   exports: [
+    DragDropModule,
     MatAutocompleteModule,
     MatButtonModule,
     MatCardModule,
