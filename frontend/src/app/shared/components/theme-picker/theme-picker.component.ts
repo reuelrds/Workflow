@@ -33,7 +33,7 @@ import {map, filter} from 'rxjs/operators';
 })
 export class ThemePickerComponent implements OnInit, OnDestroy {
   private queryParamSubscription = Subscription.EMPTY;
-  currentTheme: DocsSiteTheme;
+
 
   @Output() themeType = new EventEmitter();
 
@@ -53,7 +53,7 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
       isDefault: true
     }
   ];
-
+  currentTheme: DocsSiteTheme = this.themes[1];
   // isThemeDark = new BehaviorSubject(false);
 
   constructor(
@@ -68,6 +68,12 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
     this.queryParamSubscription = this.activatedRoute.queryParamMap
       .pipe(map(params => params.get('theme')), filter(Boolean))
       .subscribe(themeName => this.installTheme(themeName));
+
+
+    this.renderer.setElementClass(document.body, 'dark-theme', true);
+    if (this.currentTheme) {
+      this.themeStorage.storeTheme(this.currentTheme);
+    }
   }
 
   ngOnDestroy() {
