@@ -21,7 +21,6 @@ services:
 script:
   - cd frontend
   - ng lint
-  - ng test --watch=false --browsers=ChromeHeadless --code-coverage=true
   - ng build --prod
   - cd ..
   - cp package.json backend/src
