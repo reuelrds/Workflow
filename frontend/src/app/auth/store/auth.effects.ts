@@ -14,6 +14,7 @@ import * as AdminActions from './../../panels/admin-panel/store/admin/admin.acti
 import * as UserActions from './../../panels/client-panel/store/user/user.actions';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
+import { ThemeStorage } from 'src/app/shared/components/theme-picker/theme-storage';
 
 @Injectable()
 export class AuthEffects {
@@ -126,12 +127,28 @@ export class AuthEffects {
     }})
   );
 
+  @Effect({
+    dispatch: false
+  })
+  logout = this.actions$.pipe(
+    ofType(AuthActions.ActionTypes.Logout),
+    map((action) => {
+      this.authService.clearLocalData();
+      this.themeStorage.clearStorage();
+      setTimeout(() => {
+        this.router.navigate(['/auth/login']);
+      }, 500);
+      // return [{type: AuthActions.ActionTypes.Logout}];
+    })
+  );
+
   BACKEND_URL = environment.apiUrl;
 
   constructor(
     private actions$: Actions,
     private httpClient: HttpClient,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private themeStorage: ThemeStorage
   ) {}
 }
