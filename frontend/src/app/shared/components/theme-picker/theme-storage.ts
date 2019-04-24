@@ -9,7 +9,9 @@ export interface DocsSiteTheme {
 }
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ThemeStorage {
   static storageKey = 'docs-theme-storage-current-name';
 

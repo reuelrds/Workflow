@@ -43,13 +43,14 @@ export class ThemePickerComponent implements OnInit, OnDestroy {
       accent: '#80CBC4',
       name: 'cyan-teal',
       isDark: false,
-      isDefault: true
+      isDefault: false
     },
     {
       primary: '#E91E63',
       accent: '#607D8B',
       name: 'pink-bluegrey',
       isDark: true,
+      isDefault: true
     }
   ];
 
