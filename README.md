@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.com/reuelrds/Workflow.svg?branch=master)](https://travis-ci.com/reuelrds/Workflow)
 [![codecov](https://codecov.io/gh/reuelrds/Workflow/branch/master/graph/badge.svg)](https://codecov.io/gh/reuelrds/Workflow)
 
-##### *This website was a part of Internet Programming and Software Engineering & Project Management Mini Projects*
+##### *This website was a part of Internet Programming and Software Engineering & Project Management Mini Projects (Abandoned**)
 ***
 
 This website allows organizations to create their custom workflow by defining a report template using a Form Designer tool, then define a workflow in a form of flow-chart and then set premissions on the form fields. Also, every user has access to Timeline which helps to schedule and plan tasks much easier.
