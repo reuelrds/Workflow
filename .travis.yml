@@ -32,26 +32,3 @@ script:
 
 after_script:
   - codecov
-
-deploy:
-  - provider: s3
-    access_key_id: $Access_key_id
-    secret_access_key: $Secret_Access_key
-    bucket: sepm-workflow
-    local_dir: frontend/dist/workflow
-    skip_cleanup: true
-    region: ap-southeast-1
-    on:
-      branch: master
-  
-  - provider: elasticbeanstalk
-    access_key_id: $Access_key_id
-    secret_access_key: $Secret_Access_key
-    region: ap-southeast-1
-    skip_cleanup: true
-    zip_file: backend/src/backend.zip
-    app: SEPM-Workflow 
-    env: SepmWorkflow-env
-    bucket_name: elasticbeanstalk-ap-southeast-1-959131551477
-    on:
-      branch: master
