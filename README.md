@@ -10,7 +10,7 @@ This website allows organizations to create their custom workflow by defining a 
 There’s also an Admin Panel, for system administrators of a company. It also allows them to invite employees to register, assign employee’s to groups or departments and define their role within the organization.
 
 
-~~*Live preview from latest commit to master branch can be found here: [workflow]~(http://sepm-workflow.s3-website-ap-southeast-1.amazonaws.com)*
+~~*Live preview from latest commit to master branch can be found here: [workflow](http://sepm-workflow.s3-website-ap-southeast-1.amazonaws.com)*~~
 
 ## To Run this locally
 
