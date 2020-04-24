@@ -51,3 +51,5 @@ To execute tests for backend
 ## Running end-to-end tests
 
 Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+#### Jenkins test
